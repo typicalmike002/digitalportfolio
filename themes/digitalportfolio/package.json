@@ -1,0 +1,9 @@
+{
+  "name": "digitalportfolio",
+  "version": "0.0.1",
+  "description": "Developer build settings for the Digital Portfolio theme",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "load-grunt-tasks": "^3.3.0"
+  }
+}
