@@ -53,18 +53,27 @@ add_action( 'after_setup_theme', 'digital_portfolio_setup' );
  */
 function dashboard_menu() {
 
-	//Adds the portfolio menu type
-	add_menu_page( 'My Portfolio', 'Portfolio', 'manage_options', 'portfolio_menu', 'portfolio_options', 'dashicons-images-alt', 50 );
-
-
-	function portfolio_options() { 
-		
-	}
-
-
 	//Removes the post type and comments from the WordPress dashboard.
 	remove_menu_page( 'edit.php' );
 	remove_menu_page( 'edit-comments.php' );
 
 }
 add_action( 'admin_menu', 'dashboard_menu' );
+
+
+
+
+/**
+ * Configures the WordPress Admin bar.
+ *
+ * @uses remove_node() to remove unneeded nodes from the admin bar.
+ *
+ * @since Digital Portfolio 0.1
+ */
+function admin_bar_options() {
+
+	global $wp_admin_bar;
+	$wp_admin_bar->remove_node( 'new-post' ); //Removes +New post.
+
+}
+add_action( 'wp_before_admin_bar_render', 'admin_bar_options' );
