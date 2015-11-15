@@ -44,6 +44,41 @@ add_action( 'after_setup_theme', 'digital_portfolio_setup' );
 
 
 /**
+ * Injects Scripts and Styles into the head element.
+ * 
+ * @since Digital Portfolio 0.1
+ */
+function inject_scripts() {
+
+	//Default way of loading styles.
+	wp_enqueue_style( 'style', get_stylesheet_uri() );
+
+
+	$js_dir = get_template_directory_uri() . '/js';
+
+	//Loads requirejs, we set true to push everything into the footer.
+	wp_enqueue_script( 'requrejs', $js_dir . '/require.js', '', true );
+
+
+	//requirejs config file that depends on requirejs.
+	wp_register_script( 'configjs', $js_dir . '/config.js', 'requirejs', true );
+
+
+	//Creates a json object so the configjs knows its directory. 
+	wp_localize_script( 'configjs', 'js_dir', array(
+		'path'		=> $js_dir
+	));
+
+
+	wp_enqueue_script( 'configjs','', '', true );
+
+}
+add_action( 'wp_enqueue_scripts', 'inject_scripts' );
+
+
+
+
+/**
  * Configures the WordPress dashboard by adding/removing specific menu pages.
  *
  * @uses add_menu_page() For adding new menu pages to the dashboard.
@@ -100,3 +135,32 @@ function add_taxonomies() {
 
 }
 add_action( 'init', 'add_taxonomies' );
+
+
+
+
+
+/**
+ * Removes wp_emojicons from slowing our theme down.
+ *
+ * @since digital Portfolio 0.1
+ */
+function disable_emojicons() {
+
+	//Remove emoji actions.
+	remove_action( 'admin_print_styles', 'print_emoji_styles' );
+	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+	remove_action( 'wp_print_styles', 'print_emoji_detection_script' );
+	
+	//Remove emoji filters.
+	remove_filter( 'wp_mail', 'wp_staticize_emoji_style' );
+	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+
+	// Filter to remove TinyMCE emojis
+	remove_filter( 'tiny_mce_plugins', 'disable_emojicons_tinymce' );
+}
+add_action( 'init', 'disable_emojicons');
+
+?>
