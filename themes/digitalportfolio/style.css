@@ -1,4 +1,4 @@
-/*
+/*!
 Theme Name: Digital Portfolio
 Theme URI: n/a
 Author: Michael Townsend
@@ -8,4 +8,4 @@ Version: 0.1
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 Text Domain: digitalportfolio
- */
+*/@-webkit-viewport {width: device-width;}@-moz-viewport {width: device-width;}@-ms-viewport {width: device-width;}@-o-viewport {width: device-width;}@viewport {width: device-width;}

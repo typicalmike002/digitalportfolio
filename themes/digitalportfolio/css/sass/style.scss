@@ -1,0 +1,89 @@
+/*!
+Theme Name: Digital Portfolio
+Theme URI: n/a
+Author: Michael Townsend
+Author URI: n/a
+Description: A custom theme to be used for Lucas's digital portfolio.  Designed for photography content to be uploaded and displayed with ease by the photographer Lucas.  This theme is unique to the artist and is built with scalability in mind by its creator for future updates.
+Version: 0.1
+License: MIT
+License URI: https://opensource.org/licenses/MIT
+Text Domain: digitalportfolio
+*/
+
+
+@-webkit-viewport{width:device-width;}
+@-moz-viewport{width:device-width;}
+@-ms-viewport{width:device-width;}
+@-o-viewport{width:device-width;}
+@viewport{width:device-width;}
+
+
+/*-------------------------*\
+  #Mixins-Variables
+\*-------------------------*/
+@import "compass/css3";
+@import "variables/variables";
+@import "mixins/mixins";
+
+
+
+/*-------------------------*\
+  #Base-Basic
+\*-------------------------*/
+@import "base-basic/foundation";
+
+
+
+/*-------------------------*\
+  #Objects-Basic
+\*-------------------------*/
+@import "objects-basic/header-footer";
+
+
+
+/*-------------------------*\
+  #Layout-Basic
+\*-------------------------*/
+@import "layout-basic/grid";
+
+
+
+/*-------------------------*\
+  #Enhanced
+\*-------------------------*/
+@media only all {
+
+	/*-------------------------*\
+	  #Core-Enhanced
+	\*-------------------------*/
+	@import "base-enhanced/foundation";
+
+
+
+	/*-------------------------*\
+	  #Objects-Enhanced
+	\*-------------------------*/
+	@import "objects-enhanced/header-footer";
+
+
+
+	/*-------------------------*\
+	  #Layout-Enhanced
+	\*-------------------------*/
+	@import "layout-enhanced/grid";
+
+}
+
+
+
+/*-------------------------*\
+  #Responsive-Core
+\*-------------------------*/
+@import "responsive-core/grid";
+
+
+
+/*-------------------------*\
+  #Responsive-Objects
+\*-------------------------*/
+@import "responsive-objects/header-footer";
