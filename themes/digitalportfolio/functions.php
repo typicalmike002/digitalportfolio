@@ -2,7 +2,7 @@
 /**
  * Digital Portfolio functions and definitions.
  *
- * Sets up the theme and provides some helper functions, which are sued in the 
+ * Sets up the theme and provides some helper functions, which are used in the 
  * theme as custom template tags.  Others are attached to actions and filter
  * hooks in wordpress to change core functionality.
  *
@@ -45,6 +45,11 @@ add_action( 'after_setup_theme', 'digital_portfolio_setup' );
 
 /**
  * Injects Scripts and Styles into the head element.
+ *
+ * @uses wp_enqueue_style() for injecting style files into the <head>
+ * @uses wp_enqueu_script() to place javascript files ontop of <body>
+ * @uses wp_register_script() to register config.js with a dependency.
+ * @uses wp_localize_script() for passing the directory path to config.js
  * 
  * @since Digital Portfolio 0.1
  */
@@ -127,99 +132,41 @@ add_action( 'init', 'disable_emojicons');
 
 
 
-
-//Code only to be loaded for the admin section.
+//Functions that are only needed for the backend.
 if ( is_admin() ) { 
 
 
 
 
-	/**
-	 * Custom walker for wp_dropdown_categories.  
-	 * Based on https://github.com/wp-plugins/wp-media-library-categories/blob/master/index.php
-	 * This code allows the admin to filter photos by category in the media library.
-	 *
-	 * @since Digital Portfolio 0.2
-	 */
-	class media_category_filter extends Walker_CategoryDropdown {
-
-		function option_list( &$output, $category, $depth = 0, $args = array(), $id = 0 ) {
-			
-			$pad = str_repeat( '&nbsp;', $depth * 3 );
-			$cat_name = apply_filters( 'list_cats', $category->name, $category );
-
-			if( ! isset( $args['value'] ) ) {
-				$args['value'] = ( $category->taxonomy != 'category' ? 'slug' : 'id' );
-			}
-
-			$value = ( $args['value'] == 'slug' ? $category->slug : $category->term_id );
-			if ( 0 == $args['selected'] && isset( $_GET['category_media'] ) && '' != $_GET['category_media'] ) {
-				$args['selected'] = $_GET['category_media'];
-			}
-
-			$output .= '<option class="level-' . $depth . '" value="' . $value . '"';
-			if ( $value === (string) $args['selected'] ) {
-				$output .= ' selected="selected"';
-			}
-
-			$output .= '>';
-			$output .= $pad . $cat_name;
-			if ( $args['show_count'] )
-				$output .= '&nbsp;&nbsp;( ' . $category->count . ')';
-
-			$output .= "</option>\n";
-		}
-	}
-
-
-
 
 	/**
-	 * Usees the media_category_filter class to create the category filter.
-	 * Based on https://github.com/wp-plugins/wp-media-library-categories/blob/master/index.php
+	 * Adds a dropdown menu for the media library page.  See the
+	 * add_taxonomies() function to see where this happens.
 	 *
+	 * @uses wp_dropdown_categories() to add a new dropdown option.
+	 * 
 	 * @since  Digital Portfolio 0.2
 	 */
 	function add_media_category_filter() {
 		
-		global $pagenow;
+		//Admin current page.
+		global $pagenow; 
 		
+		//Only add the dropdown to the media library (upload.php)
 		if ( 'upload.php' == $pagenow ) {
-			
-			// Default taxonomy
-			$taxonomy = 'category';
 
-			// Add filter to change the default taxonomy.
-			$taxonomy = apply_filters( 'wpmediacategory_taxonomy', $taxonomy );
-			
-			if ( $taxonomy != 'category' ) {
-				$dropdown_options = array(
-					'taxonomy'			=>	$taxonomy,
-					'name'				=>	$taxonomy,
-					'show_option_all'	=>	__( 'View all categories' ),
-					'hide_empty'		=>	false,
-					'hierarchical'		=>	true,
-					'orderby'			=>	'name',
-					'show_count'		=>	true,
-					'walker'			=>	new media_category_filter(),
-					'value'				=>	'slug'
-				);
-			} else {
-				$dropdown_options = array(
-					'taxonomy'			=>	$taxonomy,
-					'show_option_all'	=>	__( 'View all categories' ),
-					'hide_empty'		=>	false,
-					'hierarchical'		=>	true,
-					'orderby'			=>	'name',
-					'show_count'		=>	false,
-					'walker'			=>	new media_category_filter(),
-					'value'				=>	'id'
-				);
-			}
+			$dropdown_options = array(
+				'taxonomy'			=>	'category',
+				'show_option_all'	=>	__( 'All categories' ),
+				'hide_empty'		=>	false
+			);
+
 			wp_dropdown_categories( $dropdown_options );
+
 		}
 	}
 	add_action( 'restrict_manage_posts', 'add_media_category_filter' );
+
 	
 
 
@@ -261,4 +208,7 @@ if ( is_admin() ) {
 	}
 	add_action( 'wp_before_admin_bar_render', 'admin_bar_options' );
 	
-} ?>
+
+
+
+/* End admin only section */ } ?>
