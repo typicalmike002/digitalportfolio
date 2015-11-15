@@ -73,7 +73,30 @@ add_action( 'admin_menu', 'dashboard_menu' );
 function admin_bar_options() {
 
 	global $wp_admin_bar;
-	$wp_admin_bar->remove_node( 'new-post' ); //Removes +New post.
+
+	//Removes  Add New post.
+	$wp_admin_bar->remove_node( 'new-post' );
 
 }
 add_action( 'wp_before_admin_bar_render', 'admin_bar_options' );
+
+
+
+
+/**
+ * Adds Categories to other types of content.
+ *
+ * @uses register_taxonomy_for_object_type() for enabling catagories.
+ *
+ * @since Digital Portfolio 0.1
+ */
+function add_taxonomies() {
+
+	//Adds categories for attachments.
+	register_taxonomy_for_object_type( 'category', 'attachment' );
+
+	//Adds categories for pages.
+	register_taxonomy_for_object_type( 'category', 'page');
+
+}
+add_action( 'init', 'add_taxonomies' );
