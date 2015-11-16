@@ -44,7 +44,84 @@ add_action( 'after_setup_theme', 'digital_portfolio_setup' );
 
 
 /**
- * Injects Scripts and Styles into the head element.
+ * Provides a standard format for the page title depending on the view.
+ * This is filtered so that plugins can provide alternative title formats.
+ * @param string $title Default title text for current view.
+ * @param string $sep Optional seperator.
+ * @return string The filtered title.  
+ * 
+ * @since Digital Portfolio 0.2
+ */
+function create_wp_title( $title, $sep ) {
+	
+	global $paged, $page;
+
+	if ( is_feed() ) {
+		return $title;
+	}
+
+	//Add the site name.
+	$title .= get_bloginfo( 'name' );
+
+	//Add the site description for the home/from page.
+	$site_description = get_bloginfo( 'description', 'display' );
+	if ( $site_description && ( is_home() || is_front_page() ) ) {
+		$title = "$title $sep $site_description";
+	}
+
+	//Add a page number if necessary.
+	if ( $paged >= 2 || $page >= 2 ) {
+		$title = sprintf( __( 'Page %s', 'digitalportfolio' ), max( $paged, $page) ) . " $sep $title";
+	}
+
+	return $title;
+}
+add_filter( 'wp_title', 'create_wp_title', 10, 2 );
+
+
+
+
+/**
+ * Creates the custom post type "gallery".
+ *
+ * @uses register_post_type() for creating the new post type.
+ *
+ * @since Digital Portfolio 0.2
+ */
+function create_gallery_post_type() {
+
+
+	//Options for the new post type.
+	register_post_type( 'gallery', array(
+		'public' 		=> true,
+		'has_archive' 	=> true,
+		'menu_icon'		=> '',
+		'description'	=> 'Create galleries to store those precious moments!',
+		'labels' 		=>	array(
+			'name'					=>	__( 'Galleries' ),
+			'singular_name'			=>	__( 'Gallery' ),
+			'add_new'				=>	_x( 'Create New', 'Gallery' ),
+			'add_new_item'			=>	__( 'Add New Gallery' ),
+			'edit_item'				=>	__(	'Edit Gallery' ),
+			'new_item'				=>	__( 'New Gallery' ),
+			'view_item'				=>	__( 'View Gallery' ),
+			'search_items'			=>	__( 'Search Galleries' ),
+			'not_found'				=>	__( 'No galleries found' ),
+			'not_found_in_trash'	=>	__( 'No galleries found in Trash' ),
+			'parent_item_colon'		=>	__( 'Parent Gallery' )
+			)
+		)
+	);
+
+}
+add_action( 'init', 'create_gallery_post_type' );
+
+
+
+
+/**
+ * Injects Scripts into the footer and styles into the header to
+ * optomize rendering.  
  *
  * @uses wp_enqueue_style() for injecting style files into the <head>
  * @uses wp_enqueu_script() to place javascript files ontop of <body>
@@ -55,8 +132,10 @@ add_action( 'after_setup_theme', 'digital_portfolio_setup' );
  */
 function inject_scripts() {
 
-	//Default way of loading styles.
-	wp_enqueue_style( 'style', get_stylesheet_uri() );
+	//Default way of loading styles.  Version number added to ensure
+	//the correct version is sent to the client regardless of caching.
+	wp_register_style( 'style', get_stylesheet_uri(), false, '1.0.0' );
+	wp_enqueue_style( 'style' );
 
 
 	$js_dir = get_template_directory_uri() . '/js';
@@ -84,7 +163,8 @@ add_action( 'wp_enqueue_scripts', 'inject_scripts' );
 
 
 /**
- * Adds Categories to other types of content.
+ * Adds Categories to both pages and posts.  Now both have
+ * their own section for catagories.
  *
  * @uses register_taxonomy_for_object_type() for enabling catagories.
  *
@@ -96,8 +176,8 @@ function add_taxonomies() {
 	register_taxonomy_for_object_type( 'category', 'attachment' );
 	apply_filters( 'wpmediacategory_taxonomy' , 'category' );
 
-	//Adds categories for pages.
-	register_taxonomy_for_object_type( 'category', 'page');
+	//Adds categories for the gallery post type.
+	register_taxonomy_for_object_type( 'category', 'gallery' );
 
 }
 add_action( 'init', 'add_taxonomies' );
@@ -137,6 +217,22 @@ if ( is_admin() ) {
 
 
 
+	/**
+	 * Loads custom styles into the wp-admin.
+	 *
+	 * @uses admin_enqueue_scripts() to properly load the icon.
+	 * 
+	 * @since Digital Portfolio 0.2
+	 */
+	function admin_stylesheet() {
+
+		wp_register_style( 'admin-styles', get_template_directory_uri() . '/css/admin-styles.css', false, '1.0.0' );
+
+		wp_enqueue_style( 'admin-styles' );
+
+	}
+	add_action( 'admin_enqueue_scripts', 'admin_stylesheet' );
+
 
 
 	/**
@@ -152,7 +248,7 @@ if ( is_admin() ) {
 		//Admin current page.
 		global $pagenow; 
 		
-		//Only add the dropdown to the media library (upload.php)
+		//Only add the dropdown to the media library (upload.php) and the Gallery post type (edit.php?post_type=gallery)
 		if ( 'upload.php' == $pagenow ) {
 
 			$dropdown_options = array(
@@ -202,7 +298,7 @@ if ( is_admin() ) {
 
 		global $wp_admin_bar;
 
-		//Removes  Add New post.
+		//Removes  "Add New post".
 		$wp_admin_bar->remove_node( 'new-post' );
 
 	}

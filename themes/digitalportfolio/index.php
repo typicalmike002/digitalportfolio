@@ -10,18 +10,18 @@
 
 get_header(); ?>
 
-<?php if ( have_posts() ) : ?>
+	<?php if ( have_posts() ) : ?>
 
-	<?php /* The loop */ ?>
-	<?php while ( have_posts() ) : the_post(); ?>
+		<?php /* The loop */ ?>
+		<?php while ( have_posts() ) : the_post(); ?>
 
-	
-		<?php get_template_part( 'content' ); ?>
+		
+			<?php get_template_part( 'content' ); ?>
 
-	<?php endwhile; ?>
+		<?php endwhile; ?>
 
-<?php else : ?>
-	<?php get_template_part( 'content', 'none' ); ?>
-<?php endif; ?>
+	<?php else : ?>
+		<?php get_template_part( 'content', 'none' ); ?>
+	<?php endif; ?>
 
 <?php get_footer(); ?>

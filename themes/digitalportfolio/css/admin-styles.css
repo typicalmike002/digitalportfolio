@@ -1,0 +1,15 @@
+/********
+
+File name: admin-styles.css
+
+Discription: Styles to be loaded into custom sections in the wp-admin
+
+********/
+
+/* Adds the camera icon to the galleries custom post type. */
+
+#adminmenu .menu-icon-gallery div.wp-menu-image:before {
+	
+	content: '\f233';
+
+}

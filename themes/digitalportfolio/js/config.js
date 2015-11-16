@@ -11,6 +11,4 @@ requirejs.config({
 
 requirejs(['jquery'], function($){
 
-	console.log('yey');
-
 });
