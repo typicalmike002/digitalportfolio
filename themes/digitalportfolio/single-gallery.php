@@ -1,11 +1,11 @@
 <?php
 /**
- * The main template file.
+ * Template for the gallery custom post type.
  *
  *
  * @package  WordPress
  * @subpackage  Digital Portfolio
- * @version 0.1
+ * @version 0.3
  */
 
 get_header(); ?>
@@ -15,13 +15,13 @@ get_header(); ?>
 		<?php /* The loop */ ?>
 		<?php while ( have_posts() ) : the_post(); ?>
 
-			<?php get_template_part( 'content' ); ?>
+			<?php get_template_part( 'gallery-controller' ); ?>
 
 		<?php endwhile; ?>
 
 	<?php else : ?>
 
-		<?php get_template_part( 'content', 'none' ); ?>
+		<?php echo 'No content to display'; ?>
 
 	<?php endif; ?>
 

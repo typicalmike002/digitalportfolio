@@ -9,7 +9,7 @@
  *
  * @package  WordPress
  * @subpackage  Digital Portfolio
- * @version 0.1
+ * @version 0.3
 */
 
 
@@ -46,6 +46,8 @@ add_action( 'after_setup_theme', 'digital_portfolio_setup' );
 /**
  * Provides a standard format for the page title depending on the view.
  * This is filtered so that plugins can provide alternative title formats.
+ * Adds the site title after the | in the title.
+ * 
  * @param string $title Default title text for current view.
  * @param string $sep Optional seperator.
  * @return string The filtered title.  
@@ -82,7 +84,7 @@ add_filter( 'wp_title', 'create_wp_title', 10, 2 );
 
 
 /**
- * Creates the custom post type "gallery".
+ * Creates the custom post type "gallery" with the specified options.
  *
  * @uses register_post_type() for creating the new post type.
  *
