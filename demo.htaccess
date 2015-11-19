@@ -1,11 +1,11 @@
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteBase /clients/lucus-photography/
-	RewriteRule ^index\.php$ - [L]
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteRule . /clients/lucus-photography/index.php [L]
+RewriteEngine On
+RewriteBase /clients/lucus-photography/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /clients/lucus-photography/index.php [L]
 </IfModule>
 
 # END WordPress
@@ -51,7 +51,7 @@
 
 
 # BEGIN Caching
-<IfModule mod_expires.c>
+<IfModule mod_expires.so>
 	ExpiresActive On
 	ExpiresByType	text/css 				"access 1 month" \
 					text/html 				"access 1 month" \
