@@ -37,8 +37,39 @@ function digital_portfolio_setup() {
 	//Adds support for a custom navigation menu.
 	register_nav_menu( 'primary', 'Navigation Menu' );
 
+	//This theme supports the use of thumbnails.
+	add_theme_support( 'post-thumbnails' );
+
 }
 add_action( 'after_setup_theme', 'digital_portfolio_setup' );
+
+
+
+/**
+ * Begin a php session to be used for the fallback gallery and login/logout data.
+ *
+ * @uses session_start()
+ *
+ * @since Digital Portfolio 0.3
+ */
+function begin_session() {
+
+	if( !session_id() ) {
+	
+		session_start();
+	
+	}
+}
+
+function kill_session() {
+
+	session_destroy();
+
+}
+add_action('init', 'begin_session', 1);
+add_action('wp_logout', 'kill_session');
+add_action('wp_login', 'kill_session');
+
 
 
 
@@ -99,6 +130,7 @@ function create_gallery_post_type() {
 		'has_archive' 	=> true,
 		'menu_icon'		=> '',
 		'description'	=> 'Create galleries to store those precious moments!',
+		'supports' 		=>	array( 'title', 'editor', 'thumbnail' ),
 		'labels' 		=>	array(
 			'name'					=>	__( 'Galleries' ),
 			'singular_name'			=>	__( 'Gallery' ),
@@ -117,6 +149,7 @@ function create_gallery_post_type() {
 
 }
 add_action( 'init', 'create_gallery_post_type' );
+
 
 
 
@@ -220,6 +253,17 @@ if ( is_admin() ) {
 
 
 	/**
+	 * Removes the galler settings option to link gallery images to the attachment page.
+	 * This was causing a bug that made some images no appear in a gallery.
+	 *
+	 * @since Digital Portfolio 0.31
+	 */
+remove_shortcode('gallery', 'gallery_shortcode');
+
+
+
+
+	/**
 	 * Loads custom styles into the wp-admin.
 	 *
 	 * @uses admin_enqueue_scripts() to properly load the icon.
@@ -234,6 +278,7 @@ if ( is_admin() ) {
 
 	}
 	add_action( 'admin_enqueue_scripts', 'admin_stylesheet' );
+
 
 
 
@@ -305,8 +350,24 @@ if ( is_admin() ) {
 
 	}
 	add_action( 'wp_before_admin_bar_render', 'admin_bar_options' );
-	
 
+
+	/**
+	 * Remove Default Image Link.
+	 */
+	function remove_default_image_link() {
+
+		$image_set = get_option( 'image_default_link_type' );
+
+		if ($image_set !== 'none') {
+
+			update_option('image_default_link_type', 'none');
+
+		}
+
+
+	}
+	add_action('admin_init', 'remove_default_image_link');
 
 
 /* End admin only section */ } ?>

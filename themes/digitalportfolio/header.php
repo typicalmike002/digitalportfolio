@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * The Header for our theme.
  *
@@ -37,6 +37,6 @@
 	<!-- navigation -->
 
 	<nav class="nav" role="navigation">
-		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav_menu',) ); ?>
+		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav_menu') ); ?>
 	</nav>
 </header>

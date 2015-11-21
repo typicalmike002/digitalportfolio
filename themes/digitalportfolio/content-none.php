@@ -9,4 +9,4 @@
  */
 ?>
 
-There is no content!
+Sorry, there seems to be no content here.

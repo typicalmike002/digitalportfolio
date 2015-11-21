@@ -9,3 +9,4 @@
  */
 ?>
 
+<?php the_content(); ?>
