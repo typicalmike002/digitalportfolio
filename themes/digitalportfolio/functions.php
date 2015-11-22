@@ -9,7 +9,7 @@
  *
  * @package  WordPress
  * @subpackage  Digital Portfolio
- * @version 0.3
+ * @version 0.1
 */
 
 
@@ -46,11 +46,13 @@ add_action( 'after_setup_theme', 'digital_portfolio_setup' );
 
 
 /**
- * Begin a php session to be used for the fallback gallery and login/logout data.
+ * Begins a php session for storing special session variables to be used by 
+ * the single-gallery.php file.  This function will also end sessions when logging in and 
+ * out of the WordPress backend.
  *
  * @uses session_start()
  *
- * @since Digital Portfolio 0.3
+ * @since Digital Portfolio 0.1
  */
 function begin_session() {
 
@@ -114,6 +116,7 @@ add_filter( 'wp_title', 'create_wp_title', 10, 2 );
 
 
 
+
 /**
  * Creates the custom post type "gallery" with the specified options.
  *
@@ -167,10 +170,19 @@ add_action( 'init', 'create_gallery_post_type' );
  */
 function inject_scripts() {
 
+	global $wp_styles;
+
 	//Default way of loading styles.  Version number added to ensure
 	//the correct version is sent to the client regardless of caching.
 	wp_register_style( 'style', get_stylesheet_uri(), false, '1.0.0' );
 	wp_enqueue_style( 'style' );
+
+	/**
+	 * Loads our ie8 only stylesheet then, adds a lte IE 8 contitional.
+	 */
+	
+	wp_enqueue_style( 'ie8', get_stylesheet_directory_uri() . '/css/ie8.css', array( 'style' ) );
+	$wp_styles->add_data( 'ie8', 'conditional', 'lte IE 8' );
 
 
 	$js_dir = get_template_directory_uri() . '/js';
@@ -190,6 +202,8 @@ function inject_scripts() {
 
 
 	wp_enqueue_script( 'configjs', '', '', '', true );
+
+	
 
 }
 add_action( 'wp_enqueue_scripts', 'inject_scripts' );
@@ -247,18 +261,35 @@ add_action( 'init', 'disable_emojicons');
 
 
 
+/**
+ * Configures the WordPress Admin bar.  Removes 'new-post' from the 
+ * +new dropdown in the WordPress admin bar as well as customize.
+ * 
+ *
+ * @uses remove_node() to remove unneeded nodes from the admin bar.
+ *
+ * @since Digital Portfolio 0.1
+ */
+function admin_bar_options() {
+
+	global $wp_admin_bar;
+
+	//Removes  "Add New post".
+	$wp_admin_bar->remove_node( 'new-post' );
+
+
+	//Removes "Customize"
+
+	$wp_admin_bar->remove_menu('customize');
+
+}
+add_action( 'wp_before_admin_bar_render', 'admin_bar_options' );
+
+
+
+
 //Functions that are only needed for the backend.
 if ( is_admin() ) { 
-
-
-
-	/**
-	 * Removes the galler settings option to link gallery images to the attachment page.
-	 * This was causing a bug that made some images no appear in a gallery.
-	 *
-	 * @since Digital Portfolio 0.31
-	 */
-remove_shortcode('gallery', 'gallery_shortcode');
 
 
 
@@ -309,7 +340,6 @@ remove_shortcode('gallery', 'gallery_shortcode');
 		}
 	}
 	add_action( 'restrict_manage_posts', 'add_media_category_filter' );
-
 	
 
 
@@ -334,26 +364,16 @@ remove_shortcode('gallery', 'gallery_shortcode');
 
 
 
-	/**
-	 * Configures the WordPress Admin bar.
-	 *
-	 * @uses remove_node() to remove unneeded nodes from the admin bar.
-	 *
-	 * @since Digital Portfolio 0.1
-	 */
-	function admin_bar_options() {
 
-		global $wp_admin_bar;
 
-		//Removes  "Add New post".
-		$wp_admin_bar->remove_node( 'new-post' );
 
-	}
-	add_action( 'wp_before_admin_bar_render', 'admin_bar_options' );
 
 
 	/**
-	 * Remove Default Image Link.
+	 * Defaults all link image types to none.  This is to prevent hotlinking
+	 * and to improve SEO.
+	 *
+	 * @since Digital Portfolio 0.3
 	 */
 	function remove_default_image_link() {
 

@@ -67,3 +67,11 @@ RewriteRule . /clients/lucus-photography/index.php [L]
 </IfModule>
 
 #END Caching
+
+
+# BEGIN File Mapping
+<IfModule mod_mime.so>
+	AddType text/x-component .htc
+</IfModule>
+
+# END File Mapping

@@ -5,3 +5,27 @@ File name: Mixins
 Discription: Functions and mixins to be used for the project. 
 
 ********/
+
+
+
+/*-------------------------*\
+  #Browser prefixes
+\*-------------------------*/
+
+/**
+ * 		1.	Mixins that include all the browser prefixes for
+ * 			css properties that require them.
+ */
+
+@mixin text-size-adjust ( $value ) {
+	-ms-text-size-adjust: $value;
+	-moz-text-size-adjust: $value;
+	-webkit-text-size-adjust: $value;
+	text-size-adjust: $value;
+}
+
+@mixin box-sizing ( $value ) {
+	-moz-box-sizing: $value;
+	-webkit-box-sizing: $value;
+	box-sizing: $value;
+}

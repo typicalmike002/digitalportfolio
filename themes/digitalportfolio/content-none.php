@@ -9,4 +9,4 @@
  */
 ?>
 
-Sorry, there seems to be no content here.
+Sorry, there seem to be no posts or galleries on this website.

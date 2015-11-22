@@ -2,6 +2,90 @@
 
 File name: Foundation.
 
-Discription: Enhanced core styles for the latest browsers.
+Discription: Element styling on top of the basic style sheet.
 
 ********/
+
+
+
+
+
+/*-------------------------*\
+	#Document-Level
+\*-------------------------*/
+
+/**
+ * 		1.	All elements inherit the border-box model from the html.
+ *
+ * 		2.	See /css/ie8.css to view how older browsers support this feature.
+ */
+
+html {
+	@include box-sizing( border-box );
+}
+
+*, *:before, *:after {
+	@include box-sizing( inherit );
+}
+
+body {
+	margin: 0;
+}
+
+
+
+
+
+/*-------------------------*\
+	#Text-Level Semantics
+\*-------------------------*/
+
+/**
+ * 		1.	Prevent 'sub and 'sup' affecting 'line-height' in all browsers.
+ */
+
+sub,
+sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sup {
+	top: -0.5em;
+}
+
+sub {
+	bottom: -0.25em;
+}
+
+
+
+
+/*-------------------------*\
+  #Embedded Content
+\*-------------------------*/
+
+/**
+ * 		1.	Correct overflow not hidden in IE 9/10/11.
+ */
+
+svg:not(:root) {
+	overflow: hidden;
+}
+
+
+
+
+/*-------------------------*\
+  #Grouping-Content
+\*-------------------------*/
+
+/**
+ * 		1.	Contain overflow in all browsers.
+ */
+
+pre {
+	overflow: auto;
+}

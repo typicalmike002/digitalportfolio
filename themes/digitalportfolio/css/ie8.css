@@ -1,0 +1,16 @@
+/********
+
+File name: ie8.css
+
+Discription: 
+			- Polyfills and styles for ie8 and below. 
+			- This will give ie8 and below support for the border-box model.
+			- The path is hard coded in here and for now it seems there's no alternative to this.
+********/
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+	*behavior: url(http://localhost/clients/lucus-photography/wp-content/themes/digitalportfolio/js/polyfills/boxsizing.htc);
+}

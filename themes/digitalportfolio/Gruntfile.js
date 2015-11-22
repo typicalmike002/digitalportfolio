@@ -33,7 +33,7 @@ module.exports = function(grunt) {
 
 		combine_mq: {
 			options: {
-				beautify: false
+				beautify: true
 			},
 			main: {
 				src: 'style.css',

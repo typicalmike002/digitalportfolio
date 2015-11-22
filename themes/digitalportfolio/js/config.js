@@ -1,9 +1,8 @@
 requirejs.config({
 
 	baseUrl: js_dir.path,
-
+	waitSeconds: 200,
 	deps: ["jsSrc/globals"],
-
 	paths: {
 		jquery: "libs/jquery-1.11.3.min"
 	}
