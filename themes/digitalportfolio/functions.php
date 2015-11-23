@@ -2,9 +2,9 @@
 /**
  * Digital Portfolio functions and definitions.
  *
- * Sets up the theme and provides some helper functions, which are used in the 
- * theme as custom template tags.  Others are attached to actions and filter
- * hooks in wordpress to change core functionality.
+ * Configures the theme's core functionality using the WordPress api.  Loads
+ * custom post types, custom css/js, and configures various options that 
+ * control the admin section of the site using filter() and action().
  *
  *
  * @package  WordPress
@@ -18,17 +18,18 @@
 /**
  * Sets up theme defaults and registers various WordPress features.
  *
- * @uses load_theme_textdomain() For translation/localization support.
  * @uses register_nav_menu() To add support for a navigation menu.
- * @uses add_theme_support() To add support for a gallery and captions.
+ * @uses add_theme_support() To add support for post formats and post thumbnails.
  *
- * @since Digital Portfolio 0.1
  * 
+ * @since Digital Portfolio 0.1
+ *
+ * @return void
  */
 function digital_portfolio_setup() {
 
 
-	//Switches default core markup for the gallery and captions.
+	//OUtput valid HTML5 for the template tags listed below.
 	add_theme_support( 'html5', array(
 		'gallery', 'caption'
 	) );
@@ -85,7 +86,7 @@ add_action('wp_login', 'kill_session');
  * @param string $sep Optional seperator.
  * @return string The filtered title.  
  * 
- * @since Digital Portfolio 0.2
+ * @since Digital Portfolio 0.1
  */
 function create_wp_title( $title, $sep ) {
 	
@@ -122,7 +123,7 @@ add_filter( 'wp_title', 'create_wp_title', 10, 2 );
  *
  * @uses register_post_type() for creating the new post type.
  *
- * @since Digital Portfolio 0.2
+ * @since Digital Portfolio 0.1
  */
 function create_gallery_post_type() {
 
@@ -288,8 +289,64 @@ add_action( 'wp_before_admin_bar_render', 'admin_bar_options' );
 
 
 
+
 //Functions that are only needed for the backend.
 if ( is_admin() ) { 
+
+
+
+
+	/**
+	 * Conditionally checks if the current 'post.php' page is using the contact-form.php template
+	 * and loads up a special form inside the WordPress admin's 'Edit Page' section for that page.
+	 * This form allows a non programmer to update various social media links to their contact page.
+	 *
+	 * This section needs some work.  The basic tests are set up but the forms need to be added.  
+	 * 
+	 */
+	function contact_form() {
+
+		//List all templates that should have their post/page editor 
+		//removed in this array.
+		define('EDITOR_HIDE_PAGE_TEMPLATES', json_encode( array( 
+			'http://page_templates/contact-form.php' 
+		) ) );
+
+		global $pagenow;
+
+		if ( ! ( 'post.php' === $pagenow ) ) {
+			return;
+		}
+
+		//Get the post ID. 
+		$post_id = filter_input( INPUT_GET, 'post', FILTER_SANITIZE_NUMBER_INT )
+			? filter_input( INPUT_GET, 'post', FILTER_SANITIZE_NUMBER_INT )
+			: filter_input( INPUT_POST, 'post_ID', FILTER_SANITIZE_NUMBER_INT );
+
+
+		if ( !isset($post_id) ) {
+			return;
+		}
+
+		$template_filename = esc_url( get_post_meta( $post_id, '_wp_page_template', true ) );
+
+
+		if ( in_array( $template_filename, json_decode( EDITOR_HIDE_PAGE_TEMPLATES ) ) ) {
+			remove_post_type_support( 'page', 'editor' );
+
+
+			//Loads the backend form section.
+			function load_meta_box() {
+   				add_meta_box( 'my-meta-box-id', 'Feature Me Please', 'call_meta_box', 'page', 'normal', 'high' );
+			}
+
+			add_action( 'add_meta_boxes', 'load_meta_box' );
+
+		}
+
+	}
+	add_action( 'admin_init', 'contact_form' );
+
 
 
 
@@ -299,7 +356,7 @@ if ( is_admin() ) {
 	 *
 	 * @uses admin_enqueue_scripts() to properly load the icon.
 	 * 
-	 * @since Digital Portfolio 0.2
+	 * @since Digital Portfolio 0.1
 	 */
 	function admin_stylesheet() {
 
@@ -319,7 +376,7 @@ if ( is_admin() ) {
 	 *
 	 * @uses wp_dropdown_categories() to add a new dropdown option.
 	 * 
-	 * @since  Digital Portfolio 0.2
+	 * @since  Digital Portfolio 0.1
 	 */
 	function add_media_category_filter() {
 		
@@ -373,7 +430,7 @@ if ( is_admin() ) {
 	 * Defaults all link image types to none.  This is to prevent hotlinking
 	 * and to improve SEO.
 	 *
-	 * @since Digital Portfolio 0.3
+	 * @since Digital Portfolio 0.1
 	 */
 	function remove_default_image_link() {
 

@@ -2,9 +2,17 @@
 
 File name: Foundation.
 
-Discription: Core Styles to be searved to all browsers.
+Discription: Core Styles searved to all browsers.
 
-Notes: This file is based on normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css
+Notes:
+		-	Fixes common browser inconsistencies and bugs.
+
+		-	Foundation is constructed as a base for all other scss styles to be built from and
+			should be included in the style.scss file first.
+
+		-	This file is based on normalize.css: "v3.0.3 | MIT License | github.com/necolas/normalize.css"
+
+		
 
 ********/
 

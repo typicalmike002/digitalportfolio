@@ -1,4 +1,4 @@
-# BEGIN WordPress
+# WordPress url rewrite rules.
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /clients/lucus-photography/
@@ -8,10 +8,10 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /clients/lucus-photography/index.php [L]
 </IfModule>
 
-# END WordPress
 
 
-# BEING gzip
+
+# Compress files with gzip
 <Ifmodule mod_filter.c>
 	AddOutputFilterByType DEFLATE	"application/atom+xml" \
 									"application/javascript" \
@@ -47,10 +47,10 @@ RewriteRule . /clients/lucus-photography/index.php [L]
 									"text/xml"
 </Ifmodule>
 
-# END gzip
 
 
-# BEGIN Caching
+
+# Enables browser caching
 <IfModule mod_expires.so>
 	ExpiresActive On
 	ExpiresByType	text/css 				"access 1 month" \
@@ -66,12 +66,18 @@ RewriteRule . /clients/lucus-photography/index.php [L]
 	ExpiresDefault	"access 1 month"
 </IfModule>
 
-#END Caching
 
 
-# BEGIN File Mapping
+
+# Alows IE to load javascript behavior files.
 <IfModule mod_mime.so>
 	AddType text/x-component .htc
 </IfModule>
 
-# END File Mapping
+
+
+
+# Disable Directory Browsing
+<IfModule mod_include.so>
+	Options -Indexes
+</IfModule>

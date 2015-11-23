@@ -1,2 +1,5 @@
-# Ignore wp uploads
+# Ignore files that were uploaded by users
 uploads
+
+# Ignore logs
+logs
