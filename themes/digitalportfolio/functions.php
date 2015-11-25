@@ -290,62 +290,119 @@ add_action( 'wp_before_admin_bar_render', 'admin_bar_options' );
 
 
 
-//Functions that are only needed for the backend.
-if ( is_admin() ) { 
+
+if ( is_admin() ) { //Functions that are only needed for the backend.
 
 
 
 
 	/**
-	 * Conditionally checks if the current 'post.php' page is using the contact-form.php template
-	 * and loads up a special form inside the WordPress admin's 'Edit Page' section for that page.
-	 * This form allows a non programmer to update various social media links to their contact page.
+	 * Loads different form fields for different page templates into the admin section of the site.
+	 * What template a page is using will now effect how authors add information to that page.
+	 * For example, the contact-form.php page doesn't need the whole page editor and instead should
+	 * load a simpler form to be filled out by the site owner.
 	 *
-	 * This section needs some work.  The basic tests are set up but the forms need to be added.  
-	 * 
+	 * This section needs to be cleaned up and some security mesures should be added/tested.
+	 *
+	 * @uses get_post_meta() for getting the page's currently loaded template name.
+	 * @since Digital Portfolio 0.1
 	 */
-	function contact_form() {
-
-		//List all templates that should have their post/page editor 
-		//removed in this array.
-		define('EDITOR_HIDE_PAGE_TEMPLATES', json_encode( array( 
-			'http://page_templates/contact-form.php' 
-		) ) );
+	function customize_content_input() {
 
 		global $pagenow;
 
-		if ( ! ( 'post.php' === $pagenow ) ) {
-			return;
-		}
+		if ( ! ( 'post.php' === $pagenow ) ) { return; /* Escape for all other sections of the admin. */ }
 
-		//Get the post ID. 
+
+		//GET or POST the post_ID number and ensure that its an int. 
 		$post_id = filter_input( INPUT_GET, 'post', FILTER_SANITIZE_NUMBER_INT )
-			? filter_input( INPUT_GET, 'post', FILTER_SANITIZE_NUMBER_INT )
-			: filter_input( INPUT_POST, 'post_ID', FILTER_SANITIZE_NUMBER_INT );
+					? filter_input( INPUT_GET, 'post', FILTER_SANITIZE_NUMBER_INT )
+					: filter_input( INPUT_POST, 'post_ID', FILTER_SANITIZE_NUMBER_INT );
 
 
-		if ( !isset($post_id) ) {
-			return;
-		}
+		if ( !isset($post_id) ) { return; /* The Filter returned false so escape. */ } 
 
+		
+		//Current post_id's loaded template.
 		$template_filename = esc_url( get_post_meta( $post_id, '_wp_page_template', true ) );
 
 
-		if ( in_array( $template_filename, json_decode( EDITOR_HIDE_PAGE_TEMPLATES ) ) ) {
+		/**
+		 * Use a define name and compares the list of template files in the array to the currently 
+		 * loaded template set in the $template_filename variable above.  This define name is used 
+		 * to separate what should be done to these list of templates in the admin sections.
+		 */
+
+
+		//Hides the page editor to the following templates.
+		define('HIDE_PAGE_EDITOR', json_encode( array( 
+			'http://page_templates/contact-form.php',
+			'archive-gallery.php'
+		) ) );
+		if ( in_array( $template_filename, json_decode( HIDE_PAGE_EDITOR ) ) ) {
 			remove_post_type_support( 'page', 'editor' );
-
-
-			//Loads the backend form section.
-			function load_meta_box() {
-   				add_meta_box( 'my-meta-box-id', 'Feature Me Please', 'call_meta_box', 'page', 'normal', 'high' );
-			}
-
-			add_action( 'add_meta_boxes', 'load_meta_box' );
-
 		}
 
+
+		//Loads options for the contact us form.
+		define('LOAD_CONTACT_FORM', json_encode( array(
+			'http://page_templates/contact-form.php'
+		) ) );
+		if ( in_array( $template_filename, json_decode( LOAD_CONTACT_FORM ) ) ) {
+
+			
+
+			function social_media_input() {
+
+   				add_meta_box( 'social_media_id', 'Social Media', 'load_social_media_form', 'page', 'normal', 'high' );
+
+			}
+
+			function load_social_media_form() {
+
+				global $post; 
+
+				wp_nonce_field( basename( __FILE__ ), 'nonce' );  //Validate form comes from this function.
+
+				$values = get_post_meta( $post->ID, 'social_media_urls', true ); //Grabs the data saved in the post_meta.
+				?>
+
+				<!-- HTML Form -->
+				<p>
+					<label for="facebook">Facebook</label>
+					<input type="text" name="facebook" id="facebook" style="width: 100%;" value="<?php echo $values['facebook']; ?>">
+					<label for="instagram">Instagram</label>
+					<input type="test" name="instagram" id="instagram" style="width: 100%;" value="<?php echo $values['instagram']; ?>">
+				</p>
+
+			<?php }
+
+			function save_social_media_form ( $post_id ) {
+
+				//Validates data:
+				$is_autosave = wp_is_post_autosave( $post_id );
+				$is_revision = wp_is_post_revision( $post_id );
+				$is_valid_nonce = (isset ( $_POST['nonce'] ) && wp_verify_nonce( $_POST['nonce'], basename(__FILE__) ) ) ? 'true' : 'false';
+				$is_valid_user = current_user_can( 'edit_post', $post_id );
+
+				//Exits the function if the data is not safe:
+				if ( $is_autosave || $is_revision || !$is_valid_nonce || !$is_valid_user ) { return; }
+
+				update_post_meta( $post_id, 'social_media_urls', array(
+					'facebook' => $_POST['facebook'],
+					'instagram' => $_POST['instagram']
+				) );
+
+
+			}
+
+			add_action( 'add_meta_boxes', 'social_media_input' );
+			add_action( 'save_post', 'save_social_media_form');
+
+		}
 	}
-	add_action( 'admin_init', 'contact_form' );
+
+	add_action( 'admin_init', 'customize_content_input' );
 
 
 
@@ -417,34 +474,6 @@ if ( is_admin() ) {
 
 	}
 	add_action( 'admin_menu', 'dashboard_menu' );
-
-
-
-
-
-
-
-
-
-	/**
-	 * Defaults all link image types to none.  This is to prevent hotlinking
-	 * and to improve SEO.
-	 *
-	 * @since Digital Portfolio 0.1
-	 */
-	function remove_default_image_link() {
-
-		$image_set = get_option( 'image_default_link_type' );
-
-		if ($image_set !== 'none') {
-
-			update_option('image_default_link_type', 'none');
-
-		}
-
-
-	}
-	add_action('admin_init', 'remove_default_image_link');
 
 
 /* End admin only section */ } ?>
