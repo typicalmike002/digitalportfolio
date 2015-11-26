@@ -13,3 +13,32 @@ Discription: Styles to be loaded into custom sections in the wp-admin
 	content: '\f233';
 
 }
+
+/* Simple grid for form layouts  */
+
+.row {
+	margin: 0 auto;
+	clear: both;
+	overflow: hidden;
+}
+
+
+@media all and (min-width: 766px){
+
+	.col_hlf {
+		float: left;
+		width: 50%;
+	}
+
+}
+
+
+label {
+	display: block;
+	cursor: default;
+	font-weight: 600;
+}
+
+input {
+	width: 85%;	
+}

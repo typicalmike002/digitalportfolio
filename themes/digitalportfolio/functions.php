@@ -340,23 +340,106 @@ if ( is_admin() ) { //Functions that are only needed for the backend.
 			'archive-gallery.php'
 		) ) );
 		if ( in_array( $template_filename, json_decode( HIDE_PAGE_EDITOR ) ) ) {
+			
 			remove_post_type_support( 'page', 'editor' );
+
 		}
 
 
-		//Loads options for the contact us form.
+		//Loads meta form and post meta data for the contact us template.
 		define('LOAD_CONTACT_FORM', json_encode( array(
 			'http://page_templates/contact-form.php'
 		) ) );
 		if ( in_array( $template_filename, json_decode( LOAD_CONTACT_FORM ) ) ) {
 
-			
 
-			function social_media_input() {
 
+			function create_meta_boxes() {
+
+				add_meta_box( 'contact_info_id', 'Contact Info', 'load_contact_info_form', 'page', 'normal', 'high' );
+				add_meta_box( 'address_id', 'Address', 'load_address_form', 'page', 'normal', 'high' );
    				add_meta_box( 'social_media_id', 'Social Media', 'load_social_media_form', 'page', 'normal', 'high' );
 
 			}
+
+			function load_contact_info_form() {
+
+				global $post; 
+
+				wp_nonce_field( basename( __FILE__ ), 'nonce' );  //Validate form comes from this function.
+
+				$values = get_post_meta( $post->ID, 'contact_info', true ); //Grabs the data saved in the post_meta.
+				?>
+
+				<!-- HTML Form -->
+				<div class="row">
+					<div class="col_hlf">
+						<label for="email"><p>Email</p></label>
+						<input type="email"
+							name="email"
+							value="<?php echo $values['email']; ?>"
+							placeholder="example@email.com">
+					</div>
+					<div class="col_hlf">
+						<label for="phone"><p>Phone Number</p></label>
+						<input type="tel"
+							pattern="^(\([0-9]{3}\)|[0-9]{3}-)[0-9]{3}-[0-9]{4}$"
+							name="phone"
+							value="<?php echo $values['phone']; ?>"
+							title="Phone Number Format: (123)123-1234"
+							placeholder="(123)123-1234">
+					</div>
+				</div>
+				<?php }
+
+			function load_address_form() {
+
+				global $post;
+				
+				include('us-states.php');
+
+				wp_nonce_field( basename(__FILE__ ), 'nonce' );
+
+				$values = get_post_meta( $post->ID, 'address', true );
+				?>
+				
+				<!-- HTML Form -->
+				<div class="row">
+					<div class="col_hlf">
+						<label for="street_address"><p>Address</p></label>
+						<input type="text"
+							name="street_address"
+							value="<?php echo $values['street_address']; ?>"
+							placeholder="Street Address or P.O. Box Number">
+					</div>
+					<div class="col_hlf">
+						<label for="city"><p>City</p></label>
+						<input type="text"
+							name="city"
+							value="<?php echo $values['city']; ?>"
+							placeholder="Village, Town or City">
+					</div>
+					<div class="col_hlf">
+						<label for="state"><p>State</p></label>
+						<select name="state">
+						<?php foreach ( $states as $abbr => $state ) : ?>
+							<option <?php if ( $abbr == $values['state'] ) : echo 'selected'; endif; /* Defaults to currently saved state. */ ?>
+								value="<?php echo $abbr; ?>"><?php echo $state; ?>
+							</option>
+						<?php endforeach; ?>
+						</select>
+					</div>
+					<div class="col_hlf">
+						<label for="zipcode"><p>Zipcode</p></label>
+						<input type="text"
+							name="zipcode"
+							value="<?php echo $values['zipcode']; ?>"
+							pattern="^[0-9]{5}(?:-[0-9]{4})?$"
+							placeholder="12345 or 12345-6789"
+							title="Zip Code Format: 12345 or 12345-6789">
+					</div>
+				</div>
+			<?php }
 
 			function load_social_media_form() {
 
@@ -368,16 +451,30 @@ if ( is_admin() ) { //Functions that are only needed for the backend.
 				?>
 
 				<!-- HTML Form -->
-				<p>
-					<label for="facebook">Facebook</label>
-					<input type="text" name="facebook" id="facebook" style="width: 100%;" value="<?php echo $values['facebook']; ?>">
-					<label for="instagram">Instagram</label>
-					<input type="test" name="instagram" id="instagram" style="width: 100%;" value="<?php echo $values['instagram']; ?>">
-				</p>
+				<div class="row">
+					<div class="col_hlf">
+						<label for="facebook"><p>Facebook URL</p></label>
+						<input type="url"
+							name="facebook"
+							value="<?php echo $values['facebook']; ?>"
+							pattern="https?://.+"
+							placeholder="http://example.com"
+							title="URL Format: http://example.com">
+					</div>
+					<div class="col_hlf">
+						<label for="instagram"><p>Instagram URL</p></label>
+						<input type="url"
+							name="instagram"
+							value="<?php echo $values['instagram']; ?>"
+							pattern="https?://.+"
+							placeholder="http://example.com"
+							title="URL Format: http://example.com">
+					</div>
+				</div>
 
 			<?php }
 
-			function save_social_media_form ( $post_id ) {
+			function save_forms ( $post_id ) {
 
 				//Validates data:
 				$is_autosave = wp_is_post_autosave( $post_id );
@@ -388,16 +485,31 @@ if ( is_admin() ) { //Functions that are only needed for the backend.
 				//Exits the function if the data is not safe:
 				if ( $is_autosave || $is_revision || !$is_valid_nonce || !$is_valid_user ) { return; }
 
+				
+				//Loads contact info into meta data.
+				update_post_meta( $post_id, 'contact_info', array(
+					'email' => $_POST['email'],
+					'phone' => $_POST['phone']
+				) );
+
+
+				update_post_meta( $post_id, 'address', array(
+					'street_address' => $_POST['street_address'],
+					'city' => $_POST['city'],
+					'state' => $_POST['state'],
+					'zipcode' => $_POST['zipcode']
+				) );
+
+
+				//Loads social media links into meta data.
 				update_post_meta( $post_id, 'social_media_urls', array(
 					'facebook' => $_POST['facebook'],
 					'instagram' => $_POST['instagram']
 				) );
-
-
 			}
 
-			add_action( 'add_meta_boxes', 'social_media_input' );
-			add_action( 'save_post', 'save_social_media_form');
+			add_action( 'add_meta_boxes', 'create_meta_boxes' );
+			add_action( 'save_post', 'save_forms' );
 
 		}
 	}
