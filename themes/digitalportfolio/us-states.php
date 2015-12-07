@@ -4,6 +4,7 @@
  */
 
 $states = array(
+    ''=>'- none -',
     'AL'=>'Alabama',
     'AK'=>'Alaska',
     'AZ'=>'Arizona',

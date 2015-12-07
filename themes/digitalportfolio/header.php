@@ -23,34 +23,30 @@
 <body <?php body_class(); ?>>
 
 <!-- header -->
-<header class="header header_banner" role="banner">
+<header class="header" role="banner">
 
 	<!-- logo -->
-	<div class="logo logo_wrapper">
+	<div class="logo">
 
 		<?php if ( is_front_page() ) : ?>
-			<h1 class="title logo_homepage">
-				<a class="logo_link" 
-				href="<?php echo esc_url( home_url( '/' ) ); ?>"
+			<h1 class="header_title">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>"
 				title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"
 				rel="<?php echo esc_attr( 'home' ); ?>"
 				/>
-					<img class="logo_image"
-					src="<?php echo esc_url( bloginfo( 'template_url' ).'/images/logo.png'); ?>"
+					<img src="<?php echo esc_url( bloginfo( 'template_url' ).'/images/logo.png'); ?>"
 					alt="<?php esc_attr( bloginfo( 'name' ) ); ?>"
 					/>
 				</a>
 			</h1>
 
 		<?php else : ?>
-			<a class="logo_link"
-				href="<?php echo esc_url( home_url( '/' ) ); ?>"
-				title="<?php echo get_bloginfo( 'name', 'display' ); ?>"
-				rel="<?php echo esc_attr( 'home' ); ?>"
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>"
+			title="<?php echo get_bloginfo( 'name', 'display' ); ?>"
+			rel="<?php echo esc_attr( 'home' ); ?>"
 			/>
-				<img class="logo_image"
-					src="<?php echo esc_url( bloginfo( 'template_url' ).'/images/logo.png'); ?>"
-					alt="<?php esc_attr( bloginfo( 'name' ) ); ?>"
+				<img src="<?php echo esc_url( bloginfo( 'template_url' ).'/images/logo.png'); ?>"
+				alt="<?php esc_attr( bloginfo( 'name' ) ); ?>"
 				/>
 			</a>
 
@@ -59,9 +55,7 @@
 
 	<!-- navigation -->
 	<nav class="nav" role="navigation">
-
 		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav_menu') ); ?>
-
 	</nav>
 </header>
 

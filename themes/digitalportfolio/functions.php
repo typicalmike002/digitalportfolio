@@ -237,6 +237,33 @@ add_action( 'init', 'add_taxonomies' );
 
 
 /**
+ * Creates the query vars for the custom single-gallery.php page.
+ * Gallery Index refers to the curretly loaded image in the array.
+ *
+ * @since Digital Portfolio 0.1
+ */
+function add_query_vars( $vars ) {
+
+	$vars[] = 'image';
+
+	return $vars; 
+}
+add_filter( 'query_vars', 'add_query_vars' );
+
+function add_query_rewrites() {
+
+	add_rewrite_tag( '%image%', '([^/]*)');
+
+	add_rewrite_rule('^gallery/([^/]*)/([^/]*)/?$', 'index.php?gallery=$matches[1]&image=$matches[2]', 'top');
+}
+add_action('init', 'add_query_rewrites' );
+
+
+
+
+
+
+/**
  * Removes wp_emojicons from loading in the <head>.
  *
  * @since digital Portfolio 0.1
@@ -423,7 +450,7 @@ if ( is_admin() ) { //Functions that are only needed for the backend.
 						<label for="state"><p>State</p></label>
 						<select name="state">
 						<?php foreach ( $states as $abbr => $state ) : ?>
-							<option <?php if ( $abbr == $values['state'] ) : echo 'selected'; endif; /* Defaults to currently saved state. */ ?>
+							<option <?php if ( $abbr == $values['state'] ) : echo 'selected'; endif; /* Posts currently saved state. */ ?>
 								value="<?php echo $abbr; ?>"><?php echo $state; ?>
 							</option>
 						<?php endforeach; ?>
@@ -434,7 +461,7 @@ if ( is_admin() ) { //Functions that are only needed for the backend.
 						<input type="text"
 							name="zipcode"
 							value="<?php echo $values['zipcode']; ?>"
-							pattern="^[0-9]{5}(?:-[0-9]{4})?$"
+							pattern="^[0-9]{5}(?:-[0-9]{4})?$" 
 							placeholder="12345 or 12345-6789"
 							title="Zip Code Format: 12345 or 12345-6789">
 					</div>
@@ -488,23 +515,23 @@ if ( is_admin() ) { //Functions that are only needed for the backend.
 				
 				//Loads contact info into meta data.
 				update_post_meta( $post_id, 'contact_info', array(
-					'email' => $_POST['email'],
-					'phone' => $_POST['phone']
+					'email' => sanitize_text_field ( $_POST['email'] ),
+					'phone' => sanitize_text_field ( $_POST['phone'] )
 				) );
 
-
+				//Loads address into meta data.
 				update_post_meta( $post_id, 'address', array(
-					'street_address' => $_POST['street_address'],
-					'city' => $_POST['city'],
-					'state' => $_POST['state'],
-					'zipcode' => $_POST['zipcode']
+					'street_address'	=>	sanitize_text_field ( $_POST['street_address'] ),
+					'city' 				=>	sanitize_text_field ( $_POST['city'] ),
+					'state' 			=>	sanitize_text_field ( $_POST['state'] ),
+					'zipcode'			=>	sanitize_text_field ( $_POST['zipcode'] )
 				) );
 
 
 				//Loads social media links into meta data.
 				update_post_meta( $post_id, 'social_media_urls', array(
-					'facebook' => $_POST['facebook'],
-					'instagram' => $_POST['instagram']
+					'facebook'	=>	sanitize_text_field ( $_POST['facebook'] ),
+					'instagram' =>	sanitize_text_field ( $_POST['instagram'] )
 				) );
 			}
 

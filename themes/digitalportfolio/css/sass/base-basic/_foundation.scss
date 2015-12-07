@@ -42,7 +42,7 @@ html {
 body {
 	font-size: $mobile;
 	color: $color1;
-	margin: 1em;
+	margin: 3em;
 }
 
 
@@ -409,6 +409,7 @@ textarea {
 
 /**
  * 		1.	Don't inherit the 'font-weight' (applied by a rule above).
+ * 		
  * 		2.	NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
  */
 
@@ -435,4 +436,30 @@ table {
 td,
 th {
 	padding: 0;
+}
+
+
+
+
+/*-------------------------*\
+  #Definition lists
+\*-------------------------*/
+
+/**
+ * 		1.	Custom stying for <dl>, <dt>, and <dd>
+ *
+ * 		2.	Added simple grid for contact-form.php
+ */
+
+dl {
+
+}
+
+dt {
+	
+}
+
+dt,
+dd {
+	
 }

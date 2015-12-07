@@ -17,15 +17,39 @@ Discription: Functions and mixins to be used for the project.
  * 			css properties that require them.
  */
 
-@mixin text-size-adjust ( $value ) {
-	-ms-text-size-adjust: $value;
-	-moz-text-size-adjust: $value;
-	-webkit-text-size-adjust: $value;
-	text-size-adjust: $value;
+@mixin text-size-adjust ( $values ) {
+	-ms-text-size-adjust: $values;
+	-moz-text-size-adjust: $values;
+	-webkit-text-size-adjust: $values;
+	text-size-adjust: $values;
 }
 
-@mixin box-sizing ( $value ) {
-	-moz-box-sizing: $value;
-	-webkit-box-sizing: $value;
-	box-sizing: $value;
+@mixin box-sizing ( $values ) {
+	-moz-box-sizing: $values;
+	-webkit-box-sizing: $values;
+	box-sizing: $values;
+}
+
+@mixin flexbox() {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+}
+
+@mixin flex( $values ) {
+	-webkit-box-flex: $values;
+	-moz-box-flex: $values;
+	-webkit-flex: $values;
+	-ms-flex: $values;
+	flex: $values;
+}
+
+@mixin order ( $values ) {
+	-webkit-box-ordinal-group: $values;
+	-moz-box-ordinal-group: $values;
+	-ms-flex-order: $values;
+	-webkit-order: $values;
+	order: $values;
 }

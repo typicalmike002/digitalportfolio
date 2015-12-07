@@ -8,63 +8,57 @@
  * @version 0.1
  */
 
-get_header(); 
+function get_image( $req ) {
 
-//Retrieve all image url's from the gallery.
-$gallery = get_post_gallery_images( $post );
+	$image_urls = get_post_gallery_images( $post ); //Array of image links [0]=>http://'uploads/2015/11/building.jpg'
+	$max = max( array_keys( $image_urls ) ); //Max index value of gallery.
+	$gallery = array();
 
+	function get_file_name( $url ) { // Takes a url argument and returns the file name.
 
-//Comutes the highest index number in the gallery array.
-$gallery_length = count( $gallery );
-$gallery_length--;
-
-
-//Session variable to remember what image our user is viewing.  Defaults to 0.
-if (empty($_SESSION['current_image']) ) {
-	 $_SESSION['current_image'] = 0;
-}
-
-
-//Validates that the current_image is an intiger.
-$_SESSION['current_image'] = filter_var( $_SESSION['current_image'], FILTER_VALIDATE_INT );
-
-
-//when users come from another gallery, the $current_image variable might be 
-//higher then the current gallery's max array length.  This fixes that.
-if ( $_SESSION['current_image'] > $gallery_length ) {
-	$_SESSION['current_image'] = 0;
-}
-
-
-
-//control_action becomes set when the user presses one of the gallery controls.
-//this section will choose what image to load next.
-if ( isset( $_POST['control_action'] ) ) {
-
-	//Validates that control_action is a boolean.
-	$action = filter_var( $_POST['control_action'], FILTER_VALIDATE_BOOLEAN );
-
-	if ( $action === false ) {
-		$_SESSION['current_image'] = $_SESSION['current_image'] > 0 ? $_SESSION['current_image'] -= 1 : $gallery_length;
-		
+		$pathinfo = pathinfo( $url );
+		return $pathinfo['filename'];
 	}
 
-	if ( $action === true ) {
+	foreach ( $image_urls as $key => $image_url ) { // Sets up variables to be assigned to each image in the gallery.
 
-		$_SESSION['current_image'] = $_SESSION['current_image'] < $gallery_length ? $_SESSION['current_image'] += 1 : 0;
+		$name = get_file_name( $image_url ); //Uses the image filename to key the gallery array.
+
+		//Each image must have its image_url stored.
+		//This array also determins the images to be used 
+		//in the previous/next links below.
+		$gallery[$name] = array( 
+			'url'		=>	$image_url,
+			'next'		=>	!( $key >= $max ) ?
+							get_file_name( $image_urls[( $key+1 )] ) :
+							get_file_name( $image_urls[0] ),
+			'previous'	=>	!( $key <= 0 ) ?
+							get_file_name( $image_urls[( $key-1 )] ) :
+							get_file_name( $image_urls[$max] )
+		);
 
 	}
-	
 
-} ?>
+	if ( array_key_exists( $req, $gallery ) ) { // Presents the user with the requested image if one is found in the gallery array.
 
+		return $gallery[$req];
 
-<?php if (array_key_exists( '0', $gallery ) ) { ?>
-	<form class="gallery" method="POST">
-		<img class="gallery_display" src="<?php echo esc_url( $gallery[$_SESSION['current_image']] ); ?>" ><br/>
-		<button class="gallery_control" name="control_action" type="submit" value="false" >Left</button>
-		<button class="gallery_control" name="control_action" type="submit" value="true" >Right</button>
-	</form>
-<?php } else { die("Warning: No images in this gallery were found."); } ?> 
+	} else { 
+		reset( $gallery );
+		$firstKey = key( $gallery );
+		wp_redirect( get_permalink() . '/' . $firstKey ); // redirect user to the first item in the gallery.
+		exit;
+	}
+}
+
+global $wp_query;
+$query_image = $wp_query->query_vars['image'];
+$image_url = get_image( $query_image );
+
+get_header();	?>
+
+<a href="<?php echo esc_url( get_permalink() . $image_url['next'] ); ?>">Previous</a>
+<img src="<?php echo esc_url( $image_url['url'] ); ?>">
+<a href="<?php echo esc_url( get_permalink() . $image_url['previous'] ); ?>">Next</a><br />
 
 <?php get_footer(); ?>
