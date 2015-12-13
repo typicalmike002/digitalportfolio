@@ -6,11 +6,6 @@ get_header(); ?>
 
 	<?php if ( have_posts() ) : 
 
-		//This will reset the gallery's index number so when the user loads another 
-		//gallery, the first image in the list is shown.
-		$_SESSION['image_index'] = 0; 
-
-
 		//Loops through all galleries to create a simple archive page.
 		$args = array('post_type' => 'gallery' ); 
 		$galleries = get_posts( $args );
