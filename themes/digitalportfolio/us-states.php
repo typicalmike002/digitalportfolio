@@ -1,6 +1,6 @@
 <?php
 /**
- * A List of us states and their abbriviations.
+ * A List of us states and their abbriviations.  Used in a function.php form.
  */
 
 $states = array(

@@ -17,6 +17,10 @@ module.exports = function(grunt) {
 				options: {
 					spawn: false
 				}
+			},
+			scripts: {
+				files: ['js/**/*.js'],
+				tasks: ['jshint', 'requirejs']
 			}
 		},
 
@@ -49,11 +53,31 @@ module.exports = function(grunt) {
 					src: ['*.css']
 				}]
 			}
+		},
+
+		jshint: {
+			all: ['Gruntfile.js']
+		},
+
+		requirejs: {
+			compile: {
+				options: {
+					baseUrl: 'js',
+					name: 'config',
+					paths: {
+						jquery: 'libraries/jquery-1.11.3.min',
+						app: 'modules/app'
+					},
+					out: 'js/optimize.min.js' 
+				}
+			}
 		}
 	});
 	grunt.registerTask('default', [
 		'grunt-contrib-cssmin',
 		'grunt-contrib-combine-mq',
-		'grunt-contrib-compass'
+		'grunt-contrib-compass',
+		'grunt-contrib-jshint',
+		'grunt-contrib-requirejs'
 	]);
 };

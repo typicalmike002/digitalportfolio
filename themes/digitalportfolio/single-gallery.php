@@ -58,7 +58,7 @@ function get_attachment_id_by_url( $url ) {
  * Retrives the requested gallery image url, and responds with an array of 
  * meta data to be used in the HTML.
  * 
- * @param  'string' $req [The name of an image in the gallery array.]
+ * @param  'string' $req [Requested image url ]
  * @return 'array'		 [$gallery_single: returns an accociative array of arrays
  *                       that contains a file name for the keys which are linked to
  *                       another array containing 4 values: the src, sets is_single
@@ -76,14 +76,12 @@ function get_attachment_id_by_url( $url ) {
 function get_gallery_data( $req ) {
 
 	$gallery = get_post_gallery( get_the_ID(), false );
+	$max = max( array_keys( $gallery['src'] ) );
 	$gallery_single = array();
 	$gallery_archive = array();
-	$max = max( array_keys( $gallery['src'] ) );
 
 	foreach ( $gallery['src'] as $key => $src ) { 
-
 		$name = get_file_name( $src );
-		
 		$gallery_single[$name] = array( 
 			'src'		=>	$src,
 			'is_single'	=>	true,	
@@ -94,8 +92,6 @@ function get_gallery_data( $req ) {
 							get_file_name( $gallery['src'][( $key-1 )] ) :
 							get_file_name( $gallery['src'][$max] ) 
 		);
-
-
 		$gallery_archive[$name] = $src;
 	}
 
@@ -121,7 +117,6 @@ function get_gallery_data( $req ) {
 
 
 //Set of global values to be sanitized and passed to the HTML:
-
 global $wp_query;
 
 $query_image = $wp_query->query_vars['image'];
@@ -130,30 +125,28 @@ $image_gallery = get_gallery_data( $query_image );
 
 get_header(); ?>
 
-<?php if ( $image_gallery['is_single'] ) : /* Template for single image displays */
-	
-	$current = sanitize_text_field( $image_gallery['src'] );
-	$next = sanitize_text_field( $image_gallery['next'] );
-	$previous = sanitize_text_field( $image_gallery['previous'] ); ?>
+<?php if ( $image_gallery['is_single'] ) :/* Displays a single image */?> 
 
-	<a href="<?php echo '../' . $previous; ?>">Previous</a>
-	<img src="<?php echo $current; ?>">
-	<a href="<?php echo '../' . $next; ?>">Next</a>
+	<?php /* Loads the following variables to be used by the template.php file. */
+		$current = sanitize_text_field( $image_gallery['src'] );
+		$next = sanitize_text_field( $image_gallery['next'] );
+		$previous = sanitize_text_field( $image_gallery['previous'] );
+	?>
 
-<?php else : /* Template for whole gallery thumbnails */
+	<?php include( locate_template('single-gallery_single.php') ); ?>
 
-	foreach ( $image_gallery as $key => $value ) : 
+<?php else : /* Displays whole gallery using thumbnails */ ?>
 
-		$image_id = get_attachment_id_by_url( $value );
-		$image_url = sanitize_text_field( $key );
-		$image_thumbnail = wp_get_attachment_image_src( $image_id, 'thumbnail' );
-		$image_src = esc_url( $image_thumbnail[0] );
+	<?php foreach ( $image_gallery as $key => $value ) : ?>
 
+		<?php /* Loads the following variables to be used by the template.php file. */
+			$image_id = get_attachment_id_by_url( $value );
+			$image_url = sanitize_text_field( $key );
+			$image_thumbnail = wp_get_attachment_image_src( $image_id, 'thumbnail' );
+			$image_src = esc_url( $image_thumbnail[0] );
 		?>
 		
-		<a href="<?php echo $image_url; ?>">
-			<img src="<?php echo $image_src; ?>">
-		</a>
+		<?php include( locate_template( 'single-gallery_archive.php' ) ); ?>
 
 	<?php endforeach; ?>
 

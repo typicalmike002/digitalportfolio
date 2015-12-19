@@ -187,22 +187,23 @@ function inject_scripts() {
 
 
 	$js_dir = get_template_directory_uri() . '/js';
+	$js_libs = $js_dir . '/libraries';
 
 	//Loads requirejs, we set true to push everything into the footer.
-	wp_enqueue_script( 'requrejs', $js_dir . '/require.js', '', '', true );
+	wp_enqueue_script( 'requrejs', $js_libs . '/require.js', '', '', true );
 
 
 	//requirejs config file that depends on requirejs.
-	wp_register_script( 'configjs', $js_dir . '/config.js', 'requirejs', '', true );
+	wp_register_script( 'optimize', $js_dir . '/optimize.min.js', 'requirejs', '', true );
 
 
 	//Creates a json object so the configjs knows its directory. 
-	wp_localize_script( 'configjs', 'js_dir', array(
+	wp_localize_script( 'optimize', 'js_dir', array(
 		'path'		=> $js_dir
 	));
 
 
-	wp_enqueue_script( 'configjs', '', '', '', true );
+	wp_enqueue_script( 'optimize', '', '', '', true );
 
 	
 
