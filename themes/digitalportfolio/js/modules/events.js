@@ -4,9 +4,9 @@ define(function(){
 
 	var events = {
 		'prevent_default': addEventListener('click', function(event){
-			event.preventDefault();
+			//event.preventDefault();
 		}, false)
 	};
 
-	//return events;
+	return events;
 });
