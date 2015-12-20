@@ -22,8 +22,8 @@ define(function(require) {
 
 	nav.get_href = function(element){
 
-		var url = element.getAttribute('href');
-		return url;
+		var href = element.getAttribute('href');
+		return href;
 	};
 
 	return nav;
