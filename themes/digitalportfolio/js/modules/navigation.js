@@ -6,7 +6,7 @@ define(function(require) {
 
 	nav.elements = {
 		id: document.getElementById('nav'),
-		a: selectors['div'].getElementsByTagName('a')
+		a: this.id.getElementsByTagName('a')
 	};
 
 	console.log( nav.elements.id );
