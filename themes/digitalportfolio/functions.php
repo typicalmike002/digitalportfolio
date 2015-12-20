@@ -198,8 +198,9 @@ function inject_scripts() {
 
 
 	//Creates a json object so the configjs knows its directory. 
-	wp_localize_script( 'optimize', 'js_dir', array(
-		'path'		=> $js_dir
+	wp_localize_script( 'optimize', 'dir', array(
+		'path'		=> $js_dir,
+		'ajax_url'	=> admin_url( 'admin-ajax.php' )
 	));
 
 
@@ -209,6 +210,29 @@ function inject_scripts() {
 
 }
 add_action( 'wp_enqueue_scripts', 'inject_scripts' );
+
+
+
+/**
+ * Registers Ajax routes for the nagivagtion links of the website.
+ *
+ * 
+ */
+function get_content() {
+
+	global $wpdb;
+
+	$request = $_POST['nonce'];
+
+	echo $request;
+
+	wp_die();
+
+
+}
+add_action( 'wp_ajax_get_content', 'get_content');
+add_action( 'wp_ajax_nopriv_get_content', 'get_content');
+
 
 
 

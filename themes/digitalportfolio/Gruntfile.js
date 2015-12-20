@@ -11,6 +11,21 @@ module.exports = function(grunt) {
 			options: {
 				livereload: true,
 			},
+			src: {
+				files: [
+					'**/*.php',
+					'**/*.css',
+					'js/**/*.js',
+					'css/sass/**/*.scss',
+					'package.json',
+					'**/*.png', 
+					'**/*.jpg', 
+					'**/*.gif',
+					'Gruntfile.js',
+					'!node_modules/*', 
+				],
+				tasks: ['gitadd', 'gitcommit']
+			},
 			scss: {
 				files: ['css/sass/*.scss', 'css/sass/**/*.scss'],
 				tasks: ['compass', 'combine_mq', 'cssmin'],
@@ -19,8 +34,54 @@ module.exports = function(grunt) {
 				}
 			},
 			scripts: {
-				files: ['js/**/*.js'],
+				files: ['js/config.js', 'js/modules/**/*.js'],
 				tasks: ['jshint', 'requirejs']
+			}
+		},
+
+		gitadd: {
+			task: {
+				options: {
+					force: true
+				},
+				files: {
+					src: ['*']
+				}
+			}
+		},
+
+		gitcommit: {
+			your_target: {
+				options: {
+					cwd: '../../',
+					message: function() {
+						var now = new Date(),
+							date = [ now.getMonth() + 1, now.getDate(), now.getFullYear() ],
+							time = [ now.getHours(), now.getMinutes(), now.getSeconds() ],
+							suffix = ( time[0] < 12 ) ? 'AM' : 'PM';
+
+						// Convert hour from military time.
+						time[0] = ( time[0] < 12 ) ? time[0] : time[0] - 12;
+
+						// If hour is 0, set it to 12.
+						time[0] = time[0] || 12;
+
+						// If seconds and minutes are less than 10, add a zero.
+						for (var i = 1; i < 3; i++) {
+							if (time[i] < 10) {
+								time[i] = "0" + time[i];
+							}
+						}
+
+						// Return the date and time formatted as a string.
+						return date.join('/') + ' ' + time.join(':') + ' ' + suffix;
+					}
+				},
+				files: [{
+					src: ["*"],
+					expand: true,
+					cwd: 'themes/digitalportfolio'
+				}]
 			}
 		},
 
@@ -74,6 +135,7 @@ module.exports = function(grunt) {
 		}
 	});
 	grunt.registerTask('default', [
+		'grunt-contrib-grunt-git',
 		'grunt-contrib-cssmin',
 		'grunt-contrib-combine-mq',
 		'grunt-contrib-compass',

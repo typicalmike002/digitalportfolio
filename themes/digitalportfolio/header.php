@@ -23,7 +23,7 @@
 <body <?php body_class(); ?>>
 
 <!-- header -->
-<header class="header" role="banner">
+<header id="header" role="banner">
 
 	<!-- logo -->
 	<div class="logo">
@@ -54,10 +54,10 @@
 	</div>
 
 	<!-- navigation -->
-	<nav class="nav" role="navigation">
+	<nav id="nav" role="navigation">
 		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav_menu') ); ?>
 	</nav>
 </header>
 
 <!-- main -->
-<main class="main" role="main">
+<main id="main" role="main">
