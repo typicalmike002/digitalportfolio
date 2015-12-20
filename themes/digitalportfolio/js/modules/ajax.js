@@ -9,9 +9,19 @@ define(function() {
 			'nonce': request
 		};
 
-		jQuery.post(dir.ajax_url, data, function(response){
-			
+		$.ajax({
+			type: "POST",
+			url: request,
+			data: data,
+			success: replace_content,
+			dataType: 'html'
 		});
+
+		function replace_content(data) {
+			var content = $(data).find('#main');
+			$('#result').empty().append(content);
+		}
+
 	};
 
 	return ajax;
