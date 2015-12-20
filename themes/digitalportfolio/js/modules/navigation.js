@@ -12,10 +12,11 @@ define(function(require) {
 		for (var i = 0, l = links.length; i < l; i++){
 			anchor = links[i];
 		}
-		
+
 		return anchor;
+
 	};
 
 	return nav;
-
+	
 });
