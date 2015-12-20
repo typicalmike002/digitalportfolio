@@ -9,6 +9,8 @@ define(function(require) {
 		'links': selectors['div'].getElementsByTagName('a')
 	};
 
+	
+
 	nav.get_links = function(){
 		var div = document.getElementById('nav'),
 			links = div.getElementsByTagName('a'),
