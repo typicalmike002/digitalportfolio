@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 				}
 			},
 			scripts: {
-				files: ['js/config.js', 'js/modules/**/*.js'],
+				files: ['js/config.js', 'js/modules/**/*.js', 'Gruntfile.js'],
 				tasks: ['jshint', 'requirejs']
 			},
 			src: {
