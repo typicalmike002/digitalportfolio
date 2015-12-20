@@ -10,7 +10,7 @@ define(function (require) {
 		var ajax_enabled_nav = nav.get_links(i);
 		ajax_enabled_nav.addEventListener('click', function(event){
 			event.preventDefault();
-			ajax.get_content( nav.get_href(this) );
+			ajax.load_content( nav.get_href(this) );
 		}, false);
 	}
 });

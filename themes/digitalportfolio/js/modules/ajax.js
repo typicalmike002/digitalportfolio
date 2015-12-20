@@ -2,7 +2,7 @@ define(function() {
 
 	var ajax = {};
 
-	ajax.get_content = function(request){
+	ajax.load_content = function(request){
 
 		var data = {
 			'action': 'get_content',
@@ -10,7 +10,7 @@ define(function() {
 		};
 
 		jQuery.post(dir.ajax_url, data, function(response){
-			alert(response);
+			
 		});
 	};
 
