@@ -3,6 +3,8 @@ module.exports = function(grunt) {
 	//Loads all grunt tasks matching the ['grunt-*', '@*/grunt-*'] patterns.
 	require('load-grunt-tasks')(grunt);
 
+	var now = new Date(); // Used for git commit message.
+
 	grunt.initConfig({
 
 		pkg: grunt.file.readJSON('package.json'),
@@ -54,28 +56,7 @@ module.exports = function(grunt) {
 			your_target: {
 				options: {
 					cwd: '../../',
-					message: function() {
-						var now = new Date(),
-							date = [ now.getMonth() + 1, now.getDate(), now.getFullYear() ],
-							time = [ now.getHours(), now.getMinutes(), now.getSeconds() ],
-							suffix = ( time[0] < 12 ) ? 'AM' : 'PM';
-
-						// Convert hour from military time.
-						time[0] = ( time[0] < 12 ) ? time[0] : time[0] - 12;
-
-						// If hour is 0, set it to 12.
-						time[0] = time[0] || 12;
-
-						// If seconds and minutes are less than 10, add a zero.
-						for (var i = 1; i < 3; i++) {
-							if (time[i] < 10) {
-								time[i] = "0" + time[i];
-							}
-						}
-
-						// Return the date and time formatted as a string.
-						return date.join('/') + ' ' + time.join(':') + ' ' + suffix;
-					}
+					message: 'Repo updated on: ' + grunt.template.today(now, 'UTC:h:MM:ss TT')
 				},
 				files: [{
 					src: ["*"],
