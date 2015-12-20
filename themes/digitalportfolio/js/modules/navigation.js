@@ -4,12 +4,12 @@ define(function(require) {
 
 	var nav = {};
 
-	nav.get_links = function(){
+	nav.get_links = function(id){
 		var div = document.getElementById('nav'),
 			links = div.getElementsByTagName('a');
 
-		return links;
-		
+		return links[id];
+
 	};
 
 	return nav;
