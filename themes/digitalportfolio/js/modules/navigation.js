@@ -13,10 +13,10 @@ define(function(require) {
 			anchor = links[i];
 		}
 
-		return anchor;
+		return anchor[2];
 
 	};
 
 	return nav;
-	
+
 });
