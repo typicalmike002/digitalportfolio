@@ -11,6 +11,10 @@ module.exports = function(grunt) {
 			options: {
 				livereload: true,
 			},
+			config: {
+				files: ['package.json', 'Gruntfile.js'],
+				tasks: ['jshint', 'gitadd', 'gitcommit']
+			},
 			scss: {
 				files: ['css/sass/*.scss', 'css/sass/**/*.scss'],
 				tasks: ['compass', 'combine_mq', 'cssmin', 'gitadd', 'gitcommit'],
@@ -19,7 +23,7 @@ module.exports = function(grunt) {
 				}
 			},
 			scripts: {
-				files: ['js/config.js', 'js/modules/**/*.js', 'Gruntfile.js'],
+				files: ['js/config.js', 'js/modules/**/*.js'],
 				tasks: ['jshint', 'requirejs', 'gitadd', 'gitcommit']
 			},
 			images: {
@@ -28,8 +32,6 @@ module.exports = function(grunt) {
 			},
 			src: {
 				files: [
-					'!node_modules/*', 
-					'package.json',
 					'**/*.php',
 					'screenshot.png'
 				],
