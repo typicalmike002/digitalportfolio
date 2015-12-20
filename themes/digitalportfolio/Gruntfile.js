@@ -13,6 +13,17 @@ module.exports = function(grunt) {
 			options: {
 				livereload: true,
 			},
+			scss: {
+				files: ['css/sass/*.scss', 'css/sass/**/*.scss'],
+				tasks: ['compass', 'combine_mq', 'cssmin'],
+				options: {
+					spawn: false
+				}
+			},
+			scripts: {
+				files: ['js/config.js', 'js/modules/**/*.js'],
+				tasks: ['jshint', 'requirejs']
+			},
 			src: {
 				files: [
 					'**/*.php',
@@ -26,18 +37,7 @@ module.exports = function(grunt) {
 					'Gruntfile.js',
 					'!node_modules/*', 
 				],
-				tasks: ['gitadd', 'gitcommit']
-			},
-			scss: {
-				files: ['css/sass/*.scss', 'css/sass/**/*.scss'],
-				tasks: ['compass', 'combine_mq', 'cssmin'],
-				options: {
-					spawn: false
-				}
-			},
-			scripts: {
-				files: ['js/config.js', 'js/modules/**/*.js'],
-				tasks: ['jshint', 'requirejs']
+				tasks: ['jshint', 'gitadd', 'gitcommit']
 			}
 		},
 
@@ -56,9 +56,7 @@ module.exports = function(grunt) {
 			your_target: {
 				options: {
 					cwd: '../../',
-					message: 'Updated: ' + grunt.event.on('watch', function(action, filepath){
-						return filepath;
-					})
+					message: 'Repo updated on: ' + grunt.template.today()
 				},
 				files: [{
 					src: ["*"],
