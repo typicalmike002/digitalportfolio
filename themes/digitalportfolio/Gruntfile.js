@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 			},
 			src: {
 				files: [
-					'**/*.php',
+					'*.php',
 					'**/*.css',
 					'js/**/*.js',
 					'css/sass/**/*.scss',
