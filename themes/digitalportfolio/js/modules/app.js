@@ -11,9 +11,10 @@ define(function (require) {
 	// });
 
 	for (var i = 0, l = nav.links_length(); i < l; i++ ) {
-		var ajax_enabled = nav.get_links(i);
-		ajax_enabled.addEventListener('click', function(event){
+		var ajax_enabled_nav = nav.get_links(i);
+		ajax_enabled_nav.addEventListener('click', function(event){
 			event.preventDefault();
+			nav.get_url(this)
 		}, false);
 	}
 
