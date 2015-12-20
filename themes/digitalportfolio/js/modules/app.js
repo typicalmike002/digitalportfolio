@@ -13,6 +13,8 @@ define(function (require) {
 
 	var links = nav.get_links();
 
+	console.log(links);
+
 	
 
 });
