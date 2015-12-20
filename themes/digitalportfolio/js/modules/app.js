@@ -11,6 +11,7 @@ define(function (require) {
 	});
 
 	console.log( navigation.get_links(1) );
+	console.log( navigation.links_length() );
 	
 
 });
