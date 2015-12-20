@@ -110,6 +110,7 @@ module.exports = function(grunt) {
 				options: {
 					baseUrl: 'js',
 					name: 'config',
+					optomize: 'none',
 					paths: {
 						jquery: 'libraries/jquery-1.11.3.min',
 						app: 'modules/app'
