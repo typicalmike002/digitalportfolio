@@ -13,5 +13,4 @@ define(function (require) {
 			ajax.get_content( nav.get_href(this) );
 		}, false);
 	}
-
 });
