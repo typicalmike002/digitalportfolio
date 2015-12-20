@@ -10,7 +10,7 @@ define(function (require) {
 	// 	ajax.get_content();
 	// });
 
-	for (var i = 0, l = nav.links_length(); i <= l; i++ ) {
+	for (var i = 0, l = nav.links_length(); i < l; i++ ) {
 		var ajax_enabled = nav.get_links(i);
 		console.log( ajax_enabled );
 	}
