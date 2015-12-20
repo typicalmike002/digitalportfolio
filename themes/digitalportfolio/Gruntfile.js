@@ -24,14 +24,15 @@ module.exports = function(grunt) {
 				files: ['js/config.js', 'js/modules/**/*.js', 'Gruntfile.js'],
 				tasks: ['jshint', 'requirejs', 'gitadd', 'gitcommit']
 			},
+			images: {
+				files: ['images/**/*.{png,jpg,gif}'],
+				tasks: ['gitadd', 'gitcommit']
+			},
 			src: {
 				files: [
 					'!node_modules/*', 
 					'package.json',
 					'**/*.php',
-					'**/*.png', 
-					'**/*.jpg', 
-					'**/*.gif',
 				],
 				tasks: ['gitadd', 'gitcommit']
 			}
