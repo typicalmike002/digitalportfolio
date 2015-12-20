@@ -2,11 +2,11 @@ define(function(require) {
 
 	'use strict';
 
-	var nav = {};
+	var nav = {},
+		div = document.getElementById('nav'),
+		links = div.getElementsByTagName('a');
 
 	nav.get_links = function(id){
-		var div = document.getElementById('nav'),
-			links = div.getElementsByTagName('a');
 		
 		if ( links.length < id ){
 			return 'Array out of bounds error';
@@ -14,6 +14,10 @@ define(function(require) {
 			return links[id];
 		}
 	};
+
+	nav.links_length = function() {
+
+	}
 
 	return nav;
 });
