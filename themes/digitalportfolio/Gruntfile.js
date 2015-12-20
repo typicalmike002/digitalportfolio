@@ -15,27 +15,23 @@ module.exports = function(grunt) {
 			},
 			scss: {
 				files: ['css/sass/*.scss', 'css/sass/**/*.scss'],
-				tasks: ['compass', 'combine_mq', 'cssmin'],
+				tasks: ['compass', 'combine_mq', 'cssmin', 'gitadd', 'gitcommit'],
 				options: {
 					spawn: false
 				}
 			},
 			scripts: {
 				files: ['js/config.js', 'js/modules/**/*.js', 'Gruntfile.js'],
-				tasks: ['jshint', 'requirejs']
+				tasks: ['jshint', 'requirejs', 'gitadd', 'gitcommit']
 			},
 			src: {
 				files: [
-					'**/*.php',
-					'**/*.css',
-					'js/**/*.js',
-					'css/sass/**/*.scss',
+					'!node_modules/*', 
 					'package.json',
+					'**/*.php',
 					'**/*.png', 
 					'**/*.jpg', 
 					'**/*.gif',
-					'Gruntfile.js',
-					'!node_modules/*', 
 				],
 				tasks: ['gitadd', 'gitcommit']
 			}
