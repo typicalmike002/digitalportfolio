@@ -14,7 +14,7 @@
 	<footer id="footer" role="contentinfo">
 
 		<p class="footer_copyright">
-			@ Copyright Lucas Asteratakis <?php echo date("Y"); ?>
+			@ change Copyright Lucas Asteratakis <?php echo date("Y"); ?>
 		</p>
 
 	</footer>
