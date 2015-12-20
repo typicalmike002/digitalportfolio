@@ -4,14 +4,15 @@ define(function (require) {
 
 	var $ = require('jquery'),
 		ajax = require('./modules/ajax'),
-		navigation = require('./modules/navigation');
+		nav = require('./modules/nav'),
+		events = require('./modules/events');
 
-	jQuery(document).ready(function($) {
-		ajax.get_content();
-	});
+	// jQuery(document).ready(function($) {
+	// 	ajax.get_content();
+	// });
 
-	console.log( navigation.get_links(1) );
-	console.log( navigation.links_length() );
+	var links = nav.get_links();
+
 	
 
 });
