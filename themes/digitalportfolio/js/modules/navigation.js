@@ -16,5 +16,4 @@ define(function(require) {
 	};
 
 	return nav;
-
 });

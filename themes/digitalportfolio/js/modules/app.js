@@ -10,7 +10,7 @@ define(function (require) {
 		ajax.get_content();
 	});
 
-	console.log( navigation.get_links() );
+	console.log( navigation.get_links(1) );
 	
 
 });
