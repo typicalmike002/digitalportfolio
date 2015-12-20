@@ -7,10 +7,9 @@ define(function(){
 			event.preventDefault();
 		},
 		'get_url': function(element){
-			var url = element.getAttribute('href')''
+			var url = element.getAttribute('href');
 			return url;
 		},
 		''
 	};	
-
 });
