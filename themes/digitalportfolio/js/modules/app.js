@@ -11,7 +11,7 @@ define(function (require) {
 	// 	ajax.get_content();
 	// });
 
-	var links = nav.get_links();
+	var links = nav.get_links(1);
 
 	console.log(links);
 
