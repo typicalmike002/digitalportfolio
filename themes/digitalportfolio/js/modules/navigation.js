@@ -15,7 +15,7 @@ define(function(require) {
 		}
 	};
 
-	nav.links_length = function() {
+	nav.links_length = function(){
 
 		return links.length;
 	};
