@@ -6,7 +6,7 @@ define(function(require) {
 
 	nav.selectors = {
 		'div': document.getElementById('nav'),
-		'links': selectors['div'].getElementsByTagName('a');
+		'links': selectors['div'].getElementsByTagName('a')
 	};
 
 	console.log( nav.selectors['links'] );
