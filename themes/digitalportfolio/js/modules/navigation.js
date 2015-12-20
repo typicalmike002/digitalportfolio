@@ -10,7 +10,7 @@ define(function(require) {
 	};
 
 	nav.get_links = function(){
-		let div = document.getElementById('nav'),
+		var div = document.getElementById('nav'),
 			links = div.getElementsByTagName('a'),
 			anchor = [];
 
