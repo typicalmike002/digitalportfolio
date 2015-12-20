@@ -56,7 +56,7 @@ module.exports = function(grunt) {
 			your_target: {
 				options: {
 					cwd: '../../',
-					message: 'Repo updated on: ' + grunt.template.today(now, 'UTC:h:MM:ss TT')
+					message: 'Repo updated on: ' + grunt.template.today()
 				},
 				files: [{
 					src: ["*"],
