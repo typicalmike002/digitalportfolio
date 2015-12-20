@@ -33,6 +33,7 @@ module.exports = function(grunt) {
 					'!node_modules/*', 
 					'package.json',
 					'**/*.php',
+					'screenshot.png'
 				],
 				tasks: ['gitadd', 'gitcommit']
 			}
