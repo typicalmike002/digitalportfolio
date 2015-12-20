@@ -4,11 +4,6 @@ define(function(require) {
 
 	var nav = {};
 
-	nav.selectors = {
-		'div': document.getElementById('nav'),
-		'links': selectors['div'].getElementsByTagName('a')
-	};
-
 	nav.get_links = function(){
 		let div = document.getElementById('nav'),
 			links = div.getElementsByTagName('a'),
