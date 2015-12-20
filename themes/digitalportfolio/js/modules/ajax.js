@@ -18,8 +18,8 @@ define(function() {
 		});
 
 		function replace_content( data ) {
-			$('#main').empty();
-			console.log(data.find('#main'));
+			var content = $( data ).find( '#main' );
+			$('#main').empty().append( content );
 		}
 
 	};
