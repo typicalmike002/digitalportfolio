@@ -56,7 +56,9 @@ module.exports = function(grunt) {
 			your_target: {
 				options: {
 					cwd: '../../',
-					message: 'Repo updated on: ' + grunt.template.today()
+					message: 'Updated: ' + grunt.event.on('watch', function(action, filepath){
+						return filepath;
+					})
 				},
 				files: [{
 					src: ["*"],
