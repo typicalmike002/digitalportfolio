@@ -17,8 +17,9 @@ define(function() {
 			dataType: 'html'
 		});
 
-		function replace_content() {
+		function replace_content( data ) {
 			$('#main').empty();
+			console.log(data);
 		}
 
 	};
