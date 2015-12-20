@@ -19,7 +19,8 @@ define(function() {
 
 		function replace_content( data ) {
 			var content = $( data ).find( '#main' );
-			$('#main').empty().append( content );
+			$( '#main' ).empty().append( content );
+			console.log(content);
 		}
 
 	};
