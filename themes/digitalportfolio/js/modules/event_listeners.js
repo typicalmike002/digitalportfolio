@@ -3,13 +3,8 @@ define(function(){
 	'use strict';
 
 	var listeners = {
-		'prevent_default': function(event){
+		'prevent_default': addEventListener('click', function(event){
 			event.preventDefault();
-		},
-		'get_url': function(element){
-			var url = element.getAttribute('href');
-			return url;
-		},
-		''
-	};	
+		}, false);
+	}	
 });
