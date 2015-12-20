@@ -19,7 +19,7 @@ define(function() {
 
 		function replace_content( data ) {
 			$('#main').empty();
-			console.log(data);
+			console.log(data.find('#main'));
 		}
 
 	};
