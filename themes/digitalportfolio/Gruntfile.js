@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 				}
 			},
 			scripts: {
-				files: ['js/config.js', 'js/modules/**/*.js', 'Gruntfile.js'],
+				files: ['js/config.js', 'js/modules/**/*.js'],
 				tasks: ['jshint', 'requirejs', 'gitadd', 'gitcommit']
 			},
 			src: {
