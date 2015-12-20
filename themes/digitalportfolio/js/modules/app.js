@@ -4,8 +4,7 @@ define(function (require) {
 
 	var $ = require('jquery'),
 		ajax = require('./modules/ajax'),
-		nav = require('./modules/nav'),
-		events = require('./modules/events');
+		nav = require('./modules/nav');
 
 	// jQuery(document).ready(function($) {
 	// 	ajax.get_content();
