@@ -9,7 +9,7 @@ define(function(require) {
 		a: selectors['div'].getElementsByTagName('a')
 	};
 
-	console.log( nav.html_tags)
+	console.log( nav.elements.id );
 
 
 	nav.get_links = function(){
