@@ -45,7 +45,7 @@ module.exports = function(grunt) {
 					force: true
 				},
 				files: {
-					src: ['*']
+					src: ['*', '!node_modules/*']
 				}
 			}
 		},
