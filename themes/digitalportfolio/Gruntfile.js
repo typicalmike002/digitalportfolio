@@ -42,10 +42,15 @@ module.exports = function(grunt) {
 		gitadd: {
 			task: {
 				options: {
+					all: true,
 					force: true
 				},
 				files: {
-					src: ['*', '!node_modules/*']
+					src: [
+					'!node_modules/**/*.{*}',
+					'!.sass-cache/**/*.{*}', 
+					'*.{php,js,json,css,sass,scss,htc,rb,gitignore}'
+					]
 				}
 			}
 		},
