@@ -8,5 +8,5 @@ define(function(){
 		}, false)
 	};
 
-	return events;
+	//return events;
 });
