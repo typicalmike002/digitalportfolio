@@ -17,9 +17,8 @@ define(function() {
 			dataType: 'html'
 		});
 
-		function replace_content(data) {
-			var content = $(data).find('#main');
-			$('#result').empty().append(content);
+		function replace_content() {
+			console.log(request);
 		}
 
 	};
