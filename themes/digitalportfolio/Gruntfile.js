@@ -47,9 +47,12 @@ module.exports = function(grunt) {
 				},
 				files: {
 					src: [
-					'!node_modules/**/*.{*}',
-					'!.sass-cache/**/*.{*}',
-					'*.{php,js,json,css,sass,scss,htc,rb,gitignore}'
+					'*.{php,png,css,rb,json,js}',
+					'js/**/*.{js,htc}',
+					'css/*.css',
+					'css/sass/**/*.{scss,sass}',
+					'page_templates/*.php',
+					'images/*.{png,jpg,gif}'
 					]
 				}
 			}
@@ -62,7 +65,7 @@ module.exports = function(grunt) {
 					message: 'Repo updated on: ' + grunt.template.today()
 				},
 				files: [{
-					src: ['footer.php'],
+					src: ['*'],
 					expand: true,
 					cwd: 'themes/digitalportfolio/'
 				}]
