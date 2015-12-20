@@ -9,7 +9,7 @@ define(function() {
 			'nonce': request
 		};
 
-		jQuery.post(dir.ajax_url, data, function(response) {
+		jQuery.post(dir.ajax_url, data, function(response){
 			alert(response);
 		});
 	};
