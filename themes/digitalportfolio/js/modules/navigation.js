@@ -20,5 +20,11 @@ define(function(require) {
 		return links.length;
 	};
 
+	nav.get_href = function(element){
+
+		var url = element.getAttribute('href');
+		return url;
+	};
+
 	return nav;
 });
