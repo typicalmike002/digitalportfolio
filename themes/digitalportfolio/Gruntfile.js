@@ -48,7 +48,8 @@ module.exports = function(grunt) {
 				files: {
 					src: [
 					'!node_modules/**/*.{*}',
-					'!.sass-cache/**/*.{*}', 
+					'!.sass-cache/**/*.{*}',
+					'footer.php',
 					'*.{php,js,json,css,sass,scss,htc,rb,gitignore}'
 					]
 				}
