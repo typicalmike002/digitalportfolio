@@ -61,7 +61,7 @@ module.exports = function(grunt) {
 				files: [{
 					src: ['**/**/**'],
 					expand: true,
-					cwd: 'themes/digitalportfolio'
+					cwd: 'themes/digitalportfolio/**/*'
 				}]
 			}
 		},
