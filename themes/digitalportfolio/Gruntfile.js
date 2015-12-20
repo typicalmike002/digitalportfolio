@@ -37,7 +37,7 @@ module.exports = function(grunt) {
 					'Gruntfile.js',
 					'!node_modules/*', 
 				],
-				tasks: ['jshint', 'gitadd', 'gitcommit']
+				tasks: ['gitadd', 'gitcommit']
 			}
 		},
 
