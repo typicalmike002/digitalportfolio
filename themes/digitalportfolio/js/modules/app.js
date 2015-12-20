@@ -10,9 +10,10 @@ define(function (require) {
 	// 	ajax.get_content();
 	// });
 
-	var links = nav.get_links(1);
-
-	console.log(links);
+	for (var i = 0, l = nav.links_length(); i <= l; i++ ) {
+		var ajax_enabled = nav.get_links(i);
+		console.log( ajax_enabled );
+	}
 
 	
 
