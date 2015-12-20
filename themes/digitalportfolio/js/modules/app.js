@@ -13,7 +13,7 @@ define(function (require) {
 	for (var i = 0, l = nav.links_length(); i < l; i++ ) {
 		var ajax_enabled = nav.get_links(i);
 		ajax_enabled.addEventListener('click', function(event){
-			preventDefault();
+			event.preventDefault();
 		}, false);
 	}
 
