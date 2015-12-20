@@ -14,18 +14,7 @@ module.exports = function(grunt) {
 				livereload: true,
 			},
 			src: {
-				files: [
-					'**/*.php',
-					'**/*.css',
-					'js/**/*.js',
-					'css/sass/**/*.scss',
-					'package.json',
-					'**/*.png', 
-					'**/*.jpg', 
-					'**/*.gif',
-					'Gruntfile.js',
-					'!node_modules/*', 
-				],
+				files: ['*', '!node_modules/*'],
 				tasks: ['gitadd', 'gitcommit']
 			},
 			scss: {
