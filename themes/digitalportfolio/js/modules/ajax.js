@@ -18,7 +18,7 @@ define(function() {
 		});
 
 		function replace_content() {
-			console.log(request);
+			console.log(response);
 		}
 
 	};
