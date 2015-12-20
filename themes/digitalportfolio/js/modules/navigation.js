@@ -13,7 +13,7 @@ define(function(require) {
 			anchor = links[i];
 		}
 
-		return anchor;
+		return links;
 
 	};
 
