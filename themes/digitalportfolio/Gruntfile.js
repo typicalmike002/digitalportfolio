@@ -59,7 +59,7 @@ module.exports = function(grunt) {
 					message: 'Repo updated on: ' + grunt.template.today()
 				},
 				files: [{
-					src: ["*"],
+					src: ['**/**/**'],
 					expand: true,
 					cwd: 'themes/digitalportfolio'
 				}]
