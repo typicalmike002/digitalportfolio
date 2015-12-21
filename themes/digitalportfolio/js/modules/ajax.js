@@ -16,7 +16,8 @@ define(function() {
 			async: true,
 			dataType: 'html',
 			success: function(data){
-				$('#main').html(data);
+				var content = $(data).find('#main');
+				$('#main').html(content);
 			}
 		});
 	};
