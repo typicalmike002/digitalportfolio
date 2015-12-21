@@ -18,7 +18,7 @@ define(function() {
 			success: function(data){
 				var content = $(data).filter('#main');
 				$('#main').empty().fadeOut('fast', function(){
-					$('#main').fadeIn('slow');
+					$('#main').append(content).fadeIn('slow');
 				});
 			}
 		});
