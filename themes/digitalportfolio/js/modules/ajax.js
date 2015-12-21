@@ -13,6 +13,7 @@ define(function() {
 			type: "POST",
 			url: request,
 			data: data,
+			async: true,
 			success: replace_content,
 			dataType: 'html'
 		});
