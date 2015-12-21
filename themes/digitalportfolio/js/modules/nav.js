@@ -3,7 +3,7 @@ define(function(require) {
 	'use strict';
 
 	var nav = {},
-		div = document.getElementById('main'),
+		div = document.getElementById('nav'),
 		links = div.getElementsByTagName('a');
 
 	nav.get_links = function(id){
