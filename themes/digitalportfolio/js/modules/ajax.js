@@ -16,7 +16,7 @@ define(function() {
 			async: true,
 			dataType: 'html',
 			success: function(data){
-				var content = $(data).find('#main');
+				var content = $(data).filter('#main');
 				$('#main').html(content);
 			}
 		});
