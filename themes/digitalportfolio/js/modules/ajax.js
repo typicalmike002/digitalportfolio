@@ -22,6 +22,11 @@ define(function() {
 		});
 	};
 
+	ajax.push_state = function(url) {
+		var state = { page: url };
+		history.pushState(state,'', url);
+	};
+
 	return ajax;
 
 });
