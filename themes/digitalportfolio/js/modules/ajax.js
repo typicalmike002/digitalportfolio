@@ -14,14 +14,11 @@ define(function() {
 			url: request,
 			data: data,
 			async: true,
-			success: replace_content,
-			dataType: 'html'
+			dataType: 'html',
+			success: function(data){
+				$('#main').html(data);
+			}
 		});
-
-		function replace_content( data ) {
-			$('#main').html(data);
-		}
-
 	};
 
 	return ajax;
