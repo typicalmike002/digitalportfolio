@@ -14,6 +14,4 @@ define(function (require) {
 			ajax.push_state( nav.get_href(this) );
 		}, false);
 	}
-
-	var something = 'something i dont want to see';
 });
