@@ -17,9 +17,7 @@ define(function() {
 			dataType: 'html',
 			success: function(data){
 				var content = $(data).filter('#main');
-				$('#main').fadeOut().empty();
-				$('#main').append( content );
-				$('#main').fadeIn();
+				$('#main').fadeOut().empty().append( content ).fadeIn();
 			}
 		});
 	};
