@@ -8,7 +8,6 @@
  * @version 0.1
  */
 ?>
-		</div>
 	</main>
 
 	<!-- footer -->
