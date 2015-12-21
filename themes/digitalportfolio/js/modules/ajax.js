@@ -17,7 +17,7 @@ define(function() {
 			dataType: 'html',
 			success: function(data){
 				var content = $(data).filter('#main');
-				$('#main').fadeOut();
+				$('#main').fadeOut().empty();
 				$('#main').append( content );
 				$('#main').fadeIn();
 			}
