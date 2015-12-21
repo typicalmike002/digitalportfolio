@@ -15,13 +15,15 @@ define(function() {
 			data: data,
 			async: true,
 			dataType: 'html',
-			success: function(data){
-				var content = $(data).filter('#main');
-				$('#main').fadeOut('slow', function(){
-					$('#main').empty().append(content).fadeIn('slow');
-				});
-			}
+			success: change_content
 		});
+
+		function change_content(data){
+			var content = $( data ).filter( '#main' );
+			$( '#main' ).fadeOut('slow', function(){
+				$( '#main' ).empty().append( content ).fadeIn( 'slow' );
+			});
+		}
 	};
 
 	ajax.push_state = function(url) {
