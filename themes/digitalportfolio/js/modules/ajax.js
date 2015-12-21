@@ -17,7 +17,7 @@ define(function() {
 			dataType: 'html',
 			success: function(data){
 				var content = $(data).filter('#main');
-				$('#main').html(content);
+				$('#main').empty().append( content );
 			}
 		});
 	};
