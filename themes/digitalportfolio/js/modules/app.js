@@ -11,6 +11,7 @@ define(function (require) {
 		ajax_enabled_nav.addEventListener('click', function(event){
 			event.preventDefault();
 			ajax.load_content( nav.get_href(this) );
+			ajax.push_state( nav.get_href(this) );
 		}, false);
 	}
 });
