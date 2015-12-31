@@ -31,10 +31,7 @@ module.exports = function(grunt) {
 				tasks: ['gitadd', 'gitcommit']
 			},
 			src: {
-				files: [
-					'**/*.php',
-					'screenshot.png'
-				],
+				files: ['**/*.php','screenshot.png'],
 				tasks: ['gitadd', 'gitcommit']
 			}
 		},

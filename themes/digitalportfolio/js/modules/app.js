@@ -6,6 +6,7 @@ define(function (require) {
 		ajax = require('./modules/ajax'),
 		nav = require('./modules/nav');
 
+	//Enables ajax request for navigation links:
 	for (var i = 0, l = nav.links_length(); i < l; i++ ) {
 		var ajax_enabled_nav = nav.get_links(i);
 		ajax_enabled_nav.addEventListener('click', function(event){

@@ -28,7 +28,7 @@ get_header(); ?>
 			<div class="page_section">
 				<p>Please press back and try again.  You might also want
 				to go to the
-				<a href="<?php echo esc_attr( home_url( '/' ) ); ?>"
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>"
 					title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"
 					rel="<?php echo esc_attr( 'home' ); ?>"
 				/>home page</a> and try again.</p>
