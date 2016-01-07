@@ -12,6 +12,6 @@
     "grunt-contrib-uglify": "^0.10.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-git": "^0.3.7",
-    "load-grunt-tasks": "^3.3.0"
+    "load-grunt-tasks": "^3.4.0"
   }
 }

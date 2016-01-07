@@ -15,16 +15,13 @@ get_header(); ?>
 			$gallery_link = get_post_permalink( $gallery->ID );
 			$thumbnail_url = wp_get_attachment_thumb_url( get_post_thumbnail_id( $gallery->ID, 'medium' ) ); ?>
 
-
 			<!-- Thumbnail Object -->
 			<a class="gallery_link" href="<?php echo $gallery_link ?>">
 				<img class="gallery_thumbnail" src="<?php echo $thumbnail_url ?>">
 				<h3 class="gallery_title"><?php echo get_the_title( $gallery->ID ); ?></h3>
 			</a>
 			
-
 		<?php endforeach; ?>
-
 
 	<?php else : ?>
 
