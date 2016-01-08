@@ -31,6 +31,14 @@ define(function() {
 		history.pushState(state,'', url);
 	};
 
+	// Pressing back will get the last page in history.
+	if(window.addEventListener) {
+		window.addEventListener('popstate', function() {
+			var url = window.location.pathname.split('/').pop();
+			ajax.load_content(url);
+		}, false);
+	}
+
 	return ajax;
 
 });
