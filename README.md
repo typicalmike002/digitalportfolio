@@ -6,7 +6,7 @@ A Custom WordPress Theme built for artists to dispay their work organized into s
 
 - WordPress
 - jQuery
-- RequireJS (in development)
-- Grunt
-- SASS
+- RequireJS (for development)
+- Grunt (for development)
+- SASS (for development)
 
