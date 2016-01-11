@@ -13,26 +13,26 @@ module.exports = function(grunt) {
 			},
 			config: {
 				files: ['package.json', 'Gruntfile.js'],
-				tasks: ['jshint', 'gitadd', 'gitcommit']
+				tasks: ['jshint', 'gitadd']
 			},
 			scss: {
 				files: ['css/sass/*.scss', 'css/sass/**/*.scss'],
-				tasks: ['compass', 'combine_mq', 'cssmin', 'gitadd', 'gitcommit'],
+				tasks: ['compass', 'combine_mq', 'cssmin', 'gitadd'],
 				options: {
 					spawn: false
 				}
 			},
 			scripts: {
 				files: ['js/config.js', 'js/modules/**/*.js'],
-				tasks: ['jshint', 'requirejs', 'gitadd', 'gitcommit']
+				tasks: ['jshint', 'requirejs', 'gitadd']
 			},
 			images: {
 				files: ['images/**/*.{png,jpg,gif}'],
-				tasks: ['gitadd', 'gitcommit']
+				tasks: ['gitadd']
 			},
 			src: {
 				files: ['**/*.php','screenshot.png'],
-				tasks: ['gitadd', 'gitcommit']
+				tasks: ['gitadd']
 			}
 		},
 
@@ -52,20 +52,6 @@ module.exports = function(grunt) {
 					'images/*.{png,jpg,gif}'
 					]
 				}
-			}
-		},
-
-		gitcommit: {
-			your_target: {
-				options: {
-					cwd: '../../',
-					message: 'Repo updated on: ' + grunt.template.today()
-				},
-				files: [{
-					src: ['*'],
-					expand: true,
-					cwd: 'themes/digitalportfolio/'
-				}]
 			}
 		},
 
