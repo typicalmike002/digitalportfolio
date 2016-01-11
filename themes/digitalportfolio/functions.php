@@ -46,36 +46,6 @@ add_action( 'after_setup_theme', 'digital_portfolio_setup' );
 
 
 
-/**
- * Begins a php session for storing special session variables to be used by 
- * the single-gallery.php file.  This function will also end sessions when logging in and 
- * out of the WordPress backend.
- *
- * @uses session_start()
- *
- * @since Digital Portfolio 0.1
- */
-function begin_session() {
-
-	if( !session_id() ) {
-	
-		session_start();
-	
-	}
-}
-
-function kill_session() {
-
-	session_destroy();
-
-}
-add_action('init', 'begin_session', 1);
-add_action('wp_logout', 'kill_session');
-add_action('wp_login', 'kill_session');
-
-
-
-
 
 /**
  * Provides a standard format for the page title depending on the view.
