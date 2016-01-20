@@ -12,4 +12,4 @@ requirejs.config({
 
 });
 
-requirejs(['jquery', 'app']);
+requirejs(['jquery','require', 'app']);

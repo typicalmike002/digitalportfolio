@@ -1,10 +1,11 @@
-define(function (require) {
+define(function () {
 
 	'use strict';
 
 	var $ = require('jquery'),
 		ajax = require('./modules/ajax'),
-		nav = require('./modules/nav');
+		nav = require('./modules/nav'),
+		main = require('./modules/main');
 
 	//Enables ajax request for navigation links:
 	for (var i = 0, l = nav.links_length(); i < l; i++) {

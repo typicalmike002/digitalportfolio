@@ -6,7 +6,7 @@ define(function() {
 
 		var data = {
 			'action': 'get_content',
-			'nonce': request
+			'request': request
 		};
 
 		$.ajax({
