@@ -46,6 +46,37 @@ add_action( 'after_setup_theme', 'digital_portfolio_setup' );
 
 
 
+<<<<<<< HEAD
+=======
+
+/**
+ * Provides a standard format for the page title depending on the view.
+ * This is filtered so that plugins can provide alternative title formats.
+ * Adds the site title after the | in the title.
+ * 
+ * @param string $title Default title text for current view.
+ * @param string $sep Optional seperator.
+ * @return string The filtered title.  
+ * 
+ * @since Digital Portfolio 0.1
+ */
+function create_wp_title( $title, $sep ) {
+	
+	global $paged, $page;
+
+	if ( is_feed() ) {
+		return $title;
+	}
+
+	//Add the site name.
+	$title .= get_bloginfo( 'name' );
+
+	//Add the site description for the home/from page.
+	$site_description = get_bloginfo( 'description', 'display' );
+	if ( $site_description && ( is_home() || is_front_page() ) ) {
+		$title = "$title $sep $site_description";
+	}
+>>>>>>> de758830ca8601070564c744367db050bc0b33a6
 
 include( 'classes/Title.php' );
 $title = new Title( 10, 2 );
