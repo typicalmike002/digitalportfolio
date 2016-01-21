@@ -5,6 +5,6 @@
  */
 ?>
 		
-<a href="<?php echo $image_url; ?>">
+<a href="<?php echo esc_url( $image_url ); ?>">
 	<img src="<?php echo $image_src; ?>">
 </a>

@@ -128,9 +128,12 @@ get_header(); ?>
 <?php if ( $image_gallery['is_single'] ) :/* Displays a single image */?> 
 
 	<?php /* Loads the following variables to be used by the template.php file. */
+
+		$next = $previous = get_permalink();
+
 		$current = sanitize_text_field( $image_gallery['src'] );
-		$next = sanitize_text_field( $image_gallery['next'] );
-		$previous = sanitize_text_field( $image_gallery['previous'] );
+		$next .= sanitize_text_field( $image_gallery['next'] );
+		$previous .= sanitize_text_field( $image_gallery['previous'] );
 	?>
 
 	<?php include( locate_template('single-gallery_single.php') ); ?>
@@ -140,8 +143,11 @@ get_header(); ?>
 	<?php foreach ( $image_gallery as $key => $value ) : ?>
 
 		<?php /* Loads the following variables to be used by the template.php file. */
+
+			$image_url = get_permalink();
+			$image_url .= sanitize_text_field( $key );
+			
 			$image_id = get_attachment_id_by_url( $value );
-			$image_url = sanitize_text_field( $key );
 			$image_thumbnail = wp_get_attachment_image_src( $image_id, 'thumbnail' );
 			$image_src = esc_url( $image_thumbnail[0] );
 		?>

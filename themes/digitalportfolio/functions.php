@@ -44,39 +44,12 @@ function digital_portfolio_setup() {
 }
 add_action( 'after_setup_theme', 'digital_portfolio_setup' );
 
-
-
-<<<<<<< HEAD
-=======
-
 /**
- * Provides a standard format for the page title depending on the view.
- * This is filtered so that plugins can provide alternative title formats.
- * Adds the site title after the | in the title.
- * 
- * @param string $title Default title text for current view.
- * @param string $sep Optional seperator.
- * @return string The filtered title.  
+ * Includes external classes.
  * 
  * @since Digital Portfolio 0.1
  */
-function create_wp_title( $title, $sep ) {
-	
-	global $paged, $page;
 
-	if ( is_feed() ) {
-		return $title;
-	}
-
-	//Add the site name.
-	$title .= get_bloginfo( 'name' );
-
-	//Add the site description for the home/from page.
-	$site_description = get_bloginfo( 'description', 'display' );
-	if ( $site_description && ( is_home() || is_front_page() ) ) {
-		$title = "$title $sep $site_description";
-	}
->>>>>>> de758830ca8601070564c744367db050bc0b33a6
 
 include( 'classes/Title.php' );
 $title = new Title( 10, 2 );
@@ -222,37 +195,6 @@ if ( is_admin() ) { //Functions that are only needed for the backend.
 
 	}
 	add_action( 'admin_enqueue_scripts', 'admin_stylesheet' );
-
-
-
-
-	/**
-	 * Adds a dropdown menu for the media library page.  See the
-	 * add_taxonomies() function to see where this happens.
-	 *
-	 * @uses wp_dropdown_categories() to add a new dropdown option.
-	 * 
-	 * @since  Digital Portfolio 0.1
-	 */
-	function add_media_category_filter() {
-		
-		//Admin current page.
-		global $pagenow; 
-		
-		//Only add the dropdown to the media library (upload.php) and the Gallery post type (edit.php?post_type=gallery)
-		if ( 'upload.php' == $pagenow ) {
-
-			$dropdown_options = array(
-				'taxonomy'			=>	'category',
-				'show_option_all'	=>	__( 'All categories' ),
-				'hide_empty'		=>	false
-			);
-
-			wp_dropdown_categories( $dropdown_options );
-
-		}
-	}
-	add_action( 'restrict_manage_posts', 'add_media_category_filter' );
 	
 
 

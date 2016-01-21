@@ -33,6 +33,7 @@
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>"
 				title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"
 				rel="<?php echo esc_attr( 'home' ); ?>"
+				id="site-logo"
 				/>
 					<img src="<?php echo esc_url( bloginfo( 'template_url' ).'/images/logo.png'); ?>"
 					alt="<?php esc_attr( bloginfo( 'name' ) ); ?>"
@@ -44,6 +45,7 @@
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>"
 			title="<?php echo get_bloginfo( 'name', 'display' ); ?>"
 			rel="<?php echo esc_attr( 'home' ); ?>"
+			id="site-logo"
 			/>
 				<img src="<?php echo esc_url( bloginfo( 'template_url' ).'/images/logo.png'); ?>"
 				alt="<?php esc_attr( bloginfo( 'name' ) ); ?>"

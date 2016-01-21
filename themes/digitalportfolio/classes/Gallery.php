@@ -20,6 +20,7 @@ class Gallery {
 
 		//WordPress post type options for the new post type.
 		register_post_type( 'gallery', array(
+			'show_in_nav_menues' => true,
 			'public' 		=> true,
 			'has_archive' 	=> true,
 			'menu_icon'		=> '',

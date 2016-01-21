@@ -6,6 +6,6 @@
  */
 ?>
 
-<a href="<?php echo '../' . $previous; ?>">Previous</a>
-<img src="<?php echo $current; ?>">
-<a href="<?php echo '../' . $next; ?>">Next</a>
+<a href="<?php echo esc_url( $previous ); ?>">Previous</a>
+<img src="<?php echo esc_url( $current ); ?>">
+<a href="<?php echo esc_url( $next ); ?>">Next</a>
