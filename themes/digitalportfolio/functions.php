@@ -29,11 +29,10 @@
 function digital_portfolio_setup() {
 
 
-	//OUtput valid HTML5 for the template tags listed below.
+	//Output valid HTML5 for the template tags listed below.
 	add_theme_support( 'html5', array(
 		'gallery', 'caption'
 	) );
-
 
 	//Adds support for a custom navigation menu.
 	register_nav_menu( 'primary', 'Navigation Menu' );
@@ -44,21 +43,54 @@ function digital_portfolio_setup() {
 }
 add_action( 'after_setup_theme', 'digital_portfolio_setup' );
 
+
+
+
+
 /**
- * Includes external classes.
+ * Class: Title
+ * Description: classes/Title.php
  * 
  * @since Digital Portfolio 0.1
  */
 
-
 include( 'classes/Title.php' );
 $title = new Title( 10, 2 );
+
+
+
+
+/**
+ * Class: Gallery
+ * Description: classes/Gallery.php
+ * 
+ * @since Digital Portfolio 0.1
+ */
 
 include( 'classes/Gallery.php' );
 $gallery = new Gallery();
 
+
+
+
+/**
+ * Class: Ajax
+ * Description: classes/Gallery.php
+ * 
+ * @since Digital Portfolio 0.1
+ */
+
 include( 'classes/Ajax.php' );
 $nav_ajax = new Ajax( 'nav', false );
+
+
+
+/**
+ * Class: Templates
+ * Description: classes/Templates.php
+ * 
+ * @since Digital Portfolio 0.1
+ */
 
 include( 'classes/Templates.php' );
 $template_controls = new Templates();
@@ -119,32 +151,6 @@ function inject_scripts() {
 
 }
 add_action( 'wp_enqueue_scripts', 'inject_scripts' );
-
-
-
-
-
-/**
- * Creates the query vars for the custom single-gallery.php page.
- * Gallery Index refers to the curretly loaded image in the array.
- *
- * @since Digital Portfolio 0.1
- */
-function add_query_vars( $vars ) {
-
-	$vars[] = 'image';
-
-	return $vars; 
-}
-add_filter( 'query_vars', 'add_query_vars' );
-
-function add_query_rewrites() {
-
-	add_rewrite_tag( '%image%', '([^/]*)');
-
-	add_rewrite_rule('^gallery/([^/]*)/([^/]*)/?$', 'index.php?gallery=$matches[1]&image=$matches[2]', 'top');
-}
-add_action('init', 'add_query_rewrites' );
 
 
 

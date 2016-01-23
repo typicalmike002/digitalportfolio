@@ -35,6 +35,12 @@ define(function (require) {
 
 	// Function that is executed when the ajax returns 200.
 	function ajaxSuccess(data){
+
+		//Set a new title for the currently loaded document:
+		var title = $( data ).filter( 'title' )[0].innerText;
+		document.title = title;
+
+		//Filters for the #main content and appends it to the #main div:
 		var content = $( data ).filter( '#main' );
 		$( '#main' ).fadeOut('slow', function(){
 			$( '#main' ).empty().append( content ).fadeIn( 'slow', function(){

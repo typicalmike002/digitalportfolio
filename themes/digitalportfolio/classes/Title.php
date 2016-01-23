@@ -6,7 +6,7 @@
  * 
  * @param string $title Default title text for current view.
  * @param string $seperator Optional seperator.
- * @return filter 'wp_title', 'create_wp_title' with the results.
+ * @return filter 'wp_title', adds a 
  * 
  * @since Digital Portfolio 0.1
  */

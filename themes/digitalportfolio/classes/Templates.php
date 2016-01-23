@@ -1,9 +1,7 @@
 <?php 
 /**
- * Loads different form fields for different page templates into the admin section of the site.
- * What template a page is using will now effect how authors add information to that page.
- * For example, the contact-form.php page doesn't need the whole page editor and instead should
- * load a simpler form to be filled out by the site owner.
+ * This file controls the forms on the backend of a wordpress site that uses its own custom
+ * templates.  Different page templates require different forms to be displayed.   
  *
  * This section needs to be cleaned up and some security mesures should be added/tested.
  *
@@ -71,9 +69,11 @@ class Templates {
 
 				global $post;
 
-				wp_nonce_field( basename( __FILE__ ), 'nonce' );  //Validate form comes from this function.
+				//Validate form comes from this function.
+				wp_nonce_field( basename( __FILE__ ), 'nonce' );
 
-				$values = get_post_meta( $post->ID, 'social_media_urls', true ); //Grabs the data saved in the post_meta.
+				//Grabs the data saved in the post_meta.
+				$values = get_post_meta( $post->ID, 'social_media_urls', true );
 				?>
 
 				<!-- HTML Form -->

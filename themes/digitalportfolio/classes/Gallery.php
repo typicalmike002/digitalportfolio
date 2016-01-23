@@ -14,6 +14,12 @@ class Gallery {
 		//Hooks the post type into WordPress.
 		add_action( 'init', array( $this, 'create_gallery_post_type' ) );
 
+		//This post type requires a query_var to work right (See function below)
+		add_filter( 'query_vars', array( $this, 'add_query_vars' ) );
+
+		//Adds a rewrite rule to keep the url looking cleaner:
+		add_action( 'init', array( $this, 'add_query_rewrites' ) );
+
 	}
 
 	function create_gallery_post_type() {
@@ -41,5 +47,21 @@ class Gallery {
 				)
 			)
 		);
+	}
+
+	//Sets up a query var that saves the current image index number being viewed:
+	function add_query_vars( $vars ) {
+
+		$vars[] = 'image';
+
+		return $vars;
+	}
+
+	//Creates a rewrite rule that works with the query_var above:
+	function add_query_rewrites() {
+
+		add_rewrite_tag( '%image%', '([^/]*)');
+
+		add_rewrite_rule('^gallery/([^/]*)/([^/]*)/?$', 'index.php?gallery=$matches[1]&image=$matches[2]', 'top');
 	}
 } ?>

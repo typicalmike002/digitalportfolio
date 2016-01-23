@@ -32,6 +32,7 @@
 			<h1 class="header_title">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>"
 				title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"
+				data-nonce="<?php echo wp_create_nonce('content_nonce'); ?>"
 				rel="<?php echo esc_attr( 'home' ); ?>"
 				id="site-logo"
 				/>
@@ -44,6 +45,7 @@
 		<?php else : ?>
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>"
 			title="<?php echo get_bloginfo( 'name', 'display' ); ?>"
+			data-nonce="<?php echo wp_create_nonce('content_nonce'); ?>"
 			rel="<?php echo esc_attr( 'home' ); ?>"
 			id="site-logo"
 			/>
