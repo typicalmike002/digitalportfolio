@@ -1,6 +1,7 @@
 <?php
 /**
- * Template for the gallery custom post type.
+ * Template for the gallery custom post type.  This template includes a query_var that
+ * is set inside classes/Gallery.php
  *
  *
  * @package  WordPress
@@ -119,7 +120,7 @@ function get_gallery_data( $req ) {
 //Set of global values to be sanitized and passed to the HTML:
 global $wp_query;
 
-$query_image = $wp_query->query_vars['image'];
+$query_image = $wp_query->query_vars['image'];// See Comment at the top.
 $query_image = sanitize_text_field( $query_image );
 $image_gallery = get_gallery_data( $query_image );
 

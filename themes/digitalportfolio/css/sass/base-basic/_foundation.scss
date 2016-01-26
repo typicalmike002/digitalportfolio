@@ -26,9 +26,9 @@ html {
 }
 
 body {
-	font-size: $mobile;
+	font-size: $mobile-font;
 	color: $color1;
-	margin: 3em;
+	margin: 0 auto;
 }
 
 
@@ -145,7 +145,7 @@ kbd,
 pre,
 samp {
 	font-family: monospace, monospace;
-	font-size: $body;
+	font-size: $mobile-font;
 }
 
 

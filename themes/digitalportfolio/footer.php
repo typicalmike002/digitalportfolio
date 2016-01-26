@@ -8,7 +8,7 @@
  * @version 0.1
  */
 ?>
-	</main>
+	</main><!-- End Main -->
 
 	<!-- footer -->
 	<footer id="footer" role="contentinfo">
