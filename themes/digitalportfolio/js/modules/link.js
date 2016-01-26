@@ -27,7 +27,7 @@ define(function () {
 				for (var i = 0, l = tags.length; i < l; i++){
 					var addEvents = tags[i];
 					(function(){
-						// Variable hoisting is avoided so 'i' can be used.
+						// Variable hoisting is avoided so 'i' can be used in eventFunc
 						addEvents.addEventListener('click', eventFunc, false);
 					}());
 				}

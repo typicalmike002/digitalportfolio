@@ -3,7 +3,7 @@
  * Paths to libraries and the main app file need to be found in the 
  * Gruntfile inside the path object.
  *
- * js_dir.path is inherited from the functions.php entique script function.
+ * js_dir.path is set inside from the functions.php entique script function.
  */
 
 requirejs.config({

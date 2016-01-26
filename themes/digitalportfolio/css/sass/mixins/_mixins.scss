@@ -8,15 +8,7 @@ Discription: Functions and mixins to be used for the project.
 
 
 
-/*-------------------------*\
-  #Browser prefixes
-\*-------------------------*/
-
-/**
- * 		1.	Mixins that include all the browser prefixes for
- * 			css properties that require them.
- */
-
+//--------Browser prefixes--------//
 @mixin text-size-adjust ( $values ) {
 	-ms-text-size-adjust: $values;
 	-moz-text-size-adjust: $values;

@@ -7,49 +7,52 @@ define(function (require) {
 		ajax = require('./modules/ajax'),
 		link = require('./modules/link'),
 
-		// Local divs in html used for ajax:
 		nav = 'nav',
 		main = 'main',
 		logo = 'site-logo';
 
-	// Sets sendRequest as the default link behavior for the following divs:
+	// Attaches the sendRequest function as a 'click' event
+	// to all <a> tags inside the above divs:
 	link.addEvent( logo, sendRequest );
 	link.addAllEvents( nav, sendRequest );
 	link.addAllEvents( main, sendRequest );
 
 	// Browser 'back', 'foward', and 'refresh' will send ajax request:
 	// This is my fix for when ajax breaks these buttons.
-	if (window.addEventListener) {
+	if (typeof window.addEventListener === 'function') {
 		window.addEventListener('popstate', function(){
 			var url = window.location.pathname.split('/').pop();
 			ajax.loadContent( url, ajaxSuccess );
 		}, false);
 	}
 
-	// Event that is used for sending ajax requests.
+	// This function is used as a 'click' event that
+	// sends an ajax request and pushes the results 
+	// into the users history with pushState();
 	function sendRequest(event){
 		event.preventDefault();
 		ajax.loadContent( link.href(this), ajaxSuccess );
 		ajax.pushState( link.href(this) );
 	}
 
-	// Function that is executed when the ajax returns 200.
+	// Function that is executed when the ajax request returns 200.
 	function ajaxSuccess(data){
 
-		//Set a new title for the currently loaded document:
+		//Retrive data's title:
 		var title = $( data ).filter( 'title' )[0].innerText;
-		document.title = title;
+		
+		//Retrive data's 'main' content:
+		var content = $( data ).filter( '#main' ).html();
 
-		//Filters for the #main content and appends it to the #main div:
-		var content = $( data ).filter( '#main' );
+		//Switches currently loaded page with above 
+		//also adds a jQuery fadeOut fadeIn effect:
+		document.title = title;
 		$( '#main' ).fadeOut('slow', function(){
 			$( '#main' ).empty().append( content ).fadeIn( 'slow', function(){
 				
 				// Adds events to links found inside the main div:
 				link.addAllEvents( main, sendRequest );
-			} );
+			});
 		});
 	}
-
-
 });

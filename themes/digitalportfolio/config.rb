@@ -1,19 +1,20 @@
 # Basic settings for compass.
 
-http_path = "/"
-css_dir = "css"
-sass_dir = "css/sass"
-images_dir = "images"
-javascript_dir = "js"
+http_path 		= "/"
+css_dir 		= "css"
+sass_dir		= "css/sass"
+images_dir		= "images"
+javascript_dir	= "js"
 
 # You can select your preferred output style here (can be overridden via the command line):
-output_style = :compressed
+output_style	= :expanded
+environment		= :development
 
 # To enable relative paths to assets via compass helper functions. Uncomment:
 # relative_assets = true
 
 # To disable debugging comments that display the original location of your selectors. Uncomment:
- line_comments = false
+# comline_comments	= true
 
 
 # If you prefer the indented syntax, you might want to regenerate this
@@ -25,10 +26,10 @@ output_style = :compressed
 
 
 # Moves style.css to the root of our theme when style.css is saved.
-require 'fileutils'
-on_stylesheet_saved do |file|
-  if File.exists?(file) && File.basename(file) == "style.css"
-  puts "Moving: #{file}"
-  FileUtils.mv(file, File.dirname(file) + "/../" + File.basename(file))
-  end
-end
+# require 'fileutils'
+# on_stylesheet_saved do |file|
+#   if File.exists?(file) && File.basename(file) == "style.css"
+#   puts "Moving: #{file}"
+#   FileUtils.mv(file, File.dirname(file) + "/../" + File.basename(file))
+#   end
+# end

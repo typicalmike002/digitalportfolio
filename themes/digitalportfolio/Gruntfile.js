@@ -17,14 +17,17 @@ module.exports = function(grunt) {
 			},
 			scss: {
 				files: ['css/sass/*.scss', 'css/sass/**/*.scss'],
-				tasks: ['compass', 'combine_mq', 'cssmin', 'gitadd'],
+				tasks: ['compass', 'combine_mq', 'autoprefixer', 'cssmin', 'gitadd'],
 				options: {
 					spawn: false
 				}
 			},
 			scripts: {
 				files: ['js/config.js', 'js/modules/**/*.js'],
-				tasks: ['jshint', 'requirejs', 'gitadd']
+				tasks: ['jshint', 'requirejs', 'gitadd'],
+				options: {
+					spawn: false
+				}
 			},
 			images: {
 				files: ['images/**/*.{png,jpg,gif}'],
@@ -71,8 +74,20 @@ module.exports = function(grunt) {
 				beautify: true
 			},
 			main: {
-				src: 'style.css',
-				dest: 'style.css'
+				src: 'css/style.css',
+				dest: 'css/style.css'
+			}
+		},
+
+		autoprefixer: {
+			options: {
+				browsers: ['last 10 versions', 'ie 8', 'ie 9', '> 0.5%']
+			},
+			main: {
+				expand: true,
+				flatten: true,
+				src: 'css/style.css',
+				dest: 'css/'
 			}
 		},
 
@@ -80,7 +95,7 @@ module.exports = function(grunt) {
 			target: {
 				files: [{
 					expand: true,
-					cwd: 'css/sass',
+					cwd: 'css',
 					src: ['*.css']
 				}]
 			}
@@ -95,7 +110,7 @@ module.exports = function(grunt) {
 				options: {
 					baseUrl: 'js',
 					name: 'config',
-					optomize: 'none',
+					optimize: 'none',
 					paths: {
 						jquery: 'libraries/jquery-1.11.3.min',
 						app: 'modules/app'
@@ -107,6 +122,7 @@ module.exports = function(grunt) {
 	});
 	grunt.registerTask('default', [
 		'grunt-contrib-grunt-git',
+		'grunt-autoprefixer',
 		'grunt-contrib-cssmin',
 		'grunt-contrib-combine-mq',
 		'grunt-contrib-compass',

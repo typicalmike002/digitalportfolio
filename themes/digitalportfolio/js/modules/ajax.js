@@ -1,4 +1,4 @@
-define(function (require) {
+define(function () {
 
 	var ajax = {
 
@@ -25,7 +25,6 @@ define(function (require) {
 		'pushState': function(url){
 			state = { page: url };
 			history.pushState( state, '', url );
-			
 		}
 	};
 

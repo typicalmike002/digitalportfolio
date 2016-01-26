@@ -11,6 +11,9 @@ Text Domain: digitalportfolio
 */
 
 
+
+
+//--------Viewpoint Widths--------//
 @-webkit-viewport{width:device-width;}
 @-moz-viewport{width:device-width;}
 @-ms-viewport{width:device-width;}
@@ -18,74 +21,78 @@ Text Domain: digitalportfolio
 @viewport{width:device-width;}
 
 
-/*-------------------------*\
-  #Mixins-Variables
-\*-------------------------*/
+
+
+//--------Comapss Libraries--------//
 @import "compass/css3";
+
+
+
+
+//--------Globals--------//
 @import "variables/variables";
 @import "mixins/mixins";
 
 
 
-/*-------------------------*\
-  #Base-Basic
-\*-------------------------*/
+
+//--------Base-Basic--------//
 @import "base-basic/foundation";
 
 
 
-/*-------------------------*\
-  #Objects-Basic
-\*-------------------------*/
+
+//--------Objects-Basic--------//
 @import "objects-basic/header-footer";
 @import "objects-basic/gallery";
 @import "objects-basic/pages";
 
 
 
-/*-------------------------*\
-  #Layout-Basic
-\*-------------------------*/
+
+//--------Layout-Basic--------//
 @import "layout-basic/grid";
 
 
 
-/*-------------------------*\
-  #Enhanced
-\*-------------------------*/
+
+//--------Enhanced--------//
 @media only all {
 
-	/*-------------------------*\
-	  #Core-Enhanced
-	\*-------------------------*/
+
+
+
+	//--------Core-Enhanced--------//
 	@import "base-enhanced/foundation";
 
 
 
-	/*-------------------------*\
-	  #Objects-Enhanced
-	\*-------------------------*/
+
+	//--------Objects-Enhanced--------//
 	@import "objects-enhanced/header-footer";
 
 
 
-	/*-------------------------*\
-	  #Layout-Enhanced
-	\*-------------------------*/
+
+	//--------Layout-Enhanced--------//
 	@import "layout-enhanced/grid";
+
+
+
 
 }
 
 
 
-/*-------------------------*\
-  #Responsive-Core
-\*-------------------------*/
+
+//--------Responsive-Core--------//
 @import "responsive-core/grid";
 
 
 
-/*-------------------------*\
-  #Responsive-Objects
-\*-------------------------*/
+
+//--------Responsive-Objects--------//
 @import "responsive-objects/header-footer";
+
+
+

@@ -8,7 +8,7 @@ Notes:
 
 		-	Loads modern css core styles ontop of "base-basic/_foundation.scss".
 
-		-	ie8 and below will not load enhanced scss files.
+		-	ie8 and below will not load enhanced scss files but will load a polyfill for box-sizing.
 
 		-	Some stuff is based on: "normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css"
 
@@ -17,36 +17,19 @@ Notes:
 
 
 
-
-/*-------------------------*\
-	#Document-Level
-\*-------------------------*/
-
-/**
- * 		1.	All elements inherit the border-box model from the html.
- *
- * 		2.	See /css/ie8.css to view how older browsers support this feature.
- */
-
+//--------Document-Level--------//
 html {
-	@include box-sizing( border-box );
+	box-sizing: border-box;
 }
 
 *, *:before, *:after {
-	@include box-sizing( inherit );
+	box-sizing: inherit;
 }
 
 
 
 
-/*-------------------------*\
-	#Text-Level Semantics
-\*-------------------------*/
-
-/**
- * 		1.	Prevent 'sub and 'sup' affecting 'line-height' in all browsers.
- */
-
+//--------Text-Level Semantics--------//
 sub,
 sup {
 	font-size: 75%;
@@ -66,14 +49,7 @@ sub {
 
 
 
-/*-------------------------*\
-  #Embedded Content
-\*-------------------------*/
-
-/**
- * 		1.	Correct overflow not hidden in IE 9/10/11.
- */
-
+//--------Embedded Content--------//
 svg:not(:root) {
 	overflow: hidden;
 }
@@ -81,14 +57,7 @@ svg:not(:root) {
 
 
 
-/*-------------------------*\
-  #Grouping-Content
-\*-------------------------*/
-
-/**
- * 		1.	Contain overflow in all browsers.
- */
-
+//--------Grouping-Content--------//
 pre {
 	overflow: auto;
 }

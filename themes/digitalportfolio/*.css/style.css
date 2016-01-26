@@ -1,0 +1,101 @@
+/*!
+Theme Name: Digital Portfolio
+Theme URI: n/a
+Author: Michael Townsend
+Author URI: n/a
+Description: A custom theme to be used for Lucas's digital portfolio.  Designed for photography content to be uploaded and displayed with ease by the photographer Lucas.  This theme is unique to the artist and is built with scalability in mind by its creator for future updates.
+Version: 0.1
+License: MIT
+License URI: https://opensource.org/licenses/MIT
+Text Domain: digitalportfolio
+*//*test*//* line 15, sass/style.scss */a {display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;}@-webkit-viewport {width: device-width;}@-moz-viewport {width: device-width;}@-ms-viewport {width: device-width;}@-o-viewport {width: device-width;}@viewport {width: device-width;}/********
+
+File name: Variables
+
+Discription: Sets global sass variables.
+
+********//* line 47, sass/variables/_variables.scss */html {font-family: "Helvetica", "Arial", sans-serif;font-style: normal;font-weight: 400;}/********
+
+File name: Mixins
+
+Discription: Functions and mixins to be used for the project. 
+
+********//********
+
+File name: Foundation.
+
+Discription: Core Styles searved to all browsers.
+
+Notes:
+		-	Fixes common browser inconsistencies and bugs.
+
+		-	Foundation is constructed as a base for all other scss styles to be built from and
+			should be included in the style.scss file first.
+
+		-	This file is based on normalize.css: "v3.0.3 | MIT License | github.com/necolas/normalize.css"
+
+		
+
+********//* line 23, sass/base-basic/_foundation.scss */html {-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;text-size-adjust: 100%;}/* line 28, sass/base-basic/_foundation.scss */body {font-size: 1em;color: #000;margin: 3em;}/* line 38, sass/base-basic/_foundation.scss */article,aside,details,figcaption,figure,footer,header,main,nav,section,summary {display: block;}/* line 52, sass/base-basic/_foundation.scss */audio,canvas,progress,video {display: inline-block;vertical-align: baseline;}/* line 60, sass/base-basic/_foundation.scss */audio:not([controls]) {display: none;height: 0;}/* line 65, sass/base-basic/_foundation.scss */[hidden],template {display: none;}/* line 74, sass/base-basic/_foundation.scss */a {color: #00f;text-decoration: none;background-color: transparent;}/* line 79, sass/base-basic/_foundation.scss */a:hover,a:active,a:focus {color: #0000b3;}/* line 85, sass/base-basic/_foundation.scss */a:hover,a:active {outline: 0;}/* line 90, sass/base-basic/_foundation.scss */a:focus img {border: 1px #00f solid;}/* line 99, sass/base-basic/_foundation.scss */abbr[title] {border-bottom: 1px dotted;}/* line 103, sass/base-basic/_foundation.scss */b,strong {font-weight: bold;}/* line 108, sass/base-basic/_foundation.scss */dfn,i {font-style: italic;}/* line 112, sass/base-basic/_foundation.scss */mark {background: #ff0;color: #000;}/* line 117, sass/base-basic/_foundation.scss */small {font-size: 80%;}/* line 125, sass/base-basic/_foundation.scss */img {border: 0;}/* line 134, sass/base-basic/_foundation.scss */figure {margin: 1em 40px;}/* line 138, sass/base-basic/_foundation.scss */hr {box-sizing: content-box;height: 0;}/* line 143, sass/base-basic/_foundation.scss */code,kbd,pre,samp {font-family: monospace, monospace;font-size: 1em;}/* line 155, sass/base-basic/_foundation.scss */button,input,optgroup,select,textarea {color: inherit;font: inherit;margin: 0;}/* line 165, sass/base-basic/_foundation.scss */button {overflow: visible;}/* line 169, sass/base-basic/_foundation.scss */button,select {text-transform: none;}/* line 174, sass/base-basic/_foundation.scss */button,html input[type="button"],input[type="reset"],input[type="submit"] {-webkit-appearance: button;cursor: pointer;}/* line 182, sass/base-basic/_foundation.scss */button[disabled],html input[disabled] {cursor: default;}/* line 187, sass/base-basic/_foundation.scss */button::-moz-focus-inner,input::-moz-focus-inner {border: 0;padding: 0;}/* line 193, sass/base-basic/_foundation.scss */input {line-height: normal;}/* line 197, sass/base-basic/_foundation.scss */input[type="checkbox"],input[type="radio"] {box-sizing: border-box;padding: 0;}/* line 203, sass/base-basic/_foundation.scss */input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button {height: auto;}/* line 208, sass/base-basic/_foundation.scss */input[type="search"] {-webkit-appearance: textfield;box-sizing: content-box;}/* line 213, sass/base-basic/_foundation.scss */fieldset {border: 1px solid #BBB;margin: 0 2px;padding: 0.35em 0.625em 0.75em;}/* line 219, sass/base-basic/_foundation.scss */legend {border: 0;padding: 0;}/* line 224, sass/base-basic/_foundation.scss */textarea {overflow: auto;}/* line 228, sass/base-basic/_foundation.scss */optgroup {font-weight: bold;}/* line 236, sass/base-basic/_foundation.scss */table {border-collapse: collapse;border-spacing: 0;}/* line 241, sass/base-basic/_foundation.scss */td,th {padding: 0;}/********
+
+File name: Header Footer
+
+Discription: Core styles for the header and footer go here.
+
+********//********
+
+File name: Gallery
+
+Discription: Core styles for the header and footer go here.
+
+********//*********
+
+File name: Pages
+
+Description: 	- Styling divs that appear in the page content templates.
+
+**********//* line 8, sass/objects-basic/_pages.scss */.page_content {display: block;}/* line 12, sass/objects-basic/_pages.scss */.page_section {margin: 0 auto;}/********
+
+File name: Grid
+
+Discription: Basic layout that delivers to all browsers.
+
+********//* line 9, sass/layout-basic/_grid.scss */.row {width: 100%;margin: 0 auto;}/********
+
+File name: Grid (responsive)
+
+Discription: Media Queries for the grid.
+
+********//********
+
+File name: Header Footer(responsive)
+
+Discription: Media Queries for the header and footer.
+
+********/@media only all {/********
+  
+  File name: Foundation.
+  
+  Discription: Element styling on top of the basic style sheet.
+  
+  Notes:
+  
+  		-	Loads modern css core styles ontop of "base-basic/_foundation.scss".
+  
+  		-	ie8 and below will not load enhanced scss files.
+  
+  		-	Some stuff is based on: "normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css"
+  
+  ********//* line 21, sass/base-enhanced/_foundation.scss */html {box-sizing: border-box;}/* line 25, sass/base-enhanced/_foundation.scss */*,*:before,*:after {box-sizing: inherit;}/* line 33, sass/base-enhanced/_foundation.scss */sub,sup {font-size: 75%;line-height: 0;position: relative;vertical-align: baseline;}/* line 41, sass/base-enhanced/_foundation.scss */sup {top: -0.5em;}/* line 45, sass/base-enhanced/_foundation.scss */sub {bottom: -0.25em;}/* line 53, sass/base-enhanced/_foundation.scss */svg:not(:root) {overflow: hidden;}/* line 61, sass/base-enhanced/_foundation.scss */pre {overflow: auto;}/********
+  
+  File name: Header Footer
+  
+  Discription: Enhanced styles for the header footer objects.
+  
+  ********//********
+  
+  File name: Grid
+  
+  Discription: Enhanced styles for the grid.
+  
+  ********/}
