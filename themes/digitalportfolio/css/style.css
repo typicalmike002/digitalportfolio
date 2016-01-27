@@ -48,13 +48,15 @@ File name: Gallery
 
 Discription: Core styles for the header and footer go here.
 
-********//*********
+Notes: Look for css tricks for creating a Masonry Gallery...
 
-File name: Pages
+********//* line 11, sass/objects-basic/_gallery.scss */.gallery {display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;-webkit-flex-wrap: wrap;-ms-flex-wrap: wrap;flex-wrap: wrap;-webkit-justify-content: space-around;-ms-flex-pack: distribute;justify-content: space-around;}/* line 19, sass/objects-basic/_gallery.scss */.gallery_thumbnail img {height: 350px;}/*********
+
+File name: main.scss
 
 Description: 	- Styling divs that appear in the page content templates.
 
-**********//* line 8, sass/objects-basic/_page.scss */.page_content {display: block;}/* line 12, sass/objects-basic/_page.scss */.page_section {margin: 0 auto;}/********
+**********//********
 
 File name: Grid
 

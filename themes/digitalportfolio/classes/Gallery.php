@@ -49,7 +49,7 @@ class Gallery {
 		);
 	}
 
-	//Sets up a query var that saves the current image index number being viewed:
+	//Sets up a query var titled 'image' and hook it into WordPress 'query_vars'
 	function add_query_vars( $vars ) {
 
 		$vars[] = 'image';
@@ -57,7 +57,11 @@ class Gallery {
 		return $vars;
 	}
 
-	//Creates a rewrite rule that works with the query_var above:
+	// Adds a rewrite tag to 'image' and a rule that passes two POST vars:
+	// - gallery 	= 	(first pattern) 
+	// - image 		= 	(second pattern)
+	// - url match	= 	gallery/gallery-name/image
+	
 	function add_query_rewrites() {
 
 		add_rewrite_tag( '%image%', '([^/]*)');

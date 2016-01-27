@@ -4,4 +4,19 @@ File name: Gallery
 
 Discription: Core styles for the header and footer go here.
 
+Notes: Look for css tricks for creating a Masonry Gallery...
+
 ********/
+
+.gallery {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.gallery_thumbnail {
+	
+	img {
+		height: 350px;
+	}
+}

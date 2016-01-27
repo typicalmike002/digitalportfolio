@@ -1,8 +1,30 @@
 <?php
 /**
- * Template for the gallery custom post type.  This template includes a query_var that
- * is set inside classes/Gallery.php
+ * - Template name: single-gallery.php
  *
+ * - This template uses a query_var set up inside classes/Gallery.php.
+ *   It is named 'image' and 
+ *
+ * - This template is a parent template and uses the get_gallery_data(); function
+ * 	 to determine whether to load either one of the two child templates or a 
+ *   default template that are detailed below.  Remember to document changes!
+ *
+ * - - - - Sub Template:	single-gallery_single.php
+ * - - - - Description:		Loads when the /gallery-name/image url is valid and
+ *							will display the image that matches in the gallery.
+ *
+ * - - - - Sub Template:	single-gallery_archive.php
+ * - - - - Description:		Loads all images found in the requested /gallery-name/
+ *							if the url is valid.  The archive only displays when
+ *							there are 0 chars after /gallery-name/ in the url.
+ *
+ * - - - - Sub Template:	archive-gallery.php
+ * - - - - Description:		Loads by default if an invalid image name is passed 
+ *							or the url contains /galleries/
+ *
+ * - - - - Sub Template:	404.php
+ * - - - - Description:		Not really a sub template but a 404 error will return
+ *							for any url containing an invalid gallery name.
  *
  * @package  WordPress
  * @subpackage  Digital Portfolio
@@ -11,12 +33,16 @@
 
 
 
+
 /**
- * Function that takes a path and returns only the file name
- * after the last slash "\" and before the dot "."
+ * Function: get_file_name( $path );
  * 
- * @param  'string' $path [Path to a file, normally an image.]
- * @return 'string'       [File name without the file extention.]
+ * Function that takes a path and returns only the file name
+ * after the last slash "\" and before the dot "."  This function
+ * is useful for extracting a file name from a full url.
+ * 
+ * @param  'string'		$path 	Path to a file 
+ * @return 'string'       		File name without the full url path.
  */
 function get_file_name( $path ) {
 	$pathinfo = pathinfo( $path );
@@ -27,62 +53,46 @@ function get_file_name( $path ) {
 
 
 /**
- * Function that takes the url of an attachment and returns it's id number.
- * This is used by the archive section for getting an image thumbnail src.
- * @param  string $url [Requested path to the attachment]
- * @return int      [The attachment's ID number]
- */
-function get_attachment_id_by_url( $url ) {
-	$post_id = attachment_url_to_postid( $url );
-
-	if ( ! $post_id ) {
-		$dir = wp_upload_dir();
-		$path = $url;
-		
-		if ( 0 === strpos( $path, $dir['baseurl'] . '/' ) ) {
-			$path = substr( $path, strlen( $dir['baseurl'] . '/' ) );
-		}
-		
-		if ( preg_match( '/^(.*)(\-\d*x\d*)(\.\w{1,})/i', $path, $matches ) ) { 
-			$url = $dir['baseurl'] . '/' . $matrches[1] . $matches[3];
-			$post_id = attachment_url_to_postid( $url );
-		}
-	}
-
-	return (int) $post_id;
-}
-
-
-
-
-/**
- * Retrives the requested gallery image url, and responds with an array of 
- * meta data to be used in the HTML.
- * 
- * @param  'string' $req [Requested image url ]
- * @return 'array'		 [$gallery_single: returns an accociative array of arrays
- *                       that contains a file name for the keys which are linked to
- *                       another array containing 4 values: the src, sets is_single
- *                       to true (see below), and the next and previous image names as they appear 
- *                       in order.
- *                       $gallery_archive: returns a single accociative array containing
- *                       the image name and its url.  This will also set is_single to
- *                       false (see below).
- * @return 'bool' 'is_single' [If the $req variable is empty, this will return false.  This value
- *                            should be used for determining which template to display.]
- * @return 'redirect'	 [Should anything other then one of the file names in the
- *                        gallery be passed through $req, redirect the gallery back
- *                        to the first image.]
+ * Function: get_gallery_data( $req );
+ *
+ * A function that handles the request made for an image inside
+ * a valid gallery name (see main notes for details).  The data
+ * it returns are used in the gallery template files.
+ *
+ * - Note: This functions returns either 2 different Arrays that
+ * 			passes necessary data to one of the sub templates. 
+ *
+ * @param 	'string' 	$req 									url requested by the user.
+ * @return 	'string' 	$gallery_single[$req]					Returns the requested image src.
+ * @return 	'Array' 	$gallery_archive 						An assosiative array matching image 
+ * 																names to their urls.
+ * @return 	'Bool' 		get_gallery_data( $req )['is_single']	Check to see if the request was for a 
+ *																single image or an archive of the 
+ *																currently loaded gallery.
  */
 function get_gallery_data( $req ) {
 
+	// gallery grabs all images associated with the currently 
+	// loaded gallery and finds the $max index value as an int:
 	$gallery = get_post_gallery( get_the_ID(), false );
 	$max = max( array_keys( $gallery['src'] ) );
+
 	$gallery_single = array();
 	$gallery_archive = array();
 
+	// loop through full gallery and pushes data about each
+	// image to both of the arrays above:
 	foreach ( $gallery['src'] as $key => $src ) { 
+
+		// because $req only contains the image name, 
+		// the get_file_name function is used here for
+		// removing the full url of the image.
 		$name = get_file_name( $src );
+
+		// $gallery_single: Double Associative array that maps
+		// all gallery image file names to an Array containing their full src,
+		// the filenames of the next and previous images in the gallery,
+		// and will return true when 'is_single' is checked.
 		$gallery_single[$name] = array( 
 			'src'		=>	$src,
 			'is_single'	=>	true,	
@@ -93,21 +103,31 @@ function get_gallery_data( $req ) {
 							get_file_name( $gallery['src'][( $key-1 )] ) :
 							get_file_name( $gallery['src'][$max] ) 
 		);
+
+		// $gallery_archive: Associative array that also
+		// matches all gallery images names to their src.
 		$gallery_archive[$name] = $src;
 	}
 
+	// 'is_single' now returns false:
 	$gallery_archive['is_single'] = false;
 
 	if ( array_key_exists( $req, $gallery_single ) ) { 
 
+		// The request matches one of the filenames inside the $gallery_single 
+		// array so return that Associative Array:
 		return $gallery_single[$req];
 
 	} else if ( empty( $req ) ) {
 
+		// The filename field was empty, so load an Array containing all 
+		// the gallery names and their src to display:
 		return $gallery_archive;
 		
 	} else {
 
+		// The request contained an invalid filename and was not found inside
+		// the gallery so this will redirect to the archive-gallery.php 
 		wp_redirect( get_home_url() . '/' . get_post_type() ); 
 		exit();
 
@@ -117,46 +137,31 @@ function get_gallery_data( $req ) {
 
 
 
-//Set of global values to be sanitized and passed to the HTML:
+/**
+* Global Variables:
+* Uses the query_vars['image'] rewrite rule found in classes/Gallery.php to
+* pass as the $req argument for the get_gallery_data( $req ); function.   
+*/
+
 global $wp_query;
 
-$query_image = $wp_query->query_vars['image'];// See Comment at the top.
-$query_image = sanitize_text_field( $query_image );
+$query_image = sanitize_text_field( $wp_query->query_vars['image'] );
 $image_gallery = get_gallery_data( $query_image );
 
 get_header(); ?>
 
-<?php if ( $image_gallery['is_single'] ) :/* Displays a single image */?> 
+<div class="gallery">
 
-	<?php /* Loads the following variables to be used by the template.php file. */
+	<?php if ( $image_gallery['is_single'] ) :/* Display sub template single-gallery_single.php */?> 
 
-		$next = $previous = get_permalink();
+		<?php include( locate_template('single-gallery_single.php') ); ?>
 
-		$current = sanitize_text_field( $image_gallery['src'] );
-		$next .= sanitize_text_field( $image_gallery['next'] );
-		$previous .= sanitize_text_field( $image_gallery['previous'] );
-	?>
-
-	<?php include( locate_template('single-gallery_single.php') ); ?>
-
-<?php else : /* Displays whole gallery using thumbnails */ ?>
-
-	<?php foreach ( $image_gallery as $key => $value ) : ?>
-
-		<?php /* Loads the following variables to be used by the template.php file. */
-
-			$image_url = get_permalink();
-			$image_url .= sanitize_text_field( $key );
+	<?php else : /* Display sub template single-gallery_archive.php */ ?>
 			
-			$image_id = get_attachment_id_by_url( $value );
-			$image_thumbnail = wp_get_attachment_image_src( $image_id, 'thumbnail' );
-			$image_src = esc_url( $image_thumbnail[0] );
-		?>
-		
 		<?php include( locate_template( 'single-gallery_archive.php' ) ); ?>
 
-	<?php endforeach; ?>
+	<?php endif; ?>
 
-<?php endif; ?>
+</div>
 
 <?php get_footer(); ?>

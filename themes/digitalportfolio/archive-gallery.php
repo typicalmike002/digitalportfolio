@@ -1,15 +1,20 @@
 <?php
 /*
-Template Name: Archives
+* - Template Name: archive-gallery.php
+* 
+* - Description: Displays the archive for the post type galleries.  Each 
+* 			 	 gallery featured image is used and will link to the 
+* 				 single-gallery_archive.php for each gallery.
+* 				 Think of it like an archive of galleries.
 */
 get_header(); ?>
 
 	<?php if ( have_posts() ) : 
-
-		//Loops through all galleries to create a simple archive page.
+		
 		$args = array('post_type' => 'gallery' ); 
 		$galleries = get_posts( $args );
-
+		
+		//Loops through all galleries to create a simple archive page:
 		foreach ( $galleries as $gallery ) :
 
 			$gallery_link = get_post_permalink( $gallery->ID );
