@@ -11,20 +11,20 @@
  *
  * - - - - Sub Template:	single-gallery_single.php
  * - - - - Description:		Loads when the /gallery-name/image url is valid and
- *							will display the image that matches in the gallery.
+ *				will display the image that matches in the gallery.
  *
  * - - - - Sub Template:	single-gallery_archive.php
  * - - - - Description:		Loads all images found in the requested /gallery-name/
- *							if the url is valid.  The archive only displays when
- *							there are 0 chars after /gallery-name/ in the url.
+ *				if the url is valid.  The archive only displays when
+ *				there are 0 chars after /gallery-name/ in the url.
  *
  * - - - - Sub Template:	archive-gallery.php
  * - - - - Description:		Loads by default if an invalid image name is passed 
- *							or the url contains /galleries/
+ *				or the url contains /galleries/
  *
  * - - - - Sub Template:	404.php
  * - - - - Description:		Not really a sub template but a 404 error will return
- *							for any url containing an invalid gallery name.
+ *				for any url containing an invalid gallery name.
  *
  * @package  WordPress
  * @subpackage  Digital Portfolio
@@ -62,13 +62,13 @@ function get_file_name( $path ) {
  * - Note: This functions returns either 2 different Arrays that
  * 			passes necessary data to one of the sub templates. 
  *
- * @param 	'string' 	$req 									url requested by the user.
+ * @param 	'string' 	$req 							url requested by the user.
  * @return 	'string' 	$gallery_single[$req]					Returns the requested image src.
- * @return 	'Array' 	$gallery_archive 						An assosiative array matching image 
- * 																names to their urls.
- * @return 	'Bool' 		get_gallery_data( $req )['is_single']	Check to see if the request was for a 
- *																single image or an archive of the 
- *																currently loaded gallery.
+ * @return 	'Array' 	$gallery_archive 					An assosiative array matching image 
+ * 											names to their urls.
+ * @return 	'Bool' 		['is_single']						Check to see if the request was for a 
+ *											single image or an archive of the 
+ *											currently loaded gallery.
  */
 function get_gallery_data( $req ) {
 
