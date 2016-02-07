@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 			},
 			scss: {
 				files: ['css/sass/*.scss', 'css/sass/**/*.scss'],
-				tasks: ['compass', 'combine_mq', 'autoprefixer', 'cssmin', 'gitadd'],
+				tasks: ['compass', 'autoprefixer', 'cssmin', 'gitadd'],
 				options: {
 					spawn: false
 				}
@@ -74,14 +74,14 @@ module.exports = function(grunt) {
 				beautify: true
 			},
 			main: {
-				src: 'css/style.css',
-				dest: 'css/style.css'
+				src: 'style.css',
+				dest: 'style.css'
 			}
 		},
 
 		autoprefixer: {
 			options: {
-				browsers: ['last 10 versions', 'ie 8', 'ie 9', '> 0.5%']
+				browsers: ['last 10 versions', 'ie 8', 'ie 9', '> 0%']
 			},
 			main: {
 				expand: true,
@@ -94,9 +94,7 @@ module.exports = function(grunt) {
 		cssmin: {
 			target: {
 				files: [{
-					expand: true,
-					cwd: 'css',
-					src: ['style.css']
+					'style.css': ['css/style.css']
 				}]
 			}
 		},

@@ -1,0 +1,22 @@
+/********
+
+File name: _responsive-basic.scss
+
+Discription: Media Queries for objects in _responsive-basic.scss
+
+********/
+
+
+@media only screen and (min-width: $tablet-width){
+
+	body {
+		max-width: $tablet-width;
+	}
+}
+
+@media only screen and (min-width: $desktop-width){
+
+	body {
+		max-width: $desktop-width;
+	}
+}

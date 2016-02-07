@@ -8,19 +8,44 @@ Version: 0.1
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 Text Domain: digitalportfolio
-*/@-webkit-viewport {width: device-width;}@-moz-viewport {width: device-width;}@-ms-viewport {width: device-width;}@-o-viewport {width: device-width;}@viewport {width: device-width;}/********
+*/
+@-webkit-viewport {
+  width: device-width;
+}
+@-moz-viewport {
+  width: device-width;
+}
+@-ms-viewport {
+  width: device-width;
+}
+@-o-viewport {
+  width: device-width;
+}
+@viewport {
+  width: device-width;
+}
+/********
 
 File name: Variables
 
 Discription: Sets global sass variables.
 
-********//* line 51, sass/variables/_variables.scss */html {font-family: "Helvetica", "Arial", sans-se  rif;font-style: normal;font-weight: 400;}/********
+********/
+/* line 51, sass/variables/_variables.scss */
+html {
+  font-family: "Helvetica", "Arial", sans-se  rif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/********
 
 File name: Mixins
 
 Discription: Functions and mixins to be used for the project. 
 
-********//********
+********/
+/********
 
 File name: Foundation.
 
@@ -36,45 +61,417 @@ Notes:
 
 		
 
-********//* line 23, sass/base-basic/_foundation.scss */html {-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;text-size-adjust: 100%;}/* line 28, sass/base-basic/_foundation.scss */body {font-size: 1em;color: #000;margin: 0 auto;}/* line 38, sass/base-basic/_foundation.scss */article,aside,details,figcaption,figure,footer,header,main,nav,section,summary {display: block;}/* line 52, sass/base-basic/_foundation.scss */audio,canvas,progress,video {display: inline-block;vertical-align: baseline;}/* line 60, sass/base-basic/_foundation.scss */audio:not([controls]) {display: none;height: 0;}/* line 65, sass/base-basic/_foundation.scss */[hidden],template {display: none;}/* line 74, sass/base-basic/_foundation.scss */a {color: #00f;text-decoration: none;background-color: transparent;}/* line 79, sass/base-basic/_foundation.scss */a:hover,a:active,a:focus {color: #0000b3;}/* line 85, sass/base-basic/_foundation.scss */a:hover,a:active {outline: 0;}/* line 90, sass/base-basic/_foundation.scss */a:focus img {border: 1px #00f solid;}/* line 99, sass/base-basic/_foundation.scss */abbr[title] {border-bottom: 1px dotted;}/* line 103, sass/base-basic/_foundation.scss */b,strong {font-weight: bold;}/* line 108, sass/base-basic/_foundation.scss */dfn,i {font-style: italic;}/* line 112, sass/base-basic/_foundation.scss */mark {background: #ff0;color: #000;}/* line 117, sass/base-basic/_foundation.scss */small {font-size: 80%;}/* line 125, sass/base-basic/_foundation.scss */img {border: 0;}/* line 134, sass/base-basic/_foundation.scss */figure {margin: 1em 40px;}/* line 138, sass/base-basic/_foundation.scss */hr {-webkit-box-sizing: content-box;box-sizing: content-box;height: 0;}/* line 143, sass/base-basic/_foundation.scss */code,kbd,pre,samp {font-family: monospace, monospace;font-size: 1em;}/* line 155, sass/base-basic/_foundation.scss */button,input,optgroup,select,textarea {color: inherit;font: inherit;margin: 0;}/* line 165, sass/base-basic/_foundation.scss */button {overflow: visible;}/* line 169, sass/base-basic/_foundation.scss */button,select {text-transform: none;}/* line 174, sass/base-basic/_foundation.scss */button,html input[type="button"],input[type="reset"],input[type="submit"] {-webkit-appearance: button;cursor: pointer;}/* line 182, sass/base-basic/_foundation.scss */button[disabled],html input[disabled] {cursor: default;}/* line 187, sass/base-basic/_foundation.scss */button::-moz-focus-inner,input::-moz-focus-inner {border: 0;padding: 0;}/* line 193, sass/base-basic/_foundation.scss */input {line-height: normal;}/* line 197, sass/base-basic/_foundation.scss */input[type="checkbox"],input[type="radio"] {-webkit-box-sizing: border-box;box-sizing: border-box;padding: 0;}/* line 203, sass/base-basic/_foundation.scss */input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button {height: auto;}/* line 208, sass/base-basic/_foundation.scss */input[type="search"] {-webkit-appearance: textfield;-webkit-box-sizing: content-box;box-sizing: content-box;}/* line 213, sass/base-basic/_foundation.scss */fieldset {border: 1px solid #BBB;margin: 0 2px;padding: 0.35em 0.625em 0.75em;}/* line 219, sass/base-basic/_foundation.scss */legend {border: 0;padding: 0;}/* line 224, sass/base-basic/_foundation.scss */textarea {overflow: auto;}/* line 228, sass/base-basic/_foundation.scss */optgroup {font-weight: bold;}/* line 236, sass/base-basic/_foundation.scss */table {border-collapse: collapse;border-spacing: 0;}/* line 241, sass/base-basic/_foundation.scss */td,th {padding: 0;}/********
+********/
+/* line 23, sass/base-basic/_foundation.scss */
+html {
+  -webkit-text-size-adjust: 100%;
+     -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+}
+
+/* line 28, sass/base-basic/_foundation.scss */
+body {
+  font-size: 1em;
+  color: #000;
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+/* line 39, sass/base-basic/_foundation.scss */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/* line 53, sass/base-basic/_foundation.scss */
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+/* line 61, sass/base-basic/_foundation.scss */
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/* line 66, sass/base-basic/_foundation.scss */
+[hidden],
+template {
+  display: none;
+}
+
+/* line 75, sass/base-basic/_foundation.scss */
+a {
+  color: #00f;
+  text-decoration: none;
+  background-color: transparent;
+}
+/* line 80, sass/base-basic/_foundation.scss */
+a:hover, a:active, a:focus {
+  color: #0000b3;
+}
+/* line 86, sass/base-basic/_foundation.scss */
+a:hover, a:active {
+  outline: 0;
+}
+/* line 91, sass/base-basic/_foundation.scss */
+a:focus img {
+  border: 1px #00f solid;
+}
+
+/* line 100, sass/base-basic/_foundation.scss */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/* line 104, sass/base-basic/_foundation.scss */
+b,
+strong {
+  font-weight: bold;
+}
+
+/* line 109, sass/base-basic/_foundation.scss */
+dfn, i {
+  font-style: italic;
+}
+
+/* line 113, sass/base-basic/_foundation.scss */
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/* line 118, sass/base-basic/_foundation.scss */
+small {
+  font-size: 80%;
+}
+
+/* line 126, sass/base-basic/_foundation.scss */
+img {
+  border: 0;
+}
+
+/* line 135, sass/base-basic/_foundation.scss */
+figure {
+  margin: 1em 40px;
+}
+
+/* line 139, sass/base-basic/_foundation.scss */
+hr {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+  height: 0;
+}
+
+/* line 144, sass/base-basic/_foundation.scss */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+/* line 156, sass/base-basic/_foundation.scss */
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+/* line 166, sass/base-basic/_foundation.scss */
+button {
+  overflow: visible;
+}
+
+/* line 170, sass/base-basic/_foundation.scss */
+button,
+select {
+  text-transform: none;
+}
+
+/* line 175, sass/base-basic/_foundation.scss */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+/* line 183, sass/base-basic/_foundation.scss */
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/* line 188, sass/base-basic/_foundation.scss */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/* line 194, sass/base-basic/_foundation.scss */
+input {
+  line-height: normal;
+}
+
+/* line 198, sass/base-basic/_foundation.scss */
+input[type="checkbox"],
+input[type="radio"] {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0;
+}
+
+/* line 204, sass/base-basic/_foundation.scss */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/* line 209, sass/base-basic/_foundation.scss */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+/* line 214, sass/base-basic/_foundation.scss */
+fieldset {
+  border: 1px solid #BBB;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/* line 220, sass/base-basic/_foundation.scss */
+legend {
+  border: 0;
+  padding: 0;
+}
+
+/* line 225, sass/base-basic/_foundation.scss */
+textarea {
+  overflow: auto;
+}
+
+/* line 229, sass/base-basic/_foundation.scss */
+optgroup {
+  font-weight: bold;
+}
+
+/* line 237, sass/base-basic/_foundation.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 242, sass/base-basic/_foundation.scss */
+td,
+th {
+  padding: 0;
+}
+
+/********
 
 File name: Header Footer
 
 Discription: Core styles for the header and footer go here.
 
-********//********
+********/
+/********
 
-File name: Gallery
+File name: _gallery.scss
 
-Discription: Core styles for the header and footer go here.
+Discription: Custom styles for Digital Portfolio's default gallery.
 
 Notes: Look for css tricks for creating a Masonry Gallery...
 
-********//* line 11, sass/objects-basic/_gallery.scss */.gallery {display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;-webkit-flex-wrap: wrap;-ms-flex-wrap: wrap;flex-wrap: wrap;-webkit-justify-content: space-around;-ms-flex-pack: distribute;justify-content: space-around;}/* line 19, sass/objects-basic/_gallery.scss */.gallery_thumbnail img {height: 350px;}/*********
+********/
+/* line 11, sass/objects-basic/_gallery.scss */
+.gallery_archive {
+  -webkit-column-count: 2;
+     -moz-column-count: 2;
+          column-count: 2;
+  -webkit-column-gap: 0.1em;
+     -moz-column-gap: 0.1em;
+          column-gap: 0.1em;
+}
+
+/* line 16, sass/objects-basic/_gallery.scss */
+.gallery_thumbnail {
+  display: inline-block;
+  padding: 0 0.1em 0 0.1em;
+  width: 100%;
+}
+/* line 22, sass/objects-basic/_gallery.scss */
+.gallery_thumbnail img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/*********
 
 File name: main.scss
 
 Description: 	- Styling divs that appear in the page content templates.
 
-**********//********
+**********/
+/********
 
-File name: Grid
+File name: _grid.scss
 
-Discription: Basic layout that delivers to all browsers.
+Discription: Media Queries for displaying a basic grid.
 
-********//* line 9, sass/layout-basic/_grid.scss */.row {width: 100%;margin: 0 auto;}/********
+********/
+/* line 10, sass/responsive-basic/_grid.scss */
+.row {
+  clear: both;
+  overflow: hidden;
+}
 
-File name: Grid (responsive)
+@media only screen and (min-width: 700px) {
+  /* line 17, sass/responsive-basic/_grid.scss */
+  [class*='col-'] {
+    float: left;
+    padding-right: 0.5em;
+  }
+  /* line 20, sass/responsive-basic/_grid.scss */
+  [class*='col-']:last-of-type {
+    padding-right: 0;
+  }
 
-Discription: Media Queries for the grid, the wrap div is the same as <body>
+  /* line 25, sass/responsive-basic/_grid.scss */
+  .col-auto {
+    width: auto;
+  }
 
-********//* line 9, sass/responsive-core/_grid.scss */.row {clear: both;overflow: hidden;}/********
+  /* line 29, sass/responsive-basic/_grid.scss */
+  .col-1-1 {
+    width: 100%;
+  }
 
-File name: Header Footer(responsive)
+  /* line 33, sass/responsive-basic/_grid.scss */
+  .col-2-3 {
+    width: 66.66%;
+  }
 
-Discription: Media Queries for the header and footer.
+  /* line 37, sass/responsive-basic/_grid.scss */
+  .col-1-3 {
+    width: 333300%;
+  }
 
-********/@media only all {/********
+  /* line 41, sass/responsive-basic/_grid.scss */
+  .col-1-2 {
+    width: 50%;
+  }
+
+  /* line 45, sass/responsive-basic/_grid.scss */
+  .col-1-4 {
+    width: 25%;
+  }
+
+  /* line 49, sass/responsive-basic/_grid.scss */
+  .col-1-8 {
+    width: 12500%;
+  }
+}
+/********
+
+File name: _responsive-basic.scss
+
+Discription: Media Queries for objects in _responsive-basic.scss
+
+********/
+@media only screen and (min-width: 700px) {
+  /* line 12, sass/responsive-basic/_foundation.scss */
+  body {
+    max-width: 700px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  /* line 19, sass/responsive-basic/_foundation.scss */
+  body {
+    max-width: 1024px;
+  }
+}
+/********
+
+File name: _gallery.scss
+
+Discription: Media Queries for the _gallery.scss file
+
+Notes: Look for css tricks for creating a Masonry Gallery...
+
+********/
+@media only screen and (min-width: 700px) {
+  /* line 14, sass/responsive-basic/_gallery.scss */
+  .gallery_archive {
+    -webkit-column-count: 3;
+       -moz-column-count: 3;
+            column-count: 3;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  /* line 20, sass/responsive-basic/_gallery.scss */
+  .gallery_archive {
+    -webkit-column-count: 4;
+       -moz-column-count: 4;
+            column-count: 4;
+  }
+}
+/*********
+
+File name: 		_annimations.scss
+
+Description: 	classes that can be added to divs either with
+				javascript or html to create an annimating 
+				effect.
+				
+**********/
+/* line 11, sass/annimations/_annimations.scss */
+.fade_out {
+  -webkit-transition: 0.5s all;
+     -moz-transition: 0.5s all;
+       -o-transition: 0.5s all;
+          transition: 0.5s all;
+  opacity: 0.0;
+}
+
+/* line 16, sass/annimations/_annimations.scss */
+.fade_in {
+  -webkit-transition: 0.5s all;
+     -moz-transition: 0.5s all;
+       -o-transition: 0.5s all;
+          transition: 0.5s all;
+  opacity: 1.0;
+}
+
+@media only all {
+  /********
   
   File name: Foundation.
   
@@ -88,16 +485,55 @@ Discription: Media Queries for the header and footer.
   
   		-	Some stuff is based on: "normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css"
   
-  ********//* line 21, sass/base-enhanced/_foundation.scss */html {-webkit-box-sizing: border-box;box-sizing: border-box;}/* line 25, sass/base-enhanced/_foundation.scss */*,*:before,*:after {-webkit-box-sizing: inherit;box-sizing: inherit;}/* line 33, sass/base-enhanced/_foundation.scss */sub,sup {font-size: 75%;line-height: 0;position: relative;vertical-align: baseline;}/* line 41, sass/base-enhanced/_foundation.scss */sup {top: -0.5em;}/* line 45, sass/base-enhanced/_foundation.scss */sub {bottom: -0.25em;}/* line 53, sass/base-enhanced/_foundation.scss */svg:not(:root) {overflow: hidden;}/* line 61, sass/base-enhanced/_foundation.scss */pre {overflow: auto;}/********
+  ********/
+  /* line 21, sass/base-enhanced/_foundation.scss */
+  html {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+
+  /* line 25, sass/base-enhanced/_foundation.scss */
+  *, *:before, *:after {
+    -webkit-box-sizing: inherit;
+       -moz-box-sizing: inherit;
+            box-sizing: inherit;
+  }
+
+  /* line 33, sass/base-enhanced/_foundation.scss */
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+
+  /* line 41, sass/base-enhanced/_foundation.scss */
+  sup {
+    top: -0.5em;
+  }
+
+  /* line 45, sass/base-enhanced/_foundation.scss */
+  sub {
+    bottom: -0.25em;
+  }
+
+  /* line 53, sass/base-enhanced/_foundation.scss */
+  svg:not(:root) {
+    overflow: hidden;
+  }
+
+  /* line 61, sass/base-enhanced/_foundation.scss */
+  pre {
+    overflow: auto;
+  }
+
+  /********
   
   File name: Header Footer
   
   Discription: Enhanced styles for the header footer objects.
   
-  ********//********
-  
-  File name: Grid
-  
-  Discription: Enhanced styles for the grid.
-  
-  ********/}@media only screen and (min-width: 600px) {/* line 16, sass/responsive-core/_grid.scss */[class*='col-'] {float: left;padding-right: 0.5em;}/* line 19, sass/responsive-core/_grid.scss */[class*='col-']:last-of-type {padding-right: 0;}/* line 24, sass/responsive-core/_grid.scss */.col-auto {width: auto;}/* line 28, sass/responsive-core/_grid.scss */.col-1-1 {width: 100%;}/* line 32, sass/responsive-core/_grid.scss */.col-2-3 {width: 66.66%;}/* line 36, sass/responsive-core/_grid.scss */.col-1-3 {width: 333300%;}/* line 40, sass/responsive-core/_grid.scss */.col-1-2 {width: 50%;}/* line 44, sass/responsive-core/_grid.scss */.col-1-4 {width: 25%;}/* line 48, sass/responsive-core/_grid.scss */.col-1-8 {width: 12500%;}}
+  ********/
+}

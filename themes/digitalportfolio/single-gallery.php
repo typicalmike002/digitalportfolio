@@ -150,8 +150,6 @@ $image_gallery = get_gallery_data( $query_image );
 
 get_header(); ?>
 
-<div class="gallery">
-
 	<?php if ( $image_gallery['is_single'] ) :/* Display sub template single-gallery_single.php */?> 
 
 		<?php include( locate_template('single-gallery_single.php') ); ?>
@@ -161,7 +159,5 @@ get_header(); ?>
 		<?php include( locate_template( 'single-gallery_archive.php' ) ); ?>
 
 	<?php endif; ?>
-
-</div>
 
 <?php get_footer(); ?>

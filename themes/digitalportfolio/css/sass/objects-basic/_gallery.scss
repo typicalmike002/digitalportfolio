@@ -1,22 +1,27 @@
 /********
 
-File name: Gallery
+File name: _gallery.scss
 
-Discription: Core styles for the header and footer go here.
+Discription: Custom styles for Digital Portfolio's default gallery.
 
 Notes: Look for css tricks for creating a Masonry Gallery...
 
 ********/
 
-.gallery {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
+.gallery_archive {
+	column-count: 2;
+	column-gap: 0.1em;
 }
 
 .gallery_thumbnail {
-	
+
+	display: inline-block;
+	padding: 0 0.1em 0 0.1em;
+	width: $hundred;
+
 	img {
-		height: 350px;
+		max-width: $hundred;
+		height: auto;
+		display: block;
 	}
 }

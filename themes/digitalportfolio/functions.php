@@ -112,29 +112,26 @@ $template_controls = new Templates();
  */
 function inject_scripts() {
 
-	global $wp_styles;
+	global $wp_styles, $wp_scripts;
 
 	//Default way of loading styles.  Version number added to ensure
 	//the correct version is sent to the client regardless of caching.
 	wp_register_style( 'style', get_stylesheet_uri(), false, '1.0.0' );
 	wp_enqueue_style( 'style' );
 
-	/**
-	 * Loads our ie8 only stylesheet then, adds a lte IE 8 contitional.
-	 */
-	
-	wp_enqueue_style( 'ie8', get_stylesheet_directory_uri() . '/css/ie8.css', array( 'style' ) );
-	$wp_styles->add_data( 'ie8', 'conditional', 'lte IE 8' );
+	// Adds an ie8 and below stylesheet:	
+	wp_enqueue_style( 'ie8_style', get_stylesheet_directory_uri() . '/css/ie8.css', array( 'style' ) );
+	wp_style_add_data( 'ie8_style', 'conditional', 'lte IE 8' );
 
 
 	$js_dir = get_template_directory_uri() . '/js';
 	$js_libs = $js_dir . '/libraries';
 
-	//Loads requirejs, we set true to push everything into the footer.
+	//Loads requirejs, all scripts are set true to push them into the footer:
 	wp_enqueue_script( 'requrejs', $js_libs . '/require.js', '', '', true );
 
 
-	//requirejs config file that depends on requirejs.
+	//config file that depends on requirejs.
 	wp_register_script( 'optimize', $js_dir . '/optimize.min.js', 'requirejs', '', true );
 
 
@@ -147,7 +144,6 @@ function inject_scripts() {
 
 	wp_enqueue_script( 'optimize', '', '', '', true );
 
-	
 
 }
 add_action( 'wp_enqueue_scripts', 'inject_scripts' );

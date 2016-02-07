@@ -14,3 +14,7 @@ Discription:
 	box-sizing: border-box;
 	*behavior: url(http://localhost/clients/lucus-photography/wp-content/themes/digitalportfolio/js/polyfills/boxsizing.htc);
 }
+
+body {
+	max-width: 1024px;
+}

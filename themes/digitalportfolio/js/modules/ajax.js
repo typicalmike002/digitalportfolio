@@ -1,8 +1,26 @@
+/* 
+ * Module name: 	ajax.js
+ *
+ * Description: 	Provides methods used with ajax calls.
+ *
+ * Dependencies: 	jQuery
+*/
+
 define(function () {
 
 	var ajax = {
 
-		// Loads the content and executes the eventFunc on success:
+		/*
+		 * Method: 	loadContent
+		 * 
+		 * Args: 	url: 		valid url request that WordPress can recognize.
+		 * 			
+		 *			eventFunc: 	callback function to execute if ajax request
+		 *						is a success.
+		 * 
+		 * Notes: 	- the action 'get_content' can be found in classes/Ajax.php
+		*/
+
 		'loadContent': function(url, eventFunc){
 
 			var data = {
@@ -20,11 +38,18 @@ define(function () {
 			});
 		},
 
-		// This function is called separetly because the back button fix
-		// wont work when pushState is called in the 'popstate' event:
+		/*
+		 * Method: 	pushState
+		 *
+		 * Args: 	url:  string to be pushed into the address bar.	
+		 *
+		*/
 		'pushState': function(url){
-			state = { page: url };
-			history.pushState( state, '', url );
+
+			if ( typeof history.pushState !== 'undefined' ) {
+				state = { page: url };
+				history.pushState( state, '', url );
+			}
 		}
 	};
 

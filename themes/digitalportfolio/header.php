@@ -9,13 +9,16 @@
  * @version 0.1
  */
 ?><!DOCTYPE html>
-
 <html>
-
 <head>
 	<meta charset="<?php esc_attr( bloginfo( 'charset' ) ); ?>">
 	<meta name="viewport" content="width=device-width">
 	<meta http-equiv="x-UA-Compatible" content-"IE=edge,chrome=1">
+	<!--[if lt IE 7 ]> 	<html class="ie6 ie7 ie8 ie9"> <!endif]-->
+	<!--[if IE 7 ]> 	<html class="ie7 ie8 ie9"> <!endif]-->
+	<!--[if IE 8 ]> 	<html class="ie8 ie9"> <!endif]-->
+	<!--[if IE 9 ]> 	<html class="ie9"> <!endif]-->
+	<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
 
 	<?php wp_head(); ?>

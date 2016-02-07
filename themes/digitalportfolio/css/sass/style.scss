@@ -50,8 +50,15 @@ Text Domain: digitalportfolio
 
 
 
-//--------Layout-Basic--------//
-@import "layout-basic/grid";
+//--------Responsive-Basic--------//
+@import "responsive-basic/grid";
+@import "responsive-basic/foundation";
+@import "responsive-basic/gallery";
+
+
+
+//--------Annimations----------//
+@import "annimations/annimations";
 
 
 
@@ -74,25 +81,4 @@ Text Domain: digitalportfolio
 
 
 
-	//--------Layout-Enhanced--------//
-	@import "layout-enhanced/grid";
-
-
-
-
 }
-
-
-
-
-//--------Responsive-Core--------//
-@import "responsive-core/grid";
-
-
-
-
-//--------Responsive-Objects--------//
-@import "responsive-objects/header-footer";
-
-
-

@@ -1,0 +1,19 @@
+/*********
+
+File name: 		_annimations.scss
+
+Description: 	classes that can be added to divs either with
+				javascript or html to create an annimating 
+				effect.
+				
+**********/
+
+.fade_out {
+	transition: 0.5s all;
+	opacity: 0.0;
+}
+
+.fade_in {
+	transition: 0.5s all;
+	opacity: 1.0;
+}

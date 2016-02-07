@@ -1,10 +1,11 @@
 /********
 
-File name: Grid (responsive)
+File name: _grid.scss
 
-Discription: Media Queries for the grid, the wrap div is the same as <body>
+Discription: Media Queries for displaying a basic grid.
 
 ********/
+
 
 .row {
 	clear: both;
@@ -51,6 +52,5 @@ Discription: Media Queries for the grid, the wrap div is the same as <body>
 }
 
 @media only screen and (min-width: $desktop-width) {
-
 
 }
