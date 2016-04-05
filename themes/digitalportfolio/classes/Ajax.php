@@ -24,20 +24,9 @@ class Ajax {
 
 		}
 
-		//Adds the data-nonce attribuite to all nav menu <a> tags in the primary nav menu.
-		add_filter( 'nav_menu_link_attributes', array( $this, 'add_nonce_atts' ) );
-
 	}
 
-	function add_nonce_atts( $atts, $item, $args ){
-
-		// Creates a custom nonce for ajax calls.
-		$atts['data-nonce'] = wp_create_nonce('content_nonce');
-
-		return $atts;
-	}
-
-	function get_content( $req ) {
+	private function get_content( $req ) {
 
 		global $wpdb;
 

@@ -6,13 +6,6 @@ Discription: Styles to be loaded into custom sections in the wp-admin
 
 ********/
 
-/* Adds the camera icon to the galleries custom post type. */
-
-#adminmenu .menu-icon-gallery div.wp-menu-image:before {
-	
-	content: '\f233';
-
-}
 
 /* Simple grid for form layouts  */
 
@@ -33,12 +26,12 @@ Discription: Styles to be loaded into custom sections in the wp-admin
 }
 
 
-label {
+label.row {
 	display: block;
 	cursor: default;
 	font-weight: 600;
 }
 
-input {
+input.row {
 	width: 85%;	
 }

@@ -18,4 +18,4 @@ requirejs.config({
 	baseUrl: dir.path
 });
 
-requirejs(['jquery','require', 'app']);
+requirejs(['require', 'jquery', 'domReady', 'app']);

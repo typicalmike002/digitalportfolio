@@ -46,33 +46,6 @@ add_action( 'after_setup_theme', 'digital_portfolio_setup' );
 
 
 
-
-/**
- * Class: Title
- * Description: classes/Title.php
- * 
- * @since Digital Portfolio 0.1
- */
-
-include( 'classes/Title.php' );
-$title = new Title( 10, 2 );
-
-
-
-
-/**
- * Class: Gallery
- * Description: classes/Gallery.php
- * 
- * @since Digital Portfolio 0.1
- */
-
-include( 'classes/Gallery.php' );
-$gallery = new Gallery();
-
-
-
-
 /**
  * Class: Ajax
  * Description: classes/Gallery.php
@@ -125,14 +98,14 @@ function inject_scripts() {
 
 
 	$js_dir = get_template_directory_uri() . '/js';
-	$js_libs = $js_dir . '/libraries';
+	$js_libs = $js_dir . '/bower_components';
 
 	//Loads requirejs, all scripts are set true to push them into the footer:
-	wp_enqueue_script( 'requrejs', $js_libs . '/require.js', '', '', true );
+	wp_enqueue_script( 'requrejs', $js_libs . '/requirejs/require.js', array(), '', true );
 
 
 	//config file that depends on requirejs.
-	wp_register_script( 'optimize', $js_dir . '/optimize.min.js', 'requirejs', '', true );
+	wp_register_script( 'optimize', $js_dir . '/optimize.min.js', '', '', true );
 
 
 	//Creates a json object so the configjs knows its directory. 
@@ -144,6 +117,9 @@ function inject_scripts() {
 
 	wp_enqueue_script( 'optimize', '', '', '', true );
 
+	// Styles for the lightbox plugin.
+	wp_register_style('lightbox-style', $js_libs . '/lightbox2/dist/css/lightbox.min.css' );
+	wp_enqueue_style( 'lightbox-style' );
 
 }
 add_action( 'wp_enqueue_scripts', 'inject_scripts' );
@@ -152,34 +128,23 @@ add_action( 'wp_enqueue_scripts', 'inject_scripts' );
 
 
 /**
- * Configures the WordPress Admin bar.  Removes 'new-post' from the 
- * +new dropdown in the WordPress admin bar as well as customize.
- * 
- *
- * @uses remove_node() to remove unneeded nodes from the admin bar.
- *
- * @since Digital Portfolio 0.1
- */
-function admin_bar_options() {
+* Adds a class to the links associated with the default navigation.
+* This class is required for the autoScrolling.  -1 will effect all links.
+*
+* @param $ulclass
+* @since Digital Portfolio 0.1
+*/
+function add_menu_link_class( $ulclass ){
 
-	global $wp_admin_bar;
-
-	//Removes  "Add New post".
-	$wp_admin_bar->remove_node( 'new-post' );
-
-
-	//Removes "Customize"
-	$wp_admin_bar->remove_menu('customize');
-
+	return preg_replace('/<a/', '<a class="autoScroll"', $ulclass, -1);
 }
-add_action( 'wp_before_admin_bar_render', 'admin_bar_options' );
+add_filter('wp_nav_menu', 'add_menu_link_class');
 
 
 
 
-
-
-if ( is_admin() ) { //Functions that are only needed for the backend.
+/* Admin only section */
+if ( is_admin() ) {
 
 
 	/**
@@ -201,22 +166,4 @@ if ( is_admin() ) { //Functions that are only needed for the backend.
 
 
 
-	/**
-	 * Configures the WordPress dashboard by adding/removing specific menu pages.
-	 *
-	 * @uses add_menu_page() For adding new menu pages to the dashboard.
-	 * @uses remove_menu_page() For removing default WordPress dashboard menus.
-	 *
-	 * @since Digital Portfolio 0.1
-	 */
-	function dashboard_menu() {
-
-		//Removes the post type and comments from the WordPress dashboard.
-		remove_menu_page( 'edit.php' );
-		remove_menu_page( 'edit-comments.php' );
-
-	}
-	add_action( 'admin_menu', 'dashboard_menu' );
-
-
-/* End admin only section */ } ?>
+/* End Admin only section */ } ?>

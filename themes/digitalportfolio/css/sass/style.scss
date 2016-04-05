@@ -26,6 +26,9 @@ Text Domain: digitalportfolio
 //--------Comapss Libraries--------//
 @import "compass/css3";
 
+@import "font-awesome-compass";
+@import "font-awesome";
+
 
 
 
@@ -45,25 +48,18 @@ Text Domain: digitalportfolio
 //--------Objects-Basic--------//
 @import "objects-basic/header-footer";
 @import "objects-basic/gallery";
-@import "objects-basic/main";
+@import "objects-basic/contact";
 
 
 
 
 //--------Responsive-Basic--------//
 @import "responsive-basic/grid";
-@import "responsive-basic/foundation";
-@import "responsive-basic/gallery";
-
-
-
-//--------Annimations----------//
-@import "annimations/annimations";
 
 
 
 
-//--------Enhanced--------//
+//--------Non Legacy Browsers--------//
 @media only all {
 
 
@@ -79,6 +75,10 @@ Text Domain: digitalportfolio
 	@import "objects-enhanced/header-footer";
 
 
+	
+
+	//--------Annimations----------//
+	@import "annimations-enhanced/annimations";
 
 
 }

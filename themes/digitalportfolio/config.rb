@@ -26,6 +26,9 @@ environment		= :development
 
 
 # Moves style.css to the root of our theme when style.css is saved.
+
+# WARNING: the below code doesn't agree with autoprefixer and removes whatever it adds:
+
 # require 'fileutils'
 # on_stylesheet_saved do |file|
 #   if File.exists?(file) && File.basename(file) == "style.css"
@@ -33,3 +36,8 @@ environment		= :development
 #   FileUtils.mv(file, File.dirname(file) + "/../" + File.basename(file))
 #   end
 # end
+
+
+# Adds font awesome sass version to compass.
+require 'font-awesome-sass'
+

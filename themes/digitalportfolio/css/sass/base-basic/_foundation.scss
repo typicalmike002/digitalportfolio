@@ -26,10 +26,25 @@ html {
 }
 
 body {
-	font-size: $mobile-font;
+	font-size: $mobileFont;
 	color: $color1;
 	margin: 0 auto;
-	max-width: $mobile-width;
+	padding-top: 30em; // Used for the fixed banner.
+}
+
+@media only screen and (min-width: $tabletWidth) {
+
+	body {
+		padding-top: 40em;
+	}
+}
+
+@media only screen and (min-width: $desktopWidth) {
+
+	body {
+		padding-top: 50em;
+	}
+
 }
 
 
@@ -73,26 +88,34 @@ template {
 
 //--------Links--------//
 a {
-	color: $colorLinks;
+	color: $color2;
 	text-decoration: none;
 	background-color: transparent;
 	
 	&:hover,
 	&:active,
 	&:focus {
-		color: darken($colorLinks, 15%);
+		color: darken($color2, 15%);
 	}
 
 	&:hover,
 	&:active {
 		outline: 0;
 	}
-
-	&:focus img {
-		border: 1px $colorLinks solid;
-	}
 }
 
+
+
+
+//--------Headers--------//
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 100;
+}
 
 
 
@@ -146,7 +169,7 @@ kbd,
 pre,
 samp {
 	font-family: monospace, monospace;
-	font-size: $mobile-font;
+	font-size: $mobileFont;
 }
 
 
@@ -247,16 +270,11 @@ th {
 
 
 
-//--------Definition lists--------//
-dl {
-
-}
-
-dt {
-	
-}
-
-dt,
-dd {
-	
+//--------JS Cases--------//
+#js-disabled {
+	position: absolute;
+	z-index: 5;
+	top: 0;
+	width: $hundred;
+	height: $hundred;
 }

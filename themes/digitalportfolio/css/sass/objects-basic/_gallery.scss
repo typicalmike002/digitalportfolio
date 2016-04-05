@@ -4,24 +4,30 @@ File name: _gallery.scss
 
 Discription: Custom styles for Digital Portfolio's default gallery.
 
-Notes: Look for css tricks for creating a Masonry Gallery...
-
 ********/
 
-.gallery_archive {
-	column-count: 2;
-	column-gap: 0.1em;
-}
-
-.gallery_thumbnail {
-
-	display: inline-block;
-	padding: 0 0.1em 0 0.1em;
+.masonry-container,
+.masonry-item {
 	width: $hundred;
 
-	img {
-		max-width: $hundred;
-		height: auto;
-		display: block;
+}
+
+.masonry-container {
+	background: $color1;
+}
+
+
+@media only screen and (min-width: $tabletWidth) {
+
+	.mansonry-item {
+		width: $hundred/2;
+	}
+
+}
+
+@media only screen and (min-width: $desktopWidth) {
+
+	.masonry-item {
+		width: $hundred/3;
 	}
 }

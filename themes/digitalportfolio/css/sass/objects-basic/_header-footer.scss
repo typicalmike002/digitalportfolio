@@ -6,10 +6,111 @@ Discription: Core styles for the header and footer go here.
 
 ********/
 
-header#header {
-	
+
+header.hero_image {
+	background: url('images/full-logo_small.png') no-repeat center center;
+	height: 30em;
 }
 
-h1.header_title {
+header#header {
+	position: fixed;
+	width: $hundred;
+	top: 0;
+	z-index: -1;
+}
 
+footer#footer {
+	padding: 1em 5em;
+	background: $color1;
+	color: $color2;
+
+	p {
+		margin: 0;
+	}
+}
+
+.site-logo {
+	height: 68px;
+	transition: all 0.5s ease-in;
+}
+
+nav#nav.nav-scrolled {
+	background: rgba($color1, 0.5);
+	height: 60px;
+
+	.site-logo {
+		height: 50px;
+	}
+}
+
+#main {
+	overflow: hidden;
+}
+
+nav#nav {
+	position: relative;
+}
+
+a.anchor_home {
+	position: absolute;
+	top: 0;
+}
+
+section#top {
+	position: absolute;
+	top: -50px;
+}
+
+
+nav#nav {
+	position: fixed;
+	top: 0;
+	z-index: 20;
+	padding: 0.5em;
+	background: $color2;
+	transition: all 0.5s ease-in;
+	width: $hundred;
+	height: 145px;
+
+	.grid_column {
+		flex: 1;
+	}
+	
+	.grid_column--forth {
+		flex: 0 0 $hundred/4;	// Custom base size for the Header Grid
+	}
+}
+
+ul.nav_menu {
+	list-style-type: none;
+	text-align: right;
+
+	li {
+		display: inline-block;
+		margin: 0 0.5em;
+	}
+}
+
+@media only screen and (min-width: $tabletWidth) {
+
+	nav#nav {
+		padding: 0.5em;
+	}
+
+	header.hero_image {
+		background: url('images/full-logo_medium.png') no-repeat center center;
+		height: 40em;
+	}
+}
+
+@media only screen and (min-width: $desktopWidth) {
+
+	nav#nav {
+		padding: 1.5em 3.5em;
+	}
+
+	header.hero_image {
+		background: url('images/full-logo_large.png') no-repeat center center;
+		height: 50em;
+	}
 }

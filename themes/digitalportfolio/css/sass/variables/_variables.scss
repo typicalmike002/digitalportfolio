@@ -15,18 +15,18 @@ $hundred : 100%;
 
 //--------Font-Size-Bases--------//
 //These variables are used to switch between different base font sizes.
-$mobile-font : 1em;
-$tablet-font: 1.125em;
-$desktop-font : 1.25em;
+$mobileFont : 1em;
+$tabletFont: 1.125em;
+$desktopFont : 1.25em;
 
 
 
 //--------Grid-Layout--------//
 $gutter-width : 0.5em;
 
-$mobile-width : 400px;
-$tablet-width : 700px;
-$desktop-width : 1024px;
+$mobileWidth : 12em;
+$tabletWidth : 24em;
+$desktopWidth : 48em;
 
 
 
@@ -41,15 +41,6 @@ $baseline : 1.5em;
 //--------Colors--------//
 $color1	: #000;	//Black
 $color2	: #fff; //White
+$color3 : #ddd; //Smoke
 $colorLinks : #00f;	//Blue
 $colorMark : #ff0; //Yellow
-
-
-
-
-//--------Fonts--------//
-%primaryFont {
-	font-family: "Helvetica", "Arial", sans-se  rif;
-	font-style: normal;
-	font-weight: 400;
-}

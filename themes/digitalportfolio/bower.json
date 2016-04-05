@@ -1,0 +1,27 @@
+{
+  "name": "digitalportfolio",
+  "description": "Developer build settings for the Digital Portfolio theme",
+  "main": "functions.php",
+  "authors": [
+    "typicalmike002"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/typicalmike002/digitalportfolio",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery-2.1.0.min": "http://code.jquery.com/jquery-2.1.0.min.js",
+    "requirejs": "^2.1.22",
+    "jquery_lazyload": "jquery.lazyload#^1.9.7",
+    "masonry": "^4.0.0",
+    "jquery-bridget": "^2.0.0",
+    "domReady": "^2.0.1",
+    "lightbox2": "^2.8.2"
+  }
+}

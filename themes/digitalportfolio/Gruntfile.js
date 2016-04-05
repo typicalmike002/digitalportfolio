@@ -108,9 +108,13 @@ module.exports = function(grunt) {
 				options: {
 					baseUrl: 'js',
 					name: 'config',
-					optimize: 'none',
+					optimize: 'none', // or 'uglify'
 					paths: {
-						jquery: 'libraries/jquery-1.11.3.min',
+						jquery: 'bower_components/jquery-2.2.0.min/index',
+						domReady: 'bower_components/domReady/domReady',
+						lazyload: 'bower_components/jquery_lazyload/jquery.lazyload',
+						masonry: 'bower_components/masonry/dist/masonry.pkgd.min',
+						lightbox: 'bower_components/lightbox2/dist/js/lightbox.min',
 						app: 'modules/app'
 					},
 					out: 'js/optimize.min.js' 

@@ -1,8 +1,13 @@
 <?php
 /**
- * The Header for our theme.
+ * Digital Portfolio's main header content.
  *
- * Displays all of the <head> section.
+ * Displays all of the <head>, <nav>, <header>, and 
+ * the opening <main> tag of the theme.
+ *
+ * The navigation's view is controlled by the navigation.js 
+ * module which allows it to stick to the top of the page 
+ * when the user scrolls down.
  *
  * @package  WordPress
  * @subpackage  Digital Portfolio
@@ -14,57 +19,49 @@
 	<meta charset="<?php esc_attr( bloginfo( 'charset' ) ); ?>">
 	<meta name="viewport" content="width=device-width">
 	<meta http-equiv="x-UA-Compatible" content-"IE=edge,chrome=1">
-	<!--[if lt IE 7 ]> 	<html class="ie6 ie7 ie8 ie9"> <!endif]-->
-	<!--[if IE 7 ]> 	<html class="ie7 ie8 ie9"> <!endif]-->
-	<!--[if IE 8 ]> 	<html class="ie8 ie9"> <!endif]-->
-	<!--[if IE 9 ]> 	<html class="ie9"> <!endif]-->
-	<!--[if (gt IE 9)|!(IE)]><!--> <html class=""> <!--<![endif]-->
+	
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
 
 	<?php wp_head(); ?>
 
 <body <?php body_class(); ?>>
 
-<!-- header -->
-<header id="header" role="banner">
+<!-- Homepage Hashtag -->
+<a name="home" class="anchor_home"></a>
 
-	<!-- logo -->
-	<div class="logo">
-
-		<?php if ( is_front_page() ) : ?>
-			<h1 class="header_title">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>"
-				title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"
-				data-nonce="<?php echo wp_create_nonce('content_nonce'); ?>"
-				rel="<?php echo esc_attr( 'home' ); ?>"
-				id="site-logo"
-				/>
-					<img src="<?php echo esc_url( bloginfo( 'template_url' ).'/images/logo.png'); ?>"
-					alt="<?php esc_attr( bloginfo( 'name' ) ); ?>"
-					/>
-				</a>
-			</h1>
-
-		<?php else : ?>
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>"
-			title="<?php echo get_bloginfo( 'name', 'display' ); ?>"
-			data-nonce="<?php echo wp_create_nonce('content_nonce'); ?>"
-			rel="<?php echo esc_attr( 'home' ); ?>"
-			id="site-logo"
+<!-- Navigation -->
+<nav id="nav" class="grid_row grid_row--center" role="navigation">
+		
+	<!-- Logo Column -->
+	<div class="grid_column--forth">
+		
+		<a href="<?php echo esc_url( home_url( '/' ) ); ?>"
+		title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"
+		rel="<?php echo esc_attr( 'home' ); ?>"
+		/>
+			<img src="<?php echo esc_url( bloginfo( 'template_url' ) . '/images/icon-logo_small--white.png' ); ?>"
+			alt="<?php esc_attr( bloginfo( 'name' ) ); ?>"
+			class="site-logo"
 			/>
-				<img src="<?php echo esc_url( bloginfo( 'template_url' ).'/images/logo.png'); ?>"
-				alt="<?php esc_attr( bloginfo( 'name' ) ); ?>"
-				/>
-			</a>
-
-		<?php endif; ?>
+		</a>
 	</div>
 
-	<!-- navigation -->
-	<nav id="nav" role="navigation">
+	<!-- Nav Links Column -->
+	<div class="grid_column grid_column--center">
 		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav_menu') ); ?>
-	</nav>
-</header>
+	</div>
+
+	</div>
+</nav>
+
+<!-- Site Header -->
+<?php if ( is_front_page() ) : ?>
+	
+	<header id="header" class="hero_image" role="banner">
+
+	</header>
+
+<?php endif; ?>
 
 <!-- main -->
 <main id="main" role="main">

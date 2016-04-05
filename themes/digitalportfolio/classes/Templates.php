@@ -38,34 +38,22 @@ class Templates {
 		 * to separate what should be done to these list of templates in the admin sections.
 		 */
 
-		$template_filename = esc_url( get_post_meta( $post_id, '_wp_page_template', true ) );
+		$template_filename = get_post_meta( $post_id, '_wp_page_template', true );
 
-		//Hides the page editor to the following templates.
-		define('HIDE_PAGE_EDITOR', json_encode( array( 
-			'http://page_templates/contact-form.php',
-			'archive-gallery.php'
-		) ) );
-		if ( in_array( $template_filename, json_decode( HIDE_PAGE_EDITOR ) ) ) {
-			
-			remove_post_type_support( 'page', 'editor' );
-
-		}
-
-		//Loads meta form and post meta data for the contact us template.
+		//Loads meta form and post meta data for the default template.
 		define('LOAD_CONTACT_FORM', json_encode( array(
-			'http://page_templates/contact-form.php'
+			'default'
 		) ) );
-
 
 		if ( in_array( $template_filename, json_decode( LOAD_CONTACT_FORM ) ) ) {
 
 			function meta_boxes() {
 
-				add_meta_box( 'social_media_id', 'Social Media', 'load_social_media_form', 'page', 'normal', 'high' );
+				add_meta_box( 'contact_us_id', 'Contact Info', 'load_contact_us_form', 'page', 'normal', 'high' );
 
 			}
 
-			function load_social_media_form() {
+			function load_contact_us_form() {
 
 				global $post;
 
@@ -73,16 +61,42 @@ class Templates {
 				wp_nonce_field( basename( __FILE__ ), 'nonce' );
 
 				//Grabs the data saved in the post_meta.
-				$values = get_post_meta( $post->ID, 'social_media_urls', true );
+				$values = get_post_meta( $post->ID, 'contact_urls', true );
+
+				$email_value = isset( $values['email'] ) ? $values['email'] : '';
+				$fk_value = isset( $values['flickr'] ) ? $values['flickr'] : '';
+
+				$fb_value = isset( $values['facebook'] ) ? $values['facebook'] : '';
+				$ig_value = isset( $values['instagram'] ) ? $values['instagram'] : '';
 				?>
 
 				<!-- HTML Form -->
 				<div class="row">
 					<div class="col_hlf">
+						<label for="email"><p>Email Address</p></label>
+						<input type="email"
+							name="email"
+							value="<?php echo esc_attr( $email_value ); ?>"
+							placeholder="example@gmail.com"
+							title="Email Format: example@gmail.com">
+					</div>
+					<div class="col_hlf">
+						<label for="flickr"><p>Flickr URL</p></label>
+						<input type="flickr"
+							name="flickr"
+							value="<?php echo esc_attr( $fk_value ); ?>"
+							pattern='https?://.+'
+							placeholder="https://example.com"
+							title="URL Format: http://example.com">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col_hlf">
 						<label for="facebook"><p>Facebook URL</p></label>
 						<input type="url"
 							name="facebook"
-							value="<?php echo $values['facebook']; ?>"
+							value="<?php echo esc_attr( $fb_value ); ?>"
 							pattern="https?://.+"
 							placeholder="http://example.com"
 							title="URL Format: http://example.com">
@@ -91,7 +105,7 @@ class Templates {
 						<label for="instagram"><p>Instagram URL</p></label>
 						<input type="url"
 							name="instagram"
-							value="<?php echo $values['instagram']; ?>"
+							value="<?php echo esc_attr( $ig_value ); ?>"
 							pattern="https?://.+"
 							placeholder="http://example.com"
 							title="URL Format: http://example.com">
@@ -110,7 +124,9 @@ class Templates {
 				if ( $is_autosave || $is_revision || !$is_valid_nonce || !$is_valid_user ) { return;/*Exits the function if the data is not safe: */}
 
 				//Saves admin's data to database:
-				update_post_meta( $post_id, 'social_media_urls', array(
+				update_post_meta( $post_id, 'contact_urls', array(
+					'email'		=> 	sanitize_text_field ( $_POST['email'] ),
+					'flickr' 	=>	sanitize_text_field( $_POST['flickr'] ),
 					'facebook'	=>	sanitize_text_field ( $_POST['facebook'] ),
 					'instagram' =>	sanitize_text_field ( $_POST['instagram'] )
 				) );

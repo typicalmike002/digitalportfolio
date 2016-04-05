@@ -7,50 +7,77 @@ Discription: Media Queries for displaying a basic grid.
 ********/
 
 
-.row {
-	clear: both;
-	overflow: hidden;
+
+
+//--------Basic Grid Styles--------//
+.grid_row {
+	display: flex;
 }
 
-@media only screen and (min-width: $tablet-width) {
-
-	[class*='col-'] {
-		float: left;
-		padding-right: $gutter-width;
-		&:last-of-type {
-			padding-right: 0;
-		}
-	}
-
-	.col-auto {
-		width: auto;
-	}
-
-	.col-1-1 {
-		width: $hundred;
-	}
-
-	.col-2-3 {
-		width: $hundred*0.6666;
-	}
-
-	.col-1-3 { 
-		width: $hundred*3333;
-	}
-
-	.col-1-2 {
-		width: $hundred/2;
-	}
-
-	.col-1-4 {
-		width: $hundred/4;
-	}
-
-	.col-1-8 {
-		width: $hundred*125;
-	}
+.grid_column {
+	flex: 0 0 $hundred;
 }
 
-@media only screen and (min-width: $desktop-width) {
 
+
+
+//--------Grid Style Modifiers--------//
+
+//--------Add Gutters-------//
+.grid_row--gutters {
+	margin: -1em 0 0 -1em;
+}
+
+.grid_row--gutters > .grid_column {
+	padding: 1em 0 0 1em;
+}
+
+//--------Alignment per row-------//
+.grid_row--top {
+	align-items: flex-start;
+}
+
+.grid_row--bottom {
+	align-items: flex-end;
+}
+
+.grid_row--center {
+	align-items: center;
+}
+
+//--------Alignment per column-------//
+.grid_column--top {
+	align-self: flex-start;
+}
+
+.grid_column--bottom {
+	align-self: flex-end;
+}
+
+.grid_column--center {
+	align-self: center;
+}
+
+
+
+
+//--------Responsive Modifiers--------//
+
+@media only screen and (min-width: $tabletWidth){
+
+	.grid_column {
+		flex: 1;
+	}
+	
+	.grid_column--half {
+		flex: 0 0 $hundred/2;
+	}
+
+	.grid_column--third {
+		flex: 0 0 $hundred/3;
+	}
+
+	.grid_column--forth {
+		flex: 0 0 $hundred/4;
+	}
 }
